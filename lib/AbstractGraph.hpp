@@ -15,6 +15,7 @@ class AbstractGraph : public IModuleGraph {
 
     protected:
     private:
+        void display();
 };
 
 #endif /* !ABSTRACTGRAPH_HPP_ */

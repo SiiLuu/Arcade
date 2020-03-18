@@ -51,3 +51,9 @@ re: fclean all
 
 debug:	CFLAGS += -g
 debug:	fclean all
+
+core: cd ./core && $(MAKE)
+
+games: cd ./games && $(MAKE)
+
+graphicals: cd ./lib && $(MAKE)
