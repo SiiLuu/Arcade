@@ -21,7 +21,7 @@ OBJ 	=	$(SRC:.cpp=.o)
 
 NAME 	=	arcade
 
-CFLAGS +=	-W -Wall -Wextra
+CFLAGS +=	-W -Wall -Wextra -Werror -Wpedantic
 
 all:	$(NAME)
 

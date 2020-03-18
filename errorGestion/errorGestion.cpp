@@ -19,8 +19,8 @@ errorGestion::~errorGestion()
 void errorGestion::argsGestion(char **av)
 {
     try {
-        if (!av[1])
-            throw Error(1, "You need almost one");
+        if (!av[1] || av[2] != nullptr)
+            throw Error(1, "You need almost add one lib with this binary.");
     }
     catch(std::exception const &error) {
         std::cerr << "Error : " << error.what() << std::endl;
