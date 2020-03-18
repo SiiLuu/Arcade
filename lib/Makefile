@@ -5,19 +5,45 @@
 ## Makefile
 ##
 
-all:
-	make -C ./NCURSES
-	make -C ./SDL
-	make -C ./SFML
+SRC 			= 	AbstractGraph.cpp
+SRC_NCURSES		=	NCURSES/nCurses.cpp
+SRC_SDL			=	SDL/Sdl.cpp
+SRC_SFML		=	SFML/Sfml.cpp
+
+OBJ				=	$(SRC:.cpp=.o)
+OBJ_NCURSES		=	$(SRC_NCURSES:.cpp=.o)
+OBJ_SDL			=	$(SRC_SDL:.cpp=.o)
+OBJ_SFML		=	$(SRC_SFML:.cpp=.o)
+
+NCURSES 		=	lib_arcade_ncurses.so
+SDL 			=	lib_arcade_sdl.so
+SFML	 		=	lib_arcade_sfml.so
+
+all: $(NCURSES)
+
+%.o : %.cpp
+		g++ -fPIC -c $(SRC) $(SRC_NCURSES) $(SRC_SDL) $(SRC_SFML)
+		mv nCurses.o NCURSES/
+		mv Sdl.o SDL/
+		mv Sfml.o SFML/
+
+$(NCURSES): $(OBJ_NCURSES)
+		ld -shared $(OBJ) $(OBJ_NCURSES) -o $(NCURSES)
+		ld -shared $(OBJ) $(OBJ_SDL) -o $(SDL)
+		ld -shared $(OBJ) $(OBJ_SFML) -o $(SFML)
 
 clean:
-	make clean -C ./NCURSES
-	make clean -C ./SDL
-	make clean -C ./SFML
+	rm -f *.o
+	rm -f SFML/*.o
+	rm -f SDL/*.o
+	rm -f NCURSES/*.o
 
 fclean:	clean
-	make fclean -C ./NCURSES
-	make fclean -C ./SDL
-	make fclean -C ./SFML
+	rm -f $(NCURSES)
+	rm -f $(SDL)
+	rm -f $(SFML)
 
 re: fclean all
+
+debug:	CFLAGS += -g
+debug:	fclean all
