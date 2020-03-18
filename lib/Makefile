@@ -12,7 +12,6 @@ SRC_SDL		=	AbstractGraph.cpp	\
 				SDL/Sdl.cpp
 
 SRC_NCURSES	=	AbstractGraph.cpp	\
-				NCURSES/nCurses.cpp
 
 OBJ_SDL		=	$(SRC_SDL:.cpp=.o)
 OBJ_SFML 	=	$(SRC_SFML:.cpp=.o)
@@ -24,30 +23,17 @@ NCURSES =	lib_arcade_ncurses.so
 
 CFLAGS +=	-W -Wall -Wextra -Werror -Wpedantic
 
-all: $(NCURSES) $(SFML) $(SDL)
+all: $(NCURSES)
 
 %.o : %.cpp
-		@echo "Compiling $@..."
-		g++ $<
+		g++ -fPIC -c -Wall $(SRC_NCURSES)
 
-$(NCURSES):	$(OBJ)
+$(NCURSES):	$(OBJ_NCURSES)
 		@echo "Compiling..."
-		ld -fPIC -shared -o $(NCURSES) $(OBJ) -lfoo
-
-$(NCURSES):	$(OBJ)
-		@echo "Compiling..."
-		ld -fPIC -shared -o $(NCURSES) $(OBJ) -lfoo
-
-$(NCURSES):	$(OBJ)
-		@echo "Compiling..."
-		ld -fPIC -shared -o $(NCURSES) $(OBJ) -lfoo
-
-$(NAME):	$(OBJ)
-		@echo "Compiling..."
-		ld -fPIC -shared -o $(SFML) $(OBJ) -lfoo
-		ld -fPIC -shared -o $(SDL) $(OBJ) -lfoo
+		ld -shared $(OBJ_NCURSES) -o $(NCURSES)
 
 clean:
+	rm -f *.o
 	rm -f NCURSES/*.o
 	rm -f SDL/*.o
 	rm -f SFML/*.o
