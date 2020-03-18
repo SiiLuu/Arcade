@@ -6,7 +6,7 @@
 */
 #include "sceneMainMenu.hpp"
 
-sceneMainMenu::sceneMainMenu(/* args */)
+sceneMainMenu::sceneMainMenu(/* args */) : Scene()
 {
 }
 

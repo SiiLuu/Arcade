@@ -6,7 +6,7 @@
 */
 #include "sceneMainGame.hpp"
 
-sceneMainGame::sceneMainGame(/* args */)
+sceneMainGame::sceneMainGame(/* args */) : Scene()
 {
 }
 

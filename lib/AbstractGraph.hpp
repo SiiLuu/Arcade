@@ -10,9 +10,10 @@
 #define ABSTRACTGRAPH_HPP_
 
 class AbstractGraph : public IModuleGraph {
+
     public:
         AbstractGraph();
-        ~AbstractGraph();
+        virtual ~AbstractGraph();
 
     protected:
     private:

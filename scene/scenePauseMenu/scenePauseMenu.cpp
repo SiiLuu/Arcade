@@ -6,7 +6,7 @@
 */
 #include "scenePauseMenu.hpp"
 
-ScenePause::ScenePause(/* args */)
+ScenePause::ScenePause(/* args */) : Scene()
 {
 }
 

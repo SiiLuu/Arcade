@@ -11,11 +11,11 @@
 
 class nCurses : public AbstractGraph
 {
-private:
-    /* data */
-public:
-    nCurses(/* args */);
-    ~nCurses();
+    private:
+        /* data */
+    public:
+        nCurses(/* args */);
+        ~nCurses();
 };
 
 #endif /* !NCURSES_HPP_ */

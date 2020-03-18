@@ -10,10 +10,10 @@
 #ifndef VITESSE_HPP_
 #define VITESSE_HPP_
 
-class Vitesse : public Component {
+class Speed : public Component {
     public:
-        Vitesse();
-        ~Vitesse();
+        Speed();
+        ~Speed();
 
     protected:
     private:
