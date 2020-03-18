@@ -10,8 +10,6 @@
 
 class Scene {
     public:
-        Scene();
-        ~Scene();
 
     protected:
     private:

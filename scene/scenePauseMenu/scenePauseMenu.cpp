@@ -4,12 +4,9 @@
 ** File description:
 ** scenePause
 */
+
 #include "scenePauseMenu.hpp"
 
-ScenePause::ScenePause(/* args */) : Scene()
-{
-}
+ScenePause::ScenePause(/* args */) {}
 
-ScenePause::~ScenePause()
-{
-}
+ScenePause::~ScenePause() {}

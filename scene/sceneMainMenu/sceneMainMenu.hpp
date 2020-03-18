@@ -4,18 +4,19 @@
 ** File description:
 ** main scene class
 */
+
 #include "../Scene.hpp"
 
 #ifndef SCENEMAINMENU_HPP_
 #define SCENEMAINMENU_HPP_
 
-class sceneMainMenu : public Scene
-{
-private:
-    /* data */
-public:
-    sceneMainMenu(/* args */);
-    ~sceneMainMenu();
+class sceneMainMenu : public Scene {
+
+    private:
+        /* data */
+    public:
+        sceneMainMenu(/* args */);
+        ~sceneMainMenu();
 };
 
 

@@ -9,13 +9,13 @@
 #ifndef SCENEMAINGAME_HPP_
 #define SCENEMAINGAME_HPP_
 
-class sceneMainGame : public Scene
-{
-private:
-    /* data */
-public:
-    sceneMainGame(/* args */);
-    ~sceneMainGame();
+class sceneMainGame : public Scene {
+
+    private:
+        /* data */
+    public:
+        sceneMainGame(/* args */);
+        ~sceneMainGame();
 };
 
 

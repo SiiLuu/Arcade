@@ -4,12 +4,9 @@
 ** File description:
 ** scene main menu
 */
+
 #include "sceneMainMenu.hpp"
 
-sceneMainMenu::sceneMainMenu(/* args */) : Scene()
-{
-}
+sceneMainMenu::sceneMainMenu(/* args */) {}
 
-sceneMainMenu::~sceneMainMenu()
-{
-}
+sceneMainMenu::~sceneMainMenu() {}
