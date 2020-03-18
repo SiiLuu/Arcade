@@ -10,10 +10,9 @@
 
 class IModuleGame {
     public:
-        IModuleGame();
-        ~IModuleGame();
-        void update();
-        void init();
+        virtual ~IModuleGame() = default;
+        virtual void update() = 0;
+        virtual void init() = 0;
 
         enum state
         {

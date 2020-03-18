@@ -15,8 +15,6 @@
 
 class AbstractGame : public IModuleGame {
     public:
-        AbstractGame();
-        ~AbstractGame();
         void saveScore();
         void initGame();
 

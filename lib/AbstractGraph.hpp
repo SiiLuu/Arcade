@@ -12,8 +12,6 @@
 class AbstractGraph : public IModuleGraph {
 
     public:
-        AbstractGraph();
-        virtual ~AbstractGraph();
 
     protected:
     private:

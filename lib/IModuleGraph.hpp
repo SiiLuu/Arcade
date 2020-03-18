@@ -11,13 +11,12 @@
 
 class IModuleGraph : public ArcadeCore {
     public:
-        IModuleGraph();
-        ~IModuleGraph();
+        virtual ~IModuleGraph() = default;
 
-        void createdWindow();
-        void registerEvenet();
-        void displayMap();
-        void destructWindow();
+        virtual void createdWindow() = 0;
+        virtual void registerEvenet() = 0;
+        virtual void displayMap() = 0;
+        virtual void destructWindow() = 0;
 
     protected:
     private:
