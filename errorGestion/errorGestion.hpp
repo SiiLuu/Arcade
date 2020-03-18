@@ -4,8 +4,10 @@
 ** File description:
 ** Arcade
 */
+
 #include "error.hpp"
 #include <iostream>
+#include <vector>
 
 #ifndef ERRORGESTION_HPP_
 #define ERRORGESTION_HPP_
@@ -13,10 +15,10 @@
 class errorGestion : public Error
 {
     private:
-        void argsGestion(char **av);
+        void argsGestion(int ac, std::vector<std::string> av);
 
     public:
-        errorGestion(char **av);
+        errorGestion(int ac, std::vector<std::string> av);
         ~errorGestion();
 };
 
