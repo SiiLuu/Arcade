@@ -28,7 +28,8 @@ clean:
 	rm -f *.o
 
 fclean:	clean
-	rm -f $(NCURSES)
+	rm -f ../$(NCURSES)
+	rm -f *.o
 
 re: fclean all
 
