@@ -6,5 +6,3 @@
 */
 
 #include "AbstractGraph.hpp"
-
-void AbstractGraph::display() {}
