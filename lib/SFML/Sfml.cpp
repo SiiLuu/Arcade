@@ -5,12 +5,12 @@
 ** sfml functions
 */
 
-#include "sfml.hpp"
+#include "Sfml.hpp"
 
-sfml::sfml(/* args */)
+Sfml::Sfml(/* args */)
 {
 }
 
-sfml::~sfml()
+Sfml::~Sfml()
 {
 }

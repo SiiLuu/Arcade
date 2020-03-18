@@ -5,12 +5,12 @@
 ** sdl functions
 */
 
-#include "sdl.hpp"
+#include "Sdl.hpp"
 
-sdl::sdl(/* args */)
+Sdl::Sdl(/* args */)
 {
 }
 
-sdl::~sdl()
+Sdl::~Sdl()
 {
 }

@@ -1,8 +1,9 @@
+
 /*
 ** EPITECH PROJECT, 2020
-** Position.hpp
+** Arcade
 ** File description:
-** Position
+** position class
 */
 
 #include "Component.hpp"

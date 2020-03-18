@@ -4,7 +4,7 @@
 ** File description:
 ** Entity
 */
-
+#pragma once
 #include "AbstractGame.hpp"
 
 #ifndef ENTITY_HPP_
@@ -17,7 +17,7 @@ class Entity : public AbstractGame {
 
     protected:
     private:
-        int uniqueID
+        int uniqueID;
 };
 
 #endif /* !ENTITY_HPP_ */

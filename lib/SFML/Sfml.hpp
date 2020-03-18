@@ -9,13 +9,13 @@
 #ifndef SFML_HPP_
 #define SFML_HPP_
 
-class sfml : public AbstractGraph
+class Sfml : public AbstractGraph
 {
     private:
         /* data */
     public:
-        sfml(/* args */);
-        ~sfml();
+        Sfml(/* args */);
+        ~Sfml();
 };
 
 #endif /* !SFML_HPP_ */

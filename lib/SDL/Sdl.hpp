@@ -9,13 +9,13 @@
 #ifndef SDL_HPP_
 #define SDL_HPP_
 
-class sdl : public AbstractGraph
+class Sdl : public AbstractGraph
 {
 private:
     /* data */
 public:
-    sdl(/* args */);
-    ~sdl();
+    Sdl(/* args */);
+    ~Sdl();
 };
 
 #endif /* !SDL_HPP_ */
