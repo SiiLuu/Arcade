@@ -21,7 +21,7 @@ NAME 	=	arcade
 
 CFLAGS +=	-W -Wall -Wextra -Werror -Wpedantic
 
-all:	core game graphicals
+all:	core games graphicals
 
 core:	$(OBJ)
 	g++ -o $(NAME) $(OBJ) $(CFLAGS)
@@ -29,8 +29,8 @@ core:	$(OBJ)
 graphicals:
 	make -C ./lib
 
-game:
-	make -C ./games
+games:
+	make -C ./game
 
 clean:
 	rm -f *.o
@@ -42,13 +42,13 @@ clean:
 	rm -f scene/sceneMainMenu/*.o
 	rm -f libLoader/*.o
 	make -C ./lib clean
-	make -C ./games clean
+	make -C ./game clean
 
 fclean:	clean
 	rm -f $(NAME)
 	make -C ./lib fclean
-	make -C ./games fclean
+	make -C ./game fclean
 
 re: fclean all
 	make -C ./lib re
-	make -C ./games re
+	make -C ./game re
