@@ -34,7 +34,7 @@ $(NCURSES): $(OBJ_NCURSES)
 		ld -shared $(OBJ) $(OBJ_SFML) -o $(SFML)
 
 clean:
-	rm -f *.o
+	rm -f AGraph/*.o
 	rm -f SFML/*.o
 	rm -f SDL/*.o
 	rm -f NCURSES/*.o
