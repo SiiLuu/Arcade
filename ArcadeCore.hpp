@@ -5,7 +5,9 @@
 ** Arcade core
 */
 #include "scene/Scene.hpp"
+#include "libLoader/LibLoader.hpp"
 #include <string>
+#include <iostream>
 
 #ifndef ARCADECORE_HPP_
 #define ARCADECORE_HPP_
@@ -21,6 +23,7 @@ class ArcadeCore {
     protected:
     private:
         Scene *_scene;
+        LibLoader *_lib;
         std::string playerName;
         std::string score;
 

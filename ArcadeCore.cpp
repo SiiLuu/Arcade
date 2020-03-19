@@ -9,8 +9,14 @@
 
 ArcadeCore::ArcadeCore()
 {
+    this->gameLoop();
 }
 
 ArcadeCore::~ArcadeCore()
 {
+}
+
+void ArcadeCore::gameLoop()
+{
+    this->_lib->load();
 }

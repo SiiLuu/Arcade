@@ -10,6 +10,7 @@ SRC 	=	main.cpp 								\
 			config/gameConfig.cpp					\
 			errorGestion/error.cpp					\
 			errorGestion/errorGestion.cpp			\
+			scene/Scene.cpp							\
 			scene/sceneMainMenu/sceneMainMenu.cpp	\
 			scene/sceneMainGame/sceneMainGame.cpp	\
 			scene/scenePauseMenu/scenePauseMenu.cpp	\

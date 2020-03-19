@@ -17,6 +17,7 @@ LibLoader::~LibLoader()
 
 void LibLoader::load()
 {
+    std::cout << "load function" << std::endl;
 }
 
 void LibLoader::unLoad()

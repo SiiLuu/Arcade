@@ -38,8 +38,8 @@ all: $(NIBBLER)
 		mv pacman.o AGame/pacman
 
 $(NIBBLER): $(OBJ_NIBBLER)
-		ld -shared $(OBJ) $(OBJ_NIBBLER) -o $(NIBBLER)
-		ld -shared $(OBJ) $(OBJ_PACMAN) -o $(PACMAN)
+		g++ -shared $(OBJ) $(OBJ_NIBBLER) -o $(NIBBLER)
+		g++ -shared $(OBJ) $(OBJ_PACMAN) -o $(PACMAN)
 
 clean:
 	rm -f *.o

@@ -4,12 +4,12 @@
 ** File description:
 ** Lib loader class
 */
-#include "../ArcadeCore.hpp"
+#include <iostream>
 
 #ifndef LIBLOADER_HPP_
 #define LIBLOADER_HPP_
 
-class LibLoader : public ArcadeCore {
+class LibLoader {
     public:
         LibLoader();
         ~LibLoader();
