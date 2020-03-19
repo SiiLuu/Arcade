@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-SRC 			= 	AbstractGraph.cpp
+SRC 			= 	AGraph/AbstractGraph.cpp
 SRC_NCURSES		=	NCURSES/nCurses.cpp
 SRC_SDL			=	SDL/Sdl.cpp
 SRC_SFML		=	SFML/Sfml.cpp
@@ -23,6 +23,7 @@ all: $(NCURSES)
 
 %.o : %.cpp
 		g++ -fPIC -c $(SRC) $(SRC_NCURSES) $(SRC_SDL) $(SRC_SFML)
+		mv AbstractGraph.o AGraph/
 		mv nCurses.o NCURSES/
 		mv Sdl.o SDL/
 		mv Sfml.o SFML/

@@ -4,7 +4,7 @@
 ** File description:
 ** sdl class
 */
-#include "../AbstractGraph.hpp"
+#include "../AGraph/AbstractGraph.hpp"
 
 #ifndef SDL_HPP_
 #define SDL_HPP_

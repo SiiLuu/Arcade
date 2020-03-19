@@ -4,7 +4,7 @@
 ** File description:
 ** abstract graph class
 */
-#include "IModuleGraph.hpp"
+#include "../IModuleGraph.hpp"
 
 #ifndef ABSTRACTGRAPH_HPP_
 #define ABSTRACTGRAPH_HPP_

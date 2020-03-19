@@ -4,7 +4,7 @@
 ** File description:
 ** nCurses class
 */
-#include "../AbstractGraph.hpp"
+#include "../AGraph/AbstractGraph.hpp"
 
 #ifndef NCURSES_HPP_
 #define NCURSES_HPP_

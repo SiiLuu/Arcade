@@ -4,7 +4,7 @@
 ** File description:
 ** sfml class
 */
-#include "../AbstractGraph.hpp"
+#include "../AGraph/AbstractGraph.hpp"
 
 #ifndef SFML_HPP_
 #define SFML_HPP_
