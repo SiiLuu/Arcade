@@ -14,3 +14,11 @@ LibLoader::LibLoader()
 LibLoader::~LibLoader()
 {
 }
+
+void LibLoader::load()
+{
+}
+
+void LibLoader::unLoad()
+{
+}

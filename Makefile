@@ -5,38 +5,24 @@
 ## Makefile
 ##
 
-SRC 	=	main.cpp 								\
-			ArcadeCore.cpp							\
-			config/gameConfig.cpp					\
-			errorGestion/error.cpp					\
-			errorGestion/errorGestion.cpp			\
-			scene/sceneMainMenu/sceneMainMenu.cpp	\
-			scene/sceneMainGame/sceneMainGame.cpp	\
-			scene/scenePauseMenu/scenePauseMenu.cpp
+all:
+	make -C ./lib
+	#make -C ./game
+	#make -C ./core
 
-OBJ 	=	$(SRC:.cpp=.o)
+core:
+	make -C ./core
 
-NAME 	=	arcade
-
-CFLAGS +=	-W -Wall -Wextra -Werror -Wpedantic
-
-all:	core graphicals
-
-core:	$(OBJ)
-	g++ -o $(NAME) $(OBJ) $(CFLAGS)
-
-graphicals: 
+graphicals:
 	make -C ./lib
 
+game:
+	make -C ./game
+
 clean:
-	rm -f *.o
-	rm -f scene/*.o
-	rm -f errorGestion/*.o
-	rm -f config/*.o
-	rm -f scene/scenePauseMenu/*.o
-	rm -f scene/sceneMainGame/*.o
-	rm -f scene/sceneMainMenu/*.o
 	make -C ./lib clean
+	make -C ./core clean
+	make -C ./game clean
 
 fclean:	clean
 	rm -f $(NAME)
