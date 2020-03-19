@@ -5,15 +5,15 @@
 ** Component
 */
 
-#include "Entity.hpp"
+#include "../Entity.hpp"
 
-#ifndef COMPONENT_HPP_
-#define COMPONENT_HPP_
+#ifndef ACOMPONENT_HPP_
+#define ACOMPONENT_HPP_
 
-class Component : public Entity {
+class AComponent : public Entity {
     public:
-        Component();
-        ~Component();
+        AComponent();
+        ~AComponent();
 
     protected:
     private:

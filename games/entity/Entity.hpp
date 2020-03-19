@@ -5,7 +5,7 @@
 ** Entity
 */
 #pragma once
-#include "AbstractGame.hpp"
+#include "../AGame/AGame.hpp"
 
 #ifndef ENTITY_HPP_
 #define ENTITY_HPP_

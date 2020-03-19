@@ -4,11 +4,12 @@
 ** File description:
 ** Game Interface
 */
+#include "../ArcadeCore.hpp"
 
 #ifndef IMODULEGAME_HPP_
 #define IMODULEGAME_HPP_
 
-class IModuleGame {
+class IModuleGame : public ArcadeCore {
     public:
         virtual ~IModuleGame() = default;
         virtual void update() = 0;

@@ -5,16 +5,16 @@
 ** HandleMap
 */
 
-#include "AbstractGame.hpp"
+#include "./AGame/AGame.hpp"
 
 #ifndef HANDLEMAP_HPP_
 #define HANDLEMAP_HPP_
 
 class HandleMap : public AbstractGame {
     public:
-        PlayerPosition();
-        StartPosition();
-        ObstaclesPosition();
+        void PlayerPosition();
+        void StartPosition();
+        void ObstaclesPosition();
         HandleMap();
         ~HandleMap();
 

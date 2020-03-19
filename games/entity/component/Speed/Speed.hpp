@@ -5,12 +5,12 @@
 ** Vitesse
 */
 
-#include "Component.hpp"
+#include "../AComponent.hpp"
 
 #ifndef VITESSE_HPP_
 #define VITESSE_HPP_
 
-class Speed : public Component {
+class Speed : public AComponent {
     public:
         Speed();
         ~Speed();

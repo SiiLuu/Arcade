@@ -12,7 +12,8 @@ SRC 	=	main.cpp 								\
 			errorGestion/errorGestion.cpp			\
 			scene/sceneMainMenu/sceneMainMenu.cpp	\
 			scene/sceneMainGame/sceneMainGame.cpp	\
-			scene/scenePauseMenu/scenePauseMenu.cpp
+			scene/scenePauseMenu/scenePauseMenu.cpp	\
+			libLoader/LibLoader.cpp
 
 OBJ 	=	$(SRC:.cpp=.o)
 
@@ -20,13 +21,16 @@ NAME 	=	arcade
 
 CFLAGS +=	-W -Wall -Wextra -Werror -Wpedantic
 
-all:	core graphicals
+all:	core game graphicals
 
 core:	$(OBJ)
 	g++ -o $(NAME) $(OBJ) $(CFLAGS)
 
 graphicals:
 	make -C ./lib
+
+game:
+	make -C ./games
 
 clean:
 	rm -f *.o
@@ -36,11 +40,15 @@ clean:
 	rm -f scene/scenePauseMenu/*.o
 	rm -f scene/sceneMainGame/*.o
 	rm -f scene/sceneMainMenu/*.o
+	rm -f libLoader/*.o
 	make -C ./lib clean
+	make -C ./games clean
 
 fclean:	clean
 	rm -f $(NAME)
 	make -C ./lib fclean
+	make -C ./games fclean
 
 re: fclean all
-	make -C ./lib re%
+	make -C ./lib re
+	make -C ./games re

@@ -6,12 +6,12 @@
 ** position class
 */
 
-#include "Component.hpp"
+#include "../AComponent.hpp"
 
 #ifndef POSITION_HPP_
 #define POSITION_HPP_
 
-class Position : public Component {
+class Position : public AComponent {
     public:
         Position();
         ~Position();

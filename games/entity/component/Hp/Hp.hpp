@@ -5,12 +5,12 @@
 ** Hp
 */
 
-#include "Component.hpp"
+#include "../AComponent.hpp"
 
 #ifndef HP_HPP_
 #define HP_HPP_
 
-class Hp : public Coponent {
+class Hp : public AComponent {
     public:
         Hp();
         ~Hp();
