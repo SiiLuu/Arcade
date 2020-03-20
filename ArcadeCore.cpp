@@ -18,5 +18,6 @@ ArcadeCore::~ArcadeCore()
 
 void ArcadeCore::gameLoop()
 {
+    this->_lib = new LibLoader();
     this->_lib->load();
 }

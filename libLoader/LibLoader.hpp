@@ -4,7 +4,11 @@
 ** File description:
 ** Lib loader class
 */
+#include <vector>
 #include <iostream>
+#include <dlfcn.h>
+#include <stdio.h>
+
 
 #ifndef LIBLOADER_HPP_
 #define LIBLOADER_HPP_
@@ -19,6 +23,9 @@ class LibLoader {
 
     protected:
     private:
+        std::vector<std::string> libPath = {"./lib/lib_arcade_sfml.so",
+                                            "./lib/lib_arcade_sdl.so",
+                                            "./lib/lib_arcade_ncurses.so"};
 };
 
 #endif /* !LIBLOADER_HPP_ */

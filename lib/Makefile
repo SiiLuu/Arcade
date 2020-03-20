@@ -22,16 +22,16 @@ SFML	 		=	lib_arcade_sfml.so
 all: $(NCURSES)
 
 %.o : %.cpp
-		g++ -fPIC -llibstdc++ -c $(SRC) $(SRC_NCURSES) $(SRC_SDL) $(SRC_SFML)
+		g++ -fPIC -c $(SRC) $(SRC_NCURSES) $(SRC_SDL) $(SRC_SFML)
 		mv AbstractGraph.o AGraph/
 		mv nCurses.o NCURSES/
 		mv Sdl.o SDL/
 		mv Sfml.o SFML/
 
 $(NCURSES): $(OBJ_NCURSES)
-		g++ -shared $(OBJ) $(OBJ_NCURSES) -o $(NCURSES)
-		g++ -shared $(OBJ) $(OBJ_SDL) -o $(SDL)
-		g++ -shared $(OBJ) $(OBJ_SFML) -o $(SFML)
+		g++ -shared -rdynamic $(OBJ) $(OBJ_NCURSES) -o $(NCURSES)
+		g++ -shared -rdynamic $(OBJ) $(OBJ_SDL) -o $(SDL)
+		g++ -shared -rdynamic $(OBJ) $(OBJ_SFML) -o $(SFML)
 
 clean:
 	rm -f AGraph/*.o

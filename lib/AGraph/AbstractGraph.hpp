@@ -12,6 +12,8 @@
 class AbstractGraph : public IModuleGraph {
 
     public:
+        virtual void getCh() = 0;
+
     protected:
     private:
 };

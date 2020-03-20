@@ -4,6 +4,7 @@
 ** File description:
 ** Graph Interface
 */
+#pragma once
 #include "../ArcadeCore.hpp"
 
 #ifndef IMODULEGRAPH_HPP_
@@ -13,10 +14,11 @@ class IModuleGraph : public ArcadeCore {
     public:
         virtual ~IModuleGraph() = default;
 
-        virtual void createdWindow() = 0;
-        virtual void registerEvenet() = 0;
-        virtual void displayMap() = 0;
-        virtual void destructWindow() = 0;
+        virtual void getCh() = 0;
+        //virtual void createdWindow() = 0;
+        //virtual void registerEvenet() = 0;
+        //virtual void displayMap() = 0;
+        //virtual void destructWindow() = 0;
 
     protected:
     private:

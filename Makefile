@@ -20,7 +20,7 @@ OBJ 	=	$(SRC:.cpp=.o)
 
 NAME 	=	arcade
 
-CFLAGS +=	-W -Wall -Wextra -Werror -Wpedantic
+CFLAGS +=	-W -Wall -Wextra -Werror -Wpedantic -ldl
 
 all:	core games graphicals
 
