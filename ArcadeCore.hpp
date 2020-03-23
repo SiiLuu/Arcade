@@ -5,9 +5,12 @@
 ** Arcade core
 */
 #include "scene/Scene.hpp"
+#include "lib/IModuleGraph.hpp"
 #include "libLoader/LibLoader.hpp"
 #include <string>
 #include <iostream>
+#include <vector>
+#include <dlfcn.h>
 
 #ifndef ARCADECORE_HPP_
 #define ARCADECORE_HPP_
@@ -23,6 +26,7 @@ class ArcadeCore {
     protected:
     private:
         Scene *_scene;
+        IModuleGraph *shared_lib;
         LibLoader *_lib;
         std::string playerName;
         std::string score;

@@ -4,6 +4,7 @@
 ** File description:
 ** Lib loader class
 */
+#include "../lib/AGraph/AbstractGraph.hpp"
 #include <vector>
 #include <iostream>
 #include <dlfcn.h>

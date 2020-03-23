@@ -4,13 +4,13 @@
 ** File description:
 ** Graph Interface
 */
-#pragma once
-#include "../ArcadeCore.hpp"
+#include "iostream"
+//#include "../ArcadeCore.hpp"
 
 #ifndef IMODULEGRAPH_HPP_
 #define IMODULEGRAPH_HPP_
 
-class IModuleGraph : public ArcadeCore {
+class IModuleGraph {
     public:
         virtual ~IModuleGraph() = default;
 

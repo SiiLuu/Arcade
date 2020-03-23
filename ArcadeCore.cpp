@@ -4,7 +4,6 @@
 ** File description:
 ** Arcade core
 */
-
 #include "ArcadeCore.hpp"
 
 ArcadeCore::ArcadeCore()

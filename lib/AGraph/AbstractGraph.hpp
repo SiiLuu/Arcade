@@ -18,4 +18,6 @@ class AbstractGraph : public IModuleGraph {
     private:
 };
 
+typedef AbstractGraph *create_t();
+
 #endif /* !ABSTRACTGRAPH_HPP_ */
