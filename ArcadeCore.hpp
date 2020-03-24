@@ -37,8 +37,8 @@ class ArcadeCore {
         Scene *_scene;
         AbstractGraph *shared_lib;
         LibLoader *_lib;
-        std::string playerName;
-        std::string score;
+        std::string _playerName;
+        std::string _score;
         library _library;
         std::vector<std::string> _av;
 
@@ -47,7 +47,7 @@ class ArcadeCore {
         void setGame();
         void setScore();
         void swapLib(std::string str);
-        library getLib(std::vector<std::string> lib) const;
+        library getLib(std::string lib) const;
         std::vector<std::string> libPath = {"./lib/lib_arcade_sfml.so",
                                             "./lib/lib_arcade_sdl.so",
                                             "./lib/lib_arcade_ncurses.so"};

@@ -37,9 +37,6 @@ class LibLoader {
     protected:
     private:
         void *_handle;
-        std::vector<std::string> libPath = {"./lib/lib_arcade_sfml.so",
-                                            "./lib/lib_arcade_sdl.so",
-                                            "./lib/lib_arcade_ncurses.so"};
 };
 
 #endif /* !LIBLOADER_HPP_ */

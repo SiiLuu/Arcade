@@ -9,7 +9,7 @@
 ArcadeCore::ArcadeCore(std::vector<std::string> av)
 {
     this->_lib = new LibLoader();
-    this->_library = getLib(av);
+    this->_library = getLib(av.at(1));
     this->_av = av;
     this->gameLoop();
 }
@@ -18,13 +18,13 @@ ArcadeCore::ArcadeCore() {}
 
 ArcadeCore::~ArcadeCore() {}
 
-ArcadeCore::library ArcadeCore::getLib(std::vector<std::string> av) const
+ArcadeCore::library ArcadeCore::getLib(std::string lib) const
 {
-    if (av.at(1).find("sfml") != std::string::npos)
+    if (lib.find("sfml") != std::string::npos)
         return (ArcadeCore::library::SFML);
-    else if (av.at(1).find("ncurses") != std::string::npos)
+    else if (lib.find("ncurses") != std::string::npos)
         return (ArcadeCore::library::NCURSES);
-    else if (av.at(1).find("sdl") != std::string::npos)
+    else if (lib.find("sdl") != std::string::npos)
         return (ArcadeCore::library::SDL);
     else
         return (ArcadeCore::library::NONE);

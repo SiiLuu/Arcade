@@ -18,7 +18,8 @@ errorGestion::~errorGestion()
 
 void errorGestion::argsGestion(int ac, std::vector<std::string> av)
 {
-    void *handle;
+    void *handle = dlopen(av.at(1).c_str(), RTLD_LAZY);
+
     try
     {
         if (ac != 2)
@@ -30,9 +31,9 @@ void errorGestion::argsGestion(int ac, std::vector<std::string> av)
             (av[1].compare("lib/lib_arcade_sfml.so") != 0) &&
             (av[1].compare("lib/lib_arcade_ncurses.so") != 0))
             throw Error(1, "Wrong library.");
-        if (!(handle = dlopen(av.at(1).c_str(), RTLD_LAZY))) {
-            throw Error(2, "Cannot open this shared libray");
+        if (!handle) {
             dlclose(handle);
+            throw Error(2, "Cannot open this shared libray");
         }
     }
     catch(std::exception const &error) {
