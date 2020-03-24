@@ -78,6 +78,7 @@ void ArcadeCore::event(std::string event)
 void ArcadeCore::gameLoop()
 {
     std::string str;
+    sf::Event events;
     this->_lib->loadGraphical(this->_av.at(1));
     this->_lib->loadGames("./game/lib_arcade_pacman.so");
     std::cout << this->_library << std::endl;

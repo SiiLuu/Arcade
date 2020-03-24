@@ -8,8 +8,6 @@
 
 #ifndef SFML_HPP_
 #define SFML_HPP_
-
-
 class Sfml : public AbstractGraph
 {
     public:
@@ -21,6 +19,8 @@ class Sfml : public AbstractGraph
         void display();
 
     private:
+        sf::Window _window;
+        sf::Texture background;
 };
 
 #endif /* !SFML_HPP_ */

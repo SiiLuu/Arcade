@@ -31,7 +31,8 @@ void Sfml::getCh()
 
 void Sfml::createWindow()
 {
-    std::cout << "SFML -> Window Created" << std::endl;
+    this->_window.create(sf::VideoMode(800, 600), "My window");
+    this->_window.setFramerateLimit(60);
 }
 
 extern "C" AbstractGraph *create()

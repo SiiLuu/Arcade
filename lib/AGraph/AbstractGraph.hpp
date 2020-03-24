@@ -5,6 +5,8 @@
 ** abstract graph class
 */
 #include "../IModuleGraph.hpp"
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
 #ifndef ABSTRACTGRAPH_HPP_
 #define ABSTRACTGRAPH_HPP_
