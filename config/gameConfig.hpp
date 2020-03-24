@@ -14,14 +14,14 @@
 
 class gameConfig : public ArcadeCore
 {
-public:
-    gameConfig();
-    ~gameConfig();
+    public:
+        gameConfig();
+        ~gameConfig();
 
-    void parseEvent();
+        void parseEvent();
 
-private:
-    std::map<std::string, std::string> configAction;
+    private:
+        std::map<std::string, std::string> configAction;
 };
 
 #endif /* !GAMECONFIG_HPP_ */

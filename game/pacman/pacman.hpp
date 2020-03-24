@@ -4,7 +4,8 @@
 ** File description:
 ** pacman class
 */
-#include "../AGame.hpp"
+#include "../AGame/AbstractGame.hpp"
+#include <iostream>
 
 #ifndef PACMAN_HPP_
 #define PACMAN_HPP_
@@ -16,6 +17,13 @@ class Pacman : public AbstractGame
     public:
         Pacman(/* args */);
         ~Pacman();
+
+        void MovePlayer();
+        void MoveIA();
+        void MoveForward();
+        void MoveBackward();
+        void MoveLeft();
+        void MoveRight();
 };
 
 #endif /* !PACMAN_HPP_ */

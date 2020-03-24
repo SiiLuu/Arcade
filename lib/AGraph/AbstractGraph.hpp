@@ -22,7 +22,7 @@ class AbstractGraph : public IModuleGraph {
     private:
 };
 
-typedef AbstractGraph *create_t();
-typedef void destroy_t(AbstractGraph *);
+typedef AbstractGraph *createGraphical_t();
+typedef void destroyGraphical_t(AbstractGraph *);
 
 #endif /* !ABSTRACTGRAPH_HPP_ */

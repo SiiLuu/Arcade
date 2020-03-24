@@ -4,7 +4,10 @@
 ** File description:
 ** Lib loader class
 */
+//#pragma once
+//#include "../game/AGame/AbstractGame.hpp"
 #include "../lib/AGraph/AbstractGraph.hpp"
+#include "../game/AGame/AbstractGame.hpp"
 #include <vector>
 #include <iostream>
 #include <dlfcn.h>
@@ -27,16 +30,20 @@ class LibLoader {
             NCURSES
         };
 
-        void load(std::string av);
-        void unLoad();
-        void destroyLib();
+        void loadGraphical(std::string av);
+        void loadGames(std::string av);
+        void destroyGames();
+        void destroyGraphical();
 
-        AbstractGraph *_actual_lib;
-        destroy_t *destroy_lib;
+        AbstractGraph *_actual_graphical_lib;
+        destroyGraphical_t *destroy__graphical_lib;
+        AbstractGame *_actual_game_lib;
+        destroyGame_t *destroy_game_lib;
 
     protected:
     private:
-        void *_handle;
+        void *_handle_lib;
+        void *_handle_game;
 };
 
 #endif /* !LIBLOADER_HPP_ */

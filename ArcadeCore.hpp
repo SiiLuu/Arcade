@@ -5,8 +5,9 @@
 ** Arcade core
 */
 #include "scene/Scene.hpp"
-#include "./lib/AGraph/AbstractGraph.hpp"
 #include "libLoader/LibLoader.hpp"
+#include "lib/AGraph/AbstractGraph.hpp"
+#include "game/AGame/AbstractGame.hpp"
 #include <string>
 #include <iostream>
 #include <vector>
@@ -34,12 +35,20 @@ class ArcadeCore {
             NCURSES
         };
 
+        enum games
+        {
+            PACMAN,
+            NIBBLER
+        };
+
         Scene *_scene;
         AbstractGraph *shared_lib;
+        AbstractGame *shared_game;
         LibLoader *_lib;
         std::string _playerName;
         std::string _score;
         library _library;
+        games _game;
         std::vector<std::string> _av;
 
         void setLibrary();
@@ -47,10 +56,14 @@ class ArcadeCore {
         void setGame();
         void setScore();
         void swapLib(std::string str);
-        library getLib(std::string lib) const;
+        void swapGame(std::string str);
+        void event(std::string event);
+        library getLib(std::string liba) const;
         std::vector<std::string> libPath = {"./lib/lib_arcade_sfml.so",
                                             "./lib/lib_arcade_sdl.so",
                                             "./lib/lib_arcade_ncurses.so"};
+        std::vector<std::string> gamePath = {"./game/lib_arcade_pacman.so",
+                                            "./game/lib_arcade_nibbler.so"};
 };
 
 #endif /* !ARCADECORE_HPP_ */

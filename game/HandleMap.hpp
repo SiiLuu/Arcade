@@ -5,7 +5,7 @@
 ** HandleMap
 */
 
-#include "./AGame/AGame.hpp"
+#include "./AGame/AbstractGame.hpp"
 
 #ifndef HANDLEMAP_HPP_
 #define HANDLEMAP_HPP_

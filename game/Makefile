@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-SRC 			= 	AGame/AGame.cpp								\
+SRC 			= 	AGame/AbstractGame.cpp								\
 					HandleMap.cpp								\
 					entity/Entity.cpp							\
 					entity/component/Hp/Hp.cpp					\
@@ -13,9 +13,9 @@ SRC 			= 	AGame/AGame.cpp								\
 					entity/component/Position/Position.cpp		\
 					entity/component/Speed/Speed.cpp
 
-SRC_NIBBLER		=	AGame/nibbler/nibbler.cpp
+SRC_NIBBLER		=	nibbler/nibbler.cpp
 
-SRC_PACMAN		=	AGame/pacman/pacman.cpp
+SRC_PACMAN		=	pacman/pacman.cpp
 
 OBJ				=	$(SRC:.cpp=.o)
 OBJ_NIBBLER		=	$(SRC_NIBBLER:.cpp=.o)
@@ -28,24 +28,24 @@ all: $(NIBBLER)
 
 %.o : %.cpp
 		g++ -fPIC -c $(SRC) $(SRC_NIBBLER) $(SRC_PACMAN)
-		mv AGame.o AGame
+		mv AbstractGame.o AGame
 		mv Entity.o	entity
 		mv Hp.o entity/component/Hp
 		mv AComponent.o	 entity/component
 		mv Position.o entity/component/Position
 		mv Speed.o entity/component/Speed
-		mv nibbler.o AGame/nibbler
-		mv pacman.o AGame/pacman
+		mv nibbler.o nibbler
+		mv pacman.o pacman
 
 $(NIBBLER): $(OBJ_NIBBLER)
-		g++ -shared $(OBJ) $(OBJ_NIBBLER) -o $(NIBBLER)
-		g++ -shared $(OBJ) $(OBJ_PACMAN) -o $(PACMAN)
+		g++ -shared -rdynamic $(OBJ) $(OBJ_NIBBLER) -o $(NIBBLER)
+		g++ -shared -rdynamic $(OBJ) $(OBJ_PACMAN) -o $(PACMAN)
 
 clean:
 	rm -f *.o
 	rm -f AGame/*.o
-	rm -f AGame/nibbler/*.o
-	rm -f AGame/pacman/*.o
+	rm -f nibbler/*.o
+	rm -f pacman/*.o
 	rm -f entity/*.o
 	rm -f entity/component/*.o
 	rm -f entity/component/Hp/*.o

@@ -4,16 +4,15 @@
 ** File description:
 ** Game Interface
 */
-#include "../ArcadeCore.hpp"
 
 #ifndef IMODULEGAME_HPP_
 #define IMODULEGAME_HPP_
 
-class IModuleGame : public ArcadeCore {
+class IModuleGame {
     public:
         virtual ~IModuleGame() = default;
-        virtual void update() = 0;
-        virtual void init() = 0;
+        //virtual void update() = 0;
+        //virtual void init() = 0;
 
         enum state
         {
