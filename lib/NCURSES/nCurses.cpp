@@ -7,10 +7,39 @@
 
 #include "nCurses.hpp"
 
-nCurses::nCurses(/* args */)
+nCurses::nCurses()
 {
+    this->createWindow();
+    this->getCh();
+    this->display();
 }
 
 nCurses::~nCurses()
 {
+    std::cout << "NCURSES destroyed" << std::endl;
+}
+
+void nCurses::display()
+{
+    std::cout << "NCURSES -> Game displayed" << std::endl;
+}
+
+void nCurses::getCh()
+{
+    std::cout << "NCURSES -> Gestion des inputs" << std::endl;
+}
+
+void nCurses::createWindow()
+{
+    std::cout << "NCURSES -> Window Created" << std::endl;
+}
+
+extern "C" AbstractGraph *create()
+{
+    return new nCurses();
+}
+
+extern "C" void destroy(AbstractGraph *object)
+{
+    delete object;
 }

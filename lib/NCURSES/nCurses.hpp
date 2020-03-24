@@ -11,11 +11,15 @@
 
 class nCurses : public AbstractGraph
 {
-    private:
-        /* data */
     public:
-        nCurses(/* args */);
+        nCurses();
         ~nCurses();
+
+        void getCh();
+        void createWindow();
+        void display();
+
+        private:
 };
 
 #endif /* !NCURSES_HPP_ */

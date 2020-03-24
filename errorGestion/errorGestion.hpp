@@ -8,6 +8,7 @@
 #include "error.hpp"
 #include <iostream>
 #include <vector>
+#include <dlfcn.h>
 
 #ifndef ERRORGESTION_HPP_
 #define ERRORGESTION_HPP_

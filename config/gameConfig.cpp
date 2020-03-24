@@ -7,10 +7,6 @@
 
 #include "gameConfig.hpp"
 
-gameConfig::gameConfig(/* args */)
-{
-}
+gameConfig::gameConfig() : ArcadeCore() {}
 
-gameConfig::~gameConfig()
-{
-}
+gameConfig::~gameConfig() {}

@@ -15,9 +15,9 @@ class IModuleGraph {
         virtual ~IModuleGraph() = default;
 
         virtual void getCh() = 0;
-        //virtual void createdWindow() = 0;
-        //virtual void registerEvenet() = 0;
-        //virtual void displayMap() = 0;
+        virtual void createWindow() = 0;
+        virtual void display() = 0;
+        //virtual void registerEvent() = 0;
         //virtual void destructWindow() = 0;
 
     protected:

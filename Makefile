@@ -20,12 +20,14 @@ OBJ 	=	$(SRC:.cpp=.o)
 
 NAME 	=	arcade
 
-CFLAGS +=	-W -Wall -Wextra -Werror -Wpedantic -ldl
+CFLAGS 	+=	-W -Wall -Wextra -Werror -Wpedantic -ldl
+
+LIBS 	+=	-lncurses -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lSDL
 
 all:	core games graphicals
 
 core:	$(OBJ)
-	g++ -o $(NAME) $(OBJ) $(CFLAGS)
+	g++ -o $(NAME) $(OBJ) $(CFLAGS) $(LIBS)
 
 graphicals:
 	make -C ./lib

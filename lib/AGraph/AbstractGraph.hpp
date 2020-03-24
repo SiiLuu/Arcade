@@ -12,12 +12,17 @@
 class AbstractGraph : public IModuleGraph {
 
     public:
+        AbstractGraph();
+        virtual ~AbstractGraph();
         virtual void getCh() = 0;
+        virtual void createWindow() = 0;
+        virtual void display() = 0;
 
     protected:
     private:
 };
 
 typedef AbstractGraph *create_t();
+typedef void destroy_t(AbstractGraph *);
 
 #endif /* !ABSTRACTGRAPH_HPP_ */

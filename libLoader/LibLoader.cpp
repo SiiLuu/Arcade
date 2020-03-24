@@ -6,35 +6,33 @@
 */
 #include "LibLoader.hpp"
 
-LibLoader::LibLoader()
-{
-}
+LibLoader::LibLoader() {}
 
-LibLoader::~LibLoader()
-{
-}
+LibLoader::~LibLoader() {}
 
-void LibLoader::load()
+void LibLoader::load(std::string av)
 {
-    void *handle = dlopen(this->libPath.at(0).c_str(), RTLD_LAZY);
+    this->_handle = dlopen(av.c_str(), RTLD_LAZY);
 
-    if (!handle) {
-        std::cerr << "Cannot open library: " << dlerror() << std::endl;
+    create_t *load_lib = (create_t *)dlsym(this->_handle, "create");
+    const char *dlsym_error = dlerror();
+    if (dlsym_error) {
+        std::cerr << "Cannot load symbol create: " << dlsym_error << '\n';
         exit(84);
     }
-    // Chargement de la fonction "func"
-	create_t * load_sfml = (create_t *)dlsym(handle, "create");
-    const char* dlsym_error = dlerror();
-	if (dlsym_error)
-	{
-		std::cerr << "Cannot load symbol create: " << dlsym_error << '\n';
+    this->destroy_lib = (destroy_t *)dlsym(this->_handle, "destroy");
+    const char *dlsym_error2 = dlerror();
+    if (dlsym_error2) {
+        std::cerr << "Cannot load symbol destroy: " << dlsym_error << '\n';
         exit(84);
-	}
-    AbstractGraph *sfml = load_sfml();
-    sfml->getCh();
-    dlclose(handle);
+    }
+    this->_actual_lib = load_lib();
 }
 
-void LibLoader::unLoad()
+void LibLoader::destroyLib()
 {
+    this->destroy_lib(this->_actual_lib);
+    dlclose(this->_handle);
 }
+
+void LibLoader::unLoad() {}

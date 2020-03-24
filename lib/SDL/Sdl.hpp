@@ -11,11 +11,15 @@
 
 class Sdl : public AbstractGraph
 {
-private:
-    /* data */
-public:
-    Sdl(/* args */);
-    ~Sdl();
+    public:
+        Sdl();
+        ~Sdl();
+
+        void getCh();
+        void createWindow();
+        void display();
+
+    private:
 };
 
 #endif /* !SDL_HPP_ */

@@ -12,19 +12,15 @@
 
 class Sfml : public AbstractGraph
 {
-    private:
-        /* data */
     public:
-        Sfml(/* args */);
-        virtual ~Sfml ();
+        Sfml();
+        ~Sfml();
 
-        virtual void getCh();
+        void getCh();
+        void createWindow();
+        void display();
 
+    private:
 };
-
-extern "C"
-    {
-        AbstractGraph *create();
-    }
 
 #endif /* !SFML_HPP_ */

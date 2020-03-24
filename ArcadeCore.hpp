@@ -5,7 +5,7 @@
 ** Arcade core
 */
 #include "scene/Scene.hpp"
-#include "lib/IModuleGraph.hpp"
+#include "./lib/AGraph/AbstractGraph.hpp"
 #include "libLoader/LibLoader.hpp"
 #include <string>
 #include <iostream>
@@ -17,6 +17,7 @@
 
 class ArcadeCore {
     public:
+        ArcadeCore(std::vector<std::string> av);
         ArcadeCore();
         ~ArcadeCore();
 
@@ -25,23 +26,31 @@ class ArcadeCore {
 
     protected:
     private:
+        enum library
+        {
+            NONE,
+            SFML,
+            SDL,
+            NCURSES
+        };
+
         Scene *_scene;
-        IModuleGraph *shared_lib;
+        AbstractGraph *shared_lib;
         LibLoader *_lib;
         std::string playerName;
         std::string score;
+        library _library;
+        std::vector<std::string> _av;
 
         void setLibrary();
         void setPlayerName();
         void setGame();
         void setScore();
-
-        enum library
-        {
-            SFML,
-            SDL,
-            NCURSES
-        };
+        void swapLib(std::string str);
+        library getLib(std::vector<std::string> lib) const;
+        std::vector<std::string> libPath = {"./lib/lib_arcade_sfml.so",
+                                            "./lib/lib_arcade_sdl.so",
+                                            "./lib/lib_arcade_ncurses.so"};
 };
 
 #endif /* !ARCADECORE_HPP_ */

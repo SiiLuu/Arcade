@@ -6,3 +6,7 @@
 */
 
 #include "AbstractGraph.hpp"
+
+AbstractGraph::AbstractGraph() {}
+
+AbstractGraph::~AbstractGraph() {}

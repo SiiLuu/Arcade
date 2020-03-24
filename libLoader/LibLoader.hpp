@@ -19,11 +19,24 @@ class LibLoader {
         LibLoader();
         ~LibLoader();
 
-        void load();
+        enum library
+        {
+            NONE,
+            SFML,
+            SDL,
+            NCURSES
+        };
+
+        void load(std::string av);
         void unLoad();
+        void destroyLib();
+
+        AbstractGraph *_actual_lib;
+        destroy_t *destroy_lib;
 
     protected:
     private:
+        void *_handle;
         std::vector<std::string> libPath = {"./lib/lib_arcade_sfml.so",
                                             "./lib/lib_arcade_sdl.so",
                                             "./lib/lib_arcade_ncurses.so"};
