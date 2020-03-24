@@ -32,6 +32,18 @@ void Sdl::getCh()
 void Sdl::createWindow()
 {
     std::cout << "SDL -> Window Created" << std::endl;
+    SDL_Init(SDL_INIT_VIDEO);
+    this->_window = SDL_CreateWindow(
+        "Arcade",
+        SDL_WINDOWPOS_UNDEFINED,
+        SDL_WINDOWPOS_UNDEFINED,
+        640,
+        480,
+        SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+    if (this->_window == NULL)
+    {
+        std::cout << "Could not create window Arcade." << std::endl;
+    }
 }
 
 extern "C" AbstractGraph *create()

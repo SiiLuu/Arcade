@@ -20,6 +20,7 @@ class Sdl : public AbstractGraph
         void display();
 
     private:
+        SDL_Window *_window;
 };
 
 #endif /* !SDL_HPP_ */

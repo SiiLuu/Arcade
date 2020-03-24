@@ -32,6 +32,11 @@ void nCurses::getCh()
 void nCurses::createWindow()
 {
     std::cout << "NCURSES -> Window Created" << std::endl;
+    initscr();
+    printw("Hello World !!!");
+    refresh();
+    getch();
+    endwin();
 }
 
 extern "C" AbstractGraph *create()

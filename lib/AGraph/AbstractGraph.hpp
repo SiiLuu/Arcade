@@ -7,6 +7,8 @@
 #include "../IModuleGraph.hpp"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <SDL2/SDL.h>
+#include <curses.h>
 
 #ifndef ABSTRACTGRAPH_HPP_
 #define ABSTRACTGRAPH_HPP_
