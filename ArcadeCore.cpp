@@ -80,11 +80,12 @@ void ArcadeCore::gameLoop()
     std::string str;
     sf::Event events;
     this->_lib->loadGraphical(this->_av.at(1));
-    //this->_lib->loadGames("./game/lib_arcade_pacman.so");
-    std::cout << this->_library << std::endl;
+    this->_lib->loadGames("./game/lib_arcade_pacman.so");
 
-    while (1)
+    while (this->_library != ArcadeCore::library::NONE)
     {
+        if (this->_library == ArcadeCore::library::SFML)
+            this->_lib->_actual_graphical_lib->display();
         //std::getline(std::cin, str);
         //swapLib(str);
         //swapGame(str);

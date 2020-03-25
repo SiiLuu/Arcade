@@ -9,6 +9,7 @@
 
 Sfml::Sfml()
 {
+    std::cout << "SFML Created" << std::endl;
     this->createWindow();
     this->getCh();
     this->display();
@@ -19,8 +20,14 @@ Sfml::~Sfml()
     std::cout << "SFML Destroyed" << std::endl;
 }
 
+void Sfml::checkEvents()
+{
+
+}
+
 void Sfml::display()
 {
+    this->checkEvents();
     this->_window.clear();
     this->_window.draw(this->_backgroundSprite);
     this->_window.display();
@@ -37,10 +44,6 @@ void Sfml::createWindow()
     this->_window.setFramerateLimit(60);
     this->_background.loadFromFile("foret.jpg");
     this->_backgroundSprite.setTexture(this->_background);
-}
-
-void Sfml::gameLoop()
-{
 }
 
 extern "C" AbstractGraph *create()

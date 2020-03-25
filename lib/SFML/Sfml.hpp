@@ -20,9 +20,10 @@ class Sfml : public AbstractGraph
 
     private:
         sf::RenderWindow _window;
+        sf::Event _event;
         sf::Texture _background;
         sf::Sprite _backgroundSprite;
-        void gameLoop();
+        void checkEvents();
 };
 
 #endif /* !SFML_HPP_ */
