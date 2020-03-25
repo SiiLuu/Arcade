@@ -16,7 +16,8 @@ Sdl::Sdl()
 
 Sdl::~Sdl()
 {
-    std::cout << "SDL Destroyed" << std::endl;
+    SDL_DestroyWindow(this->_window);
+    SDL_Quit();
 }
 
 void Sdl::display()

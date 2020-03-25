@@ -21,7 +21,9 @@ Sfml::~Sfml()
 
 void Sfml::display()
 {
-    std::cout << "SFML -> Game displayed" << std::endl;
+    this->_window.clear();
+    this->_window.draw(this->_backgroundSprite);
+    this->_window.display();
 }
 
 void Sfml::getCh()
@@ -33,6 +35,12 @@ void Sfml::createWindow()
 {
     this->_window.create(sf::VideoMode(800, 600), "My window");
     this->_window.setFramerateLimit(60);
+    this->_background.loadFromFile("foret.jpg");
+    this->_backgroundSprite.setTexture(this->_background);
+}
+
+void Sfml::gameLoop()
+{
 }
 
 extern "C" AbstractGraph *create()
