@@ -15,11 +15,11 @@ class nCurses : public AbstractGraph
         nCurses();
         ~nCurses();
 
-        void getCh();
         void createWindow();
-        std::string display();
+        void display();
+        std::string registerEvents();
 
-        private:
+    private:
 };
 
 #endif /* !NCURSES_HPP_ */

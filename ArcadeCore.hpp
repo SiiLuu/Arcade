@@ -6,7 +6,6 @@
 */
 #include "scene/Scene.hpp"
 #include "libLoader/LibLoader.hpp"
-#include "lib/AGraph/AbstractGraph.hpp"
 #include "game/AGame/AbstractGame.hpp"
 #include <string>
 #include <iostream>

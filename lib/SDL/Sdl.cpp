@@ -10,25 +10,25 @@
 Sdl::Sdl()
 {
     this->createWindow();
-    this->getCh();
     this->display();
 }
 
 Sdl::~Sdl()
 {
+    std::cout << "SDL Destroyed" << std::endl;
     SDL_DestroyWindow(this->_window);
     SDL_Quit();
 }
 
-std::string Sdl::display()
+void Sdl::display()
 {
     std::cout << "SDL -> Game displayed" << std::endl;
-    return ("");
 }
 
-void Sdl::getCh()
+std::string Sdl::registerEvents()
 {
-    std::cout << "SDL -> Gestion des inputs" << std::endl;
+    std::cout << "SDL -> Events gestion" << std::endl;
+    return ("");
 }
 
 void Sdl::createWindow()

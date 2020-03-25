@@ -78,7 +78,7 @@ void ArcadeCore::event(std::string event)
 
 void ArcadeCore::eventInSfml()
 {
-    std::string event = this->_lib->_actual_graphical_lib->display();
+    std::string event = this->_lib->_actual_graphical_lib->registerEvents();
 
     if (event == "CLOSE")
         this->_library = ArcadeCore::library::NONE;
@@ -97,8 +97,10 @@ void ArcadeCore::gameLoop()
 
     while (this->_library != ArcadeCore::library::NONE)
     {
-        if (this->_library == ArcadeCore::library::SFML)
+        if (this->_library == ArcadeCore::library::SFML) {
             this->eventInSfml();
+            this->_scene->display(1, this->_lib->_actual_graphical_lib);
+        }
         //std::getline(std::cin, str);
         //swapLib(str);
         //swapGame(str);

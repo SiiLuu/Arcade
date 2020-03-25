@@ -10,7 +10,6 @@
 nCurses::nCurses()
 {
     this->createWindow();
-    this->getCh();
     this->display();
 }
 
@@ -19,15 +18,15 @@ nCurses::~nCurses()
     std::cout << "NCURSES destroyed" << std::endl;
 }
 
-std::string nCurses::display()
+void nCurses::display()
 {
     std::cout << "NCURSES -> Game displayed" << std::endl;
-    return ("");
 }
 
-void nCurses::getCh()
+std::string nCurses::registerEvents()
 {
     std::cout << "NCURSES -> Gestion des inputs" << std::endl;
+    return ("");
 }
 
 void nCurses::createWindow()

@@ -14,10 +14,9 @@ class IModuleGraph {
     public:
         virtual ~IModuleGraph() = default;
 
-        virtual void getCh() = 0;
         virtual void createWindow() = 0;
-        virtual std::string display() = 0;
-        //virtual void registerEvent() = 0;
+        virtual void display() = 0;
+        virtual std::string registerEvents() = 0;
         //virtual void destructWindow() = 0;
 
     protected:

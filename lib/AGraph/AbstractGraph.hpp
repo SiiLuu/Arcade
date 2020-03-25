@@ -18,9 +18,9 @@ class AbstractGraph : public IModuleGraph {
     public:
         AbstractGraph();
         virtual ~AbstractGraph();
-        virtual void getCh() = 0;
         virtual void createWindow() = 0;
-        virtual std::string display() = 0;
+        virtual void display() = 0;
+        virtual std::string registerEvents() = 0;
 
     protected:
     private:

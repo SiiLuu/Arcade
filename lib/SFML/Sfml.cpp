@@ -11,7 +11,6 @@ Sfml::Sfml()
 {
     std::cout << "SFML Created" << std::endl;
     this->createWindow();
-    this->getCh();
     this->display();
 }
 
@@ -20,7 +19,7 @@ Sfml::~Sfml()
     std::cout << "SFML Destroyed" << std::endl;
 }
 
-std::string Sfml::checkEvents()
+std::string Sfml::registerEvents()
 {
     while (this->_window.pollEvent(this->_event))
     {
@@ -53,18 +52,11 @@ std::string Sfml::checkEvents()
     return ("");
 }
 
-std::string Sfml::display()
+void Sfml::display()
 {
-    std::string event = this->checkEvents();
     this->_window.clear();
     this->_window.draw(this->_backgroundSprite);
     this->_window.display();
-    return (event);
-}
-
-void Sfml::getCh()
-{
-    std::cout << "SFML -> Gestion des inputs" << std::endl;
 }
 
 void Sfml::createWindow()
