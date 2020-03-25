@@ -48,7 +48,7 @@ void ArcadeCore::swapLib(std::string str)
         this->_lib->loadGraphical(this->libPath.at(2));
     }
 }
-
+/*
 void ArcadeCore::swapGame(std::string str)
 {
     if (!str.compare("p")) {
@@ -73,6 +73,19 @@ void ArcadeCore::event(std::string event)
         this->_lib->_actual_game_lib->MoveLeft();
     if (!event.compare("d"))
         this->_lib->_actual_game_lib->MoveRight();
+}*/
+
+
+void ArcadeCore::eventInSfml()
+{
+    std::string event = this->_lib->_actual_graphical_lib->display();
+
+    if (event == "CLOSE")
+        this->_library = ArcadeCore::library::NONE;
+    if (event == "2")
+        this->swapLib("2");
+    if (event == "3")
+        this->swapLib("3");
 }
 
 void ArcadeCore::gameLoop()
@@ -85,7 +98,7 @@ void ArcadeCore::gameLoop()
     while (this->_library != ArcadeCore::library::NONE)
     {
         if (this->_library == ArcadeCore::library::SFML)
-            this->_lib->_actual_graphical_lib->display();
+            this->eventInSfml();
         //std::getline(std::cin, str);
         //swapLib(str);
         //swapGame(str);

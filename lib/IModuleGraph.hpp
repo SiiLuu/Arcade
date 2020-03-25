@@ -16,7 +16,7 @@ class IModuleGraph {
 
         virtual void getCh() = 0;
         virtual void createWindow() = 0;
-        virtual void display() = 0;
+        virtual std::string display() = 0;
         //virtual void registerEvent() = 0;
         //virtual void destructWindow() = 0;
 

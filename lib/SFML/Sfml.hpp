@@ -16,14 +16,14 @@ class Sfml : public AbstractGraph
 
         void getCh();
         void createWindow();
-        void display();
+        std::string display();
 
     private:
         sf::RenderWindow _window;
         sf::Event _event;
         sf::Texture _background;
         sf::Sprite _backgroundSprite;
-        void checkEvents();
+        std::string checkEvents();
 };
 
 #endif /* !SFML_HPP_ */

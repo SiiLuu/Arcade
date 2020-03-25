@@ -57,7 +57,9 @@ class ArcadeCore {
         void setScore();
         void swapLib(std::string str);
         void swapGame(std::string str);
-        void event(std::string event);
+        void eventInSfml();
+        void eventInSdl();
+        void eventInNcurses();
         library getLib(std::string liba) const;
         std::vector<std::string> libPath = {"./lib/lib_arcade_sfml.so",
                                             "./lib/lib_arcade_sdl.so",

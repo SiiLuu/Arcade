@@ -20,9 +20,10 @@ Sdl::~Sdl()
     SDL_Quit();
 }
 
-void Sdl::display()
+std::string Sdl::display()
 {
     std::cout << "SDL -> Game displayed" << std::endl;
+    return ("");
 }
 
 void Sdl::getCh()

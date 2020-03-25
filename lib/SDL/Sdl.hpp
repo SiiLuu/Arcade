@@ -17,7 +17,7 @@ class Sdl : public AbstractGraph
 
         void getCh();
         void createWindow();
-        void display();
+        std::string display();
 
     private:
         SDL_Window *_window;

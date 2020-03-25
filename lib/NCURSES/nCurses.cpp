@@ -19,9 +19,10 @@ nCurses::~nCurses()
     std::cout << "NCURSES destroyed" << std::endl;
 }
 
-void nCurses::display()
+std::string nCurses::display()
 {
     std::cout << "NCURSES -> Game displayed" << std::endl;
+    return ("");
 }
 
 void nCurses::getCh()

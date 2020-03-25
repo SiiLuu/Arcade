@@ -20,7 +20,7 @@ class AbstractGraph : public IModuleGraph {
         virtual ~AbstractGraph();
         virtual void getCh() = 0;
         virtual void createWindow() = 0;
-        virtual void display() = 0;
+        virtual std::string display() = 0;
 
     protected:
     private:
