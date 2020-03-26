@@ -7,10 +7,15 @@
 
 #include "sceneMainGame.hpp"
 
-sceneMainGame::sceneMainGame(/* args */) : Scene()
+SceneMainGame::SceneMainGame(/* args */)
 {
 }
 
-sceneMainGame::~sceneMainGame()
+SceneMainGame::~SceneMainGame()
 {
+}
+
+void SceneMainGame::display(AbstractGraph *lib)
+{
+    
 }

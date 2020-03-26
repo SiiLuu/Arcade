@@ -7,8 +7,21 @@
 
 #include "Scene.hpp"
 
-void Scene::display(int scene, AbstractGraph *actualLib)
+Scene::Scene()
+{
+    this->_sceneMenu = new SceneMainMenu();
+    this->_sceneGame = new SceneMainGame();
+    this->_scenePause = new ScenePause();
+}
+
+Scene::~Scene() {}
+
+void Scene::display(int scene, AbstractGraph *lib)
 {
     if (scene == 1)
-        actualLib->display();
+        this->_sceneMenu->display(lib);
+    else if (scene == 2)
+        this->_sceneGame->display(lib);
+    else if (scene == 3)
+        this->_scenePause->display(lib);
 }

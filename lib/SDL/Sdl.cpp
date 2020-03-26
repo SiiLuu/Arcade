@@ -27,7 +27,16 @@ void Sdl::display()
 
 std::string Sdl::registerEvents()
 {
-    std::cout << "SDL -> Events gestion" << std::endl;
+    while (SDL_PollEvent(&this->_events))
+    {
+        switch (this->_events.type)
+        {
+        case SDL_QUIT:
+            return ("CLOSE");
+        default:
+            break;
+        }
+    }
     return ("");
 }
 
@@ -39,8 +48,8 @@ void Sdl::createWindow()
         "Arcade",
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
-        640,
-        480,
+        1920,
+        1080,
         SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
     if (this->_window == NULL)
     {

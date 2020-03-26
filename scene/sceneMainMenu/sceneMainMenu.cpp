@@ -7,6 +7,11 @@
 
 #include "sceneMainMenu.hpp"
 
-sceneMainMenu::sceneMainMenu(/* args */) {}
+SceneMainMenu::SceneMainMenu(/* args */) {}
 
-sceneMainMenu::~sceneMainMenu() {}
+SceneMainMenu::~SceneMainMenu() {}
+
+void SceneMainMenu::display(AbstractGraph *lib)
+{
+    lib->display();
+}

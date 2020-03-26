@@ -21,6 +21,7 @@ class Sdl : public AbstractGraph
 
     private:
         SDL_Window *_window;
+        SDL_Event _events;
 };
 
 #endif /* !SDL_HPP_ */

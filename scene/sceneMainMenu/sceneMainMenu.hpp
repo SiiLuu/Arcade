@@ -4,19 +4,23 @@
 ** File description:
 ** main scene class
 */
-
-#include "../Scene.hpp"
+#pragma once
+#include "../../lib/AGraph/AbstractGraph.hpp"
 
 #ifndef SCENEMAINMENU_HPP_
 #define SCENEMAINMENU_HPP_
 
-class sceneMainMenu : public Scene {
+class SceneMainMenu {
+
+    public:
+        SceneMainMenu(/* args */);
+        ~SceneMainMenu();
+
+        void display(AbstractGraph *);
 
     private:
-        /* data */
-    public:
-        sceneMainMenu(/* args */);
-        ~sceneMainMenu();
+        int test;
+
 };
 
 

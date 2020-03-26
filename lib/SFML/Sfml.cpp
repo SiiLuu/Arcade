@@ -61,7 +61,7 @@ void Sfml::display()
 
 void Sfml::createWindow()
 {
-    this->_window.create(sf::VideoMode(800, 600), "My window");
+    this->_window.create(sf::VideoMode(1920, 1080), "My window");
     this->_window.setFramerateLimit(60);
     this->_background.loadFromFile("foret.jpg");
     this->_backgroundSprite.setTexture(this->_background);

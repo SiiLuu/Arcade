@@ -4,20 +4,21 @@
 ** File description:
 ** Scene Pause
 */
-
-#include "../Scene.hpp"
+#pragma once
+#include "../../lib/AGraph/AbstractGraph.hpp"
 
 #ifndef SCENEPAUSE_HPP_
 #define SCENEPAUSE_HPP_
 
-class ScenePause : public Scene {
+class ScenePause {
 
     private:
         /* data */
     public:
         ScenePause(/* args */);
         ~ScenePause();
-};
 
+        void display(AbstractGraph *);
+};
 
 #endif /* !SCENEPAUSE_HPP_ */

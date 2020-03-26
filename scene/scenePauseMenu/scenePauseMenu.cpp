@@ -10,3 +10,8 @@
 ScenePause::ScenePause(/* args */) {}
 
 ScenePause::~ScenePause() {}
+
+void ScenePause::display(AbstractGraph *lib)
+{
+
+}

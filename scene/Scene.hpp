@@ -4,17 +4,25 @@
 ** File description:
 ** Scene Class
 */
-#include "../lib/AGraph/AbstractGraph.hpp"
+#include "sceneMainMenu/sceneMainMenu.hpp"
+#include "scenePauseMenu/scenePauseMenu.hpp"
+#include "sceneMainGame/sceneMainGame.hpp"
 
 #ifndef SCENE_HPP_
 #define SCENE_HPP_
 
 class Scene {
     public:
+        Scene();
+        ~Scene();
         void display(int, AbstractGraph *);
 
     protected:
     private:
+        SceneMainMenu *_sceneMenu;
+        SceneMainGame *_sceneGame;
+        ScenePause *_scenePause;
+        AbstractGraph *graphicalLib;
         int sceneNumber;
 };
 
