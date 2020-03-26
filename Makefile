@@ -24,7 +24,7 @@ CFLAGS 	+=	-W -Wall -Wextra -Werror -Wpedantic -ldl
 
 LIBS 	+=	-lncurses -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lSDL2
 
-all:	games graphicals core
+all:	core games graphicals
 
 core:	$(OBJ)
 	g++ -o $(NAME) $(OBJ) $(CFLAGS) $(LIBS)
@@ -33,7 +33,7 @@ graphicals:
 	make -C ./lib
 
 games:
-	make -C ./games
+	make -C ./game
 
 clean:
 	rm -f *.o
@@ -44,16 +44,14 @@ clean:
 	rm -f scene/sceneMainGame/*.o
 	rm -f scene/sceneMainMenu/*.o
 	rm -f libLoader/*.o
-	make -C ./games clean
 	make -C ./lib clean
+	make -C ./game clean
 
 fclean:	clean
 	rm -f $(NAME)
-	make -C ./games fclean
 	make -C ./lib fclean
+	make -C ./game fclean
 
 re: fclean all
-	make -C ./games re
 	make -C ./lib re
-
-.PHONY: core games graphicals
+	make -C ./game re
