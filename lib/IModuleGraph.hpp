@@ -15,7 +15,8 @@ class IModuleGraph {
         virtual ~IModuleGraph() = default;
 
         virtual void createWindow() = 0;
-        virtual void display() = 0;
+        virtual void displayMenu() = 0;
+        virtual void displayGame() = 0;
         virtual std::string registerEvents() = 0;
         //virtual void destructWindow() = 0;
 

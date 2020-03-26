@@ -10,7 +10,6 @@
 nCurses::nCurses()
 {
     this->createWindow();
-    this->display();
 }
 
 nCurses::~nCurses()
@@ -18,7 +17,11 @@ nCurses::~nCurses()
     std::cout << "NCURSES destroyed" << std::endl;
 }
 
-void nCurses::display()
+void nCurses::displayGame()
+{
+}
+
+void nCurses::displayMenu()
 {
     std::cout << "NCURSES -> Game displayed" << std::endl;
 }

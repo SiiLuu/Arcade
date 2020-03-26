@@ -13,5 +13,5 @@ SceneMainMenu::~SceneMainMenu() {}
 
 void SceneMainMenu::display(AbstractGraph *lib)
 {
-    lib->display();
+    lib->displayMenu();
 }

@@ -10,7 +10,6 @@
 Sdl::Sdl()
 {
     this->createWindow();
-    this->display();
 }
 
 Sdl::~Sdl()
@@ -20,7 +19,11 @@ Sdl::~Sdl()
     SDL_Quit();
 }
 
-void Sdl::display()
+void Sdl::displayGame()
+{
+}
+
+void Sdl::displayMenu()
 {
     std::cout << "SDL -> Game displayed" << std::endl;
 }

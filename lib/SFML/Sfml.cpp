@@ -11,7 +11,6 @@ Sfml::Sfml()
 {
     std::cout << "SFML Created" << std::endl;
     this->createWindow();
-    this->display();
 }
 
 Sfml::~Sfml()
@@ -52,7 +51,11 @@ std::string Sfml::registerEvents()
     return ("");
 }
 
-void Sfml::display()
+void Sfml::displayGame()
+{
+}
+
+void Sfml::displayMenu()
 {
     this->_window.clear();
     this->_window.draw(this->_backgroundSprite);

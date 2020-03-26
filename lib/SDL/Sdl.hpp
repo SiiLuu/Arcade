@@ -16,7 +16,8 @@ class Sdl : public AbstractGraph
         ~Sdl();
 
         void createWindow();
-        void display();
+        void displayGame();
+        void displayMenu();
         std::string registerEvents();
 
     private:
