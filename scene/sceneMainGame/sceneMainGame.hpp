@@ -18,7 +18,7 @@ class SceneMainGame {
         SceneMainGame(/* args */);
         ~SceneMainGame();
 
-        void display(AbstractGraph *);
+        void display(AbstractGraph *, std::string);
 };
 
 #endif /* !SCENEMAINGAME_HPP_ */

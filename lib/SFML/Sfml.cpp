@@ -20,13 +20,8 @@ std::string Sfml::registerEvents()
 {
     while (this->_window.pollEvent(this->_event))
     {
-        switch (this->_event.type) {
-            case sf::Event::Closed:
-                this->_window.close();
+        if (this->_event.type == sf::Event::Closed)
                 return ("CLOSE");
-            default:
-                break;
-        }
         switch (this->_event.key.code) {
             case sf::Keyboard::P:
                 return ("P");
@@ -44,6 +39,8 @@ std::string Sfml::registerEvents()
                 return ("Q");
             case sf::Keyboard::D:
                 return ("D");
+            case sf::Keyboard::Escape:
+                return ("ESCAPE");
             default:
                 break;
         }
@@ -54,7 +51,12 @@ std::string Sfml::registerEvents()
 void Sfml::displayGame(std::string game)
 {
     this->_window.clear();
-    this->_window.draw(this->_pacmanSprite);
+    if (!game.compare("PACMAN")) {
+        this->_window.draw(this->_pacmanSprite);
+    }
+    else if (!game.compare("NIBBLER")) {
+        this->_window.draw(this->_nibblerSprite);
+    }
     this->_window.display();
 }
 
@@ -71,6 +73,8 @@ void Sfml::setTexture()
     this->_backgroundSprite.setTexture(this->_background);
     this->_pacman.loadFromFile("assets/pacman.png");
     this->_pacmanSprite.setTexture(this->_pacman);
+    this->_nibbler.loadFromFile("assets/snake.png");
+    this->_nibblerSprite.setTexture(this->_nibbler);
 }
 
 void Sfml::createWindow()

@@ -15,7 +15,8 @@ class Scene {
     public:
         Scene();
         ~Scene();
-        void display(int, AbstractGraph *);
+        void display(AbstractGraph *, std::string);
+        int sceneNumber;
 
     protected:
     private:
@@ -23,7 +24,6 @@ class Scene {
         SceneMainGame *_sceneGame;
         ScenePause *_scenePause;
         AbstractGraph *graphicalLib;
-        int sceneNumber;
 };
 
 #endif /* !SCENE_HPP_ */

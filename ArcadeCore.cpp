@@ -11,6 +11,8 @@ ArcadeCore::ArcadeCore(std::vector<std::string> av)
     this->_lib = new LibLoader();
     this->_scene = new Scene();
     this->_library = getLib(av.at(1));
+    this->_game = ArcadeCore::games::NOTHING;
+    this->_scene->sceneNumber = 1;
     this->_av = av;
     this->gameLoop();
 }
@@ -49,21 +51,23 @@ void ArcadeCore::swapLib(std::string str)
         this->_lib->loadGraphical(this->libPath.at(2));
     }
 }
-/*
+
 void ArcadeCore::swapGame(std::string str)
 {
     if (!str.compare("p")) {
-        this->_lib->destroyGames();
+        if (this->_game != ArcadeCore::games::NOTHING)
+            this->_lib->destroyGames();
         this->_game = ArcadeCore::games::PACMAN;
         this->_lib->loadGames(this->gamePath.at(0));
     }
     if (!str.compare("n")) {
-        this->_lib->destroyGames();
+        if (this->_game != ArcadeCore::games::NOTHING)
+            this->_lib->destroyGames();
         this->_game = ArcadeCore::games::NIBBLER;
         this->_lib->loadGames(this->gamePath.at(1));
     }
 }
-
+/*
 void ArcadeCore::event(std::string event)
 {
     if (!event.compare("z"))
@@ -81,12 +85,24 @@ void ArcadeCore::eventInSfml()
 {
     std::string event = this->_lib->_actual_graphical_lib->registerEvents();
 
-    if (event == "CLOSE")
+    if (!event.compare("CLOSE"))
         this->_library = ArcadeCore::library::NONE;
-    if (event == "2")
+    if (!event.compare("2"))
         this->swapLib("2");
-    if (event == "3")
+    if (!event.compare("3"))
         this->swapLib("3");
+    if (!event.compare("ESCAPE"))
+        this->_scene->sceneNumber = 1;
+    if (!event.compare("P")) {
+        this->_gameToDisplay = "PACMAN";
+        this->_scene->sceneNumber = 2;
+        this->swapGame("p");
+    }
+    if (!event.compare("N")) {
+        this->_gameToDisplay = "NIBBLER";
+        this->_scene->sceneNumber = 2;
+        this->swapGame("n");
+    }
 }
 
 void ArcadeCore::eventInSdl()
@@ -104,17 +120,16 @@ void ArcadeCore::eventInSdl()
 void ArcadeCore::gameLoop()
 {
     this->_lib->loadGraphical(this->_av.at(1));
-    this->_lib->loadGames("./game/lib_arcade_pacman.so");
 
     while (this->_library != ArcadeCore::library::NONE)
     {
         if (this->_library == ArcadeCore::library::SFML) {
             this->eventInSfml();
-            this->_scene->display(1, this->_lib->_actual_graphical_lib);
+            this->_scene->display(this->_lib->_actual_graphical_lib, this->_gameToDisplay);
         }
         if (this->_library == ArcadeCore::library::SDL) {
             this->eventInSdl();
-            this->_scene->display(1, this->_lib->_actual_graphical_lib);
+            this->_scene->display(this->_lib->_actual_graphical_lib, this->_gameToDisplay);
         }
         //std::getline(std::cin, str);
         //swapLib(str);
