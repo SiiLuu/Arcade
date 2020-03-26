@@ -14,6 +14,7 @@ Sdl::Sdl()
 
 Sdl::~Sdl()
 {
+    SDL_DestroyRenderer(this->renderer);
     SDL_DestroyWindow(this->_window);
     SDL_Quit();
 }
@@ -41,6 +42,8 @@ std::string Sdl::registerEvents()
             return ("S");
         case SDLK_d:
             return ("D");
+        case SDLK_ESCAPE:
+            return ("ESCAPE");
         default:
             break;
         }
@@ -50,12 +53,34 @@ std::string Sdl::registerEvents()
 
 void Sdl::displayGame(std::string game)
 {
-    
+    SDL_RenderClear(renderer);
+    if (!game.compare("PACMAN")) {
+        SDL_RenderCopy(renderer, tpacman, NULL, NULL);
+    }
+    else if (!game.compare("NIBBLER")) {
+        SDL_RenderCopy(renderer, tnibbler, NULL, NULL);
+    }
+    SDL_RenderPresent(renderer);
 }
 
 void Sdl::displayMenu()
 {
-    
+    SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, tbg, NULL, NULL);
+    SDL_RenderPresent(renderer);
+}
+
+void Sdl::setTexture()
+{
+    this->bg = IMG_Load("assets/arcade.jpg");
+    this->tbg = SDL_CreateTextureFromSurface(this->renderer, this->bg);
+    SDL_FreeSurface(bg);
+    this->spacman = IMG_Load("assets/pacman.png");
+    this->tpacman = SDL_CreateTextureFromSurface(this->renderer, this->spacman);
+    SDL_FreeSurface(spacman);
+    this->snibbler = IMG_Load("assets/snake.png");
+    this->tnibbler = SDL_CreateTextureFromSurface(this->renderer, this->snibbler);
+    SDL_FreeSurface(snibbler);
 }
 
 void Sdl::createWindow()
@@ -72,6 +97,8 @@ void Sdl::createWindow()
     {
         std::cout << "Could not create window Arcade." << std::endl;
     }
+    this->renderer = SDL_CreateRenderer(this->_window, -1, SDL_RENDERER_ACCELERATED);
+    setTexture();
 }
 
 extern "C" AbstractGraph *create()

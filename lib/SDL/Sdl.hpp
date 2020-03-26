@@ -22,7 +22,15 @@ class Sdl : public AbstractGraph
 
     private:
         SDL_Window *_window;
+        SDL_Renderer *renderer;
+        SDL_Surface *bg;
+        SDL_Texture *tbg;
+        SDL_Surface *spacman;
+        SDL_Texture *tpacman;
+        SDL_Surface *snibbler;
+        SDL_Texture *tnibbler;
         SDL_Event _events;
+        void setTexture();
 };
 
 #endif /* !SDL_HPP_ */

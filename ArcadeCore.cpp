@@ -115,6 +115,18 @@ void ArcadeCore::eventInSdl()
         this->swapLib("1");
     if (event == "3")
         this->swapLib("3");
+    if (!event.compare("ESCAPE"))
+        this->_scene->sceneNumber = 1;
+    if (!event.compare("P")) {
+        this->_gameToDisplay = "PACMAN";
+        this->_scene->sceneNumber = 2;
+        this->swapGame("p");
+    }
+    if (!event.compare("N")) {
+        this->_gameToDisplay = "NIBBLER";
+        this->_scene->sceneNumber = 2;
+        this->swapGame("n");
+    }
 }
 
 void ArcadeCore::gameLoop()

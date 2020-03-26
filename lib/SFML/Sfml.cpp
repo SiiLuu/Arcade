@@ -12,9 +12,7 @@ Sfml::Sfml()
     this->createWindow();
 }
 
-Sfml::~Sfml()
-{
-}
+Sfml::~Sfml() {}
 
 std::string Sfml::registerEvents()
 {

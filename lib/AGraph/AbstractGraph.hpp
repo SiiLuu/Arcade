@@ -8,6 +8,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SDL2/SDL.h>
+#include "SDL2/SDL_image.h"
 #include <curses.h>
 
 #ifndef ABSTRACTGRAPH_HPP_
