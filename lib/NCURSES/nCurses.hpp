@@ -16,7 +16,7 @@ class nCurses : public AbstractGraph
         ~nCurses();
 
         void createWindow();
-        void displayGame();
+        void displayGame(std::string game);
         void displayMenu();
         std::string registerEvents();
 

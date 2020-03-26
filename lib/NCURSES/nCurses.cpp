@@ -17,7 +17,7 @@ nCurses::~nCurses()
     std::cout << "NCURSES destroyed" << std::endl;
 }
 
-void nCurses::displayGame()
+void nCurses::displayGame(std::string game)
 {
 }
 

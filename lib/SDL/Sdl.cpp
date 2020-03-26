@@ -19,7 +19,7 @@ Sdl::~Sdl()
     SDL_Quit();
 }
 
-void Sdl::displayGame()
+void Sdl::displayGame(std::string game)
 {
 }
 

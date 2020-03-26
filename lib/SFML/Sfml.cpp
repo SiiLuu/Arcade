@@ -32,6 +32,8 @@ std::string Sfml::registerEvents()
         switch (this->_event.key.code) {
             case sf::Keyboard::P:
                 return ("P");
+            case sf::Keyboard::N:
+                return ("N");
             case sf::Keyboard::Num2:
                 return ("2");
             case sf::Keyboard::Num3:
@@ -51,8 +53,11 @@ std::string Sfml::registerEvents()
     return ("");
 }
 
-void Sfml::displayGame()
+void Sfml::displayGame(std::string game)
 {
+    this->_window.clear();
+    this->_window.draw(this->_pacmanSprite);
+    this->_window.display();
 }
 
 void Sfml::displayMenu()
@@ -62,12 +67,19 @@ void Sfml::displayMenu()
     this->_window.display();
 }
 
+void Sfml::setTexture()
+{
+    this->_background.loadFromFile("assets/arcade.jpg");
+    this->_backgroundSprite.setTexture(this->_background);
+    this->_pacman.loadFromFile("assets/pacman.png");
+    this->_pacmanSprite.setTexture(this->_pacman);
+}
+
 void Sfml::createWindow()
 {
     this->_window.create(sf::VideoMode(1920, 1080), "Arcade");
     this->_window.setFramerateLimit(60);
-    this->_background.loadFromFile("assets/arcade.jpg");
-    this->_backgroundSprite.setTexture(this->_background);
+    this->setTexture();
 }
 
 extern "C" AbstractGraph *create()

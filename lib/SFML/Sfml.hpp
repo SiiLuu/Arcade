@@ -15,7 +15,7 @@ class Sfml : public AbstractGraph
         ~Sfml();
 
         void createWindow();
-        void displayGame();
+        void displayGame(std::string game);
         void displayMenu();
         std::string registerEvents();
 
@@ -24,7 +24,9 @@ class Sfml : public AbstractGraph
         sf::Event _event;
         sf::Texture _background;
         sf::Sprite _backgroundSprite;
-        std::string checkEvents();
+        sf::Texture _pacman;
+        sf::Sprite _pacmanSprite;
+        void setTexture();
 };
 
 #endif /* !SFML_HPP_ */

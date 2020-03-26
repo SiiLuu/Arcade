@@ -17,5 +17,5 @@ SceneMainGame::~SceneMainGame()
 
 void SceneMainGame::display(AbstractGraph *lib)
 {
-    lib->displayGame();
+    lib->displayGame("test");
 }

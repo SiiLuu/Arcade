@@ -19,7 +19,7 @@ class AbstractGraph : public IModuleGraph {
         AbstractGraph();
         virtual ~AbstractGraph();
         virtual void createWindow() = 0;
-        virtual void displayGame() = 0;
+        virtual void displayGame(std::string game) = 0;
         virtual void displayMenu() = 0;
         virtual std::string registerEvents() = 0;
 
