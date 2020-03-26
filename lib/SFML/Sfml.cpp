@@ -56,7 +56,12 @@ std::string Sfml::registerEvents()
 void Sfml::displayGame(std::string game)
 {
     this->_window.clear();
-    this->_window.draw(this->_pacmanSprite);
+    if (!game.compare("PACMAN")) {
+        this->_window.draw(this->_pacmanSprite);
+    }
+    else if (!game.compare("NIBBLER")) {
+        this->_window.draw(this->_nibblerSprite);
+    }
     this->_window.display();
 }
 
@@ -73,6 +78,8 @@ void Sfml::setTexture()
     this->_backgroundSprite.setTexture(this->_background);
     this->_pacman.loadFromFile("assets/pacman.png");
     this->_pacmanSprite.setTexture(this->_pacman);
+    this->_nibbler.loadFromFile("assets/snake.png");
+    this->_nibblerSprite.setTexture(this->_nibbler);
 }
 
 void Sfml::createWindow()

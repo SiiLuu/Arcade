@@ -15,7 +15,7 @@ SceneMainGame::~SceneMainGame()
 {
 }
 
-void SceneMainGame::display(AbstractGraph *lib)
+void SceneMainGame::display(AbstractGraph *lib, std::string game)
 {
-    lib->displayGame("test");
+    lib->displayGame(game);
 }

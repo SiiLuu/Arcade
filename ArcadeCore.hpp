@@ -36,6 +36,7 @@ class ArcadeCore {
 
         enum games
         {
+            NOTHING,
             PACMAN,
             NIBBLER
         };
@@ -48,6 +49,7 @@ class ArcadeCore {
         std::string _score;
         library _library;
         games _game;
+        std::string _gameToDisplay;
         std::vector<std::string> _av;
 
         void setLibrary();
