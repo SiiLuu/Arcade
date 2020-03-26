@@ -9,13 +9,11 @@
 
 Sfml::Sfml()
 {
-    std::cout << "SFML Created" << std::endl;
     this->createWindow();
 }
 
 Sfml::~Sfml()
 {
-    std::cout << "SFML Destroyed" << std::endl;
 }
 
 std::string Sfml::registerEvents()
@@ -77,7 +75,7 @@ void Sfml::setTexture()
 
 void Sfml::createWindow()
 {
-    this->_window.create(sf::VideoMode(1920, 1080), "Arcade");
+    this->_window.create(sf::VideoMode(1600, 900), "Arcade");
     this->_window.setFramerateLimit(60);
     this->setTexture();
 }

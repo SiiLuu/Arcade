@@ -95,6 +95,10 @@ void ArcadeCore::eventInSdl()
 
     if (event == "CLOSE")
         this->_library = ArcadeCore::library::NONE;
+    if (event == "1")
+        this->swapLib("1");
+    if (event == "3")
+        this->swapLib("3");
 }
 
 void ArcadeCore::gameLoop()

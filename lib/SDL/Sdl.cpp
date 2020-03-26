@@ -14,28 +14,33 @@ Sdl::Sdl()
 
 Sdl::~Sdl()
 {
-    std::cout << "SDL Destroyed" << std::endl;
     SDL_DestroyWindow(this->_window);
     SDL_Quit();
-}
-
-void Sdl::displayGame(std::string game)
-{
-}
-
-void Sdl::displayMenu()
-{
-    std::cout << "SDL -> Game displayed" << std::endl;
 }
 
 std::string Sdl::registerEvents()
 {
     while (SDL_PollEvent(&this->_events))
     {
-        switch (this->_events.type)
-        {
-        case SDL_QUIT:
+        if (this->_events.type == SDL_QUIT)
             return ("CLOSE");
+        switch (this->_events.key.keysym.sym) {
+        case SDLK_p:
+            return ("P");
+        case SDLK_n:
+            return ("N");
+        case SDLK_1:
+            return ("1");
+        case SDLK_3:
+            return ("3");
+        case SDLK_z:
+            return ("Z");
+        case SDLK_q:
+            return ("Q");
+        case SDLK_s:
+            return ("S");
+        case SDLK_d:
+            return ("D");
         default:
             break;
         }
@@ -43,16 +48,25 @@ std::string Sdl::registerEvents()
     return ("");
 }
 
+void Sdl::displayGame(std::string game)
+{
+    
+}
+
+void Sdl::displayMenu()
+{
+    
+}
+
 void Sdl::createWindow()
 {
-    std::cout << "SDL -> Window Created" << std::endl;
     SDL_Init(SDL_INIT_VIDEO);
     this->_window = SDL_CreateWindow(
         "Arcade",
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
-        1920,
-        1080,
+        1600,
+        900,
         SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
     if (this->_window == NULL)
     {
