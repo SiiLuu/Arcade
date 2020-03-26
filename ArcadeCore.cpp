@@ -9,6 +9,7 @@
 ArcadeCore::ArcadeCore(std::vector<std::string> av)
 {
     this->_lib = new LibLoader();
+    this->_scene = new Scene();
     this->_library = getLib(av.at(1));
     this->_av = av;
     this->gameLoop();
@@ -48,7 +49,7 @@ void ArcadeCore::swapLib(std::string str)
         this->_lib->loadGraphical(this->libPath.at(2));
     }
 }
-
+/*
 void ArcadeCore::swapGame(std::string str)
 {
     if (!str.compare("p")) {
@@ -73,18 +74,44 @@ void ArcadeCore::event(std::string event)
         this->_lib->_actual_game_lib->MoveLeft();
     if (!event.compare("d"))
         this->_lib->_actual_game_lib->MoveRight();
+}*/
+
+
+void ArcadeCore::eventInSfml()
+{
+    std::string event = this->_lib->_actual_graphical_lib->registerEvents();
+
+    if (event == "CLOSE")
+        this->_library = ArcadeCore::library::NONE;
+    if (event == "2")
+        this->swapLib("2");
+    if (event == "3")
+        this->swapLib("3");
+}
+
+void ArcadeCore::eventInSdl()
+{
+    std::string event = this->_lib->_actual_graphical_lib->registerEvents();
+
+    if (event == "CLOSE")
+        this->_library = ArcadeCore::library::NONE;
 }
 
 void ArcadeCore::gameLoop()
 {
-    std::string str;
-    sf::Event events;
     this->_lib->loadGraphical(this->_av.at(1));
-    //this->_lib->loadGames("./game/lib_arcade_pacman.so");
-    std::cout << this->_library << std::endl;
+    this->_lib->loadGames("./game/lib_arcade_pacman.so");
 
-    while (1)
+    while (this->_library != ArcadeCore::library::NONE)
     {
+        if (this->_library == ArcadeCore::library::SFML) {
+            this->eventInSfml();
+            this->_scene->display(1, this->_lib->_actual_graphical_lib);
+        }
+        if (this->_library == ArcadeCore::library::SDL) {
+            this->eventInSdl();
+            this->_scene->display(1, this->_lib->_actual_graphical_lib);
+        }
         //std::getline(std::cin, str);
         //swapLib(str);
         //swapGame(str);

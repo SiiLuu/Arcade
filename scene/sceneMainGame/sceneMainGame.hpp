@@ -4,19 +4,21 @@
 ** File description:
 ** class for the main game scene
 */
-#include "../Scene.hpp"
+#pragma once
+#include "../../lib/AGraph/AbstractGraph.hpp"
 
 #ifndef SCENEMAINGAME_HPP_
 #define SCENEMAINGAME_HPP_
 
-class sceneMainGame : public Scene {
+class SceneMainGame {
 
     private:
         /* data */
     public:
-        sceneMainGame(/* args */);
-        ~sceneMainGame();
-};
+        SceneMainGame(/* args */);
+        ~SceneMainGame();
 
+        void display(AbstractGraph *);
+};
 
 #endif /* !SCENEMAINGAME_HPP_ */

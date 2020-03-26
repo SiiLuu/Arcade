@@ -15,12 +15,13 @@ class Sdl : public AbstractGraph
         Sdl();
         ~Sdl();
 
-        void getCh();
         void createWindow();
         void display();
+        std::string registerEvents();
 
     private:
         SDL_Window *_window;
+        SDL_Event _events;
 };
 
 #endif /* !SDL_HPP_ */
