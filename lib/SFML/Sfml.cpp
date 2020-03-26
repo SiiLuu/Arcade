@@ -22,13 +22,8 @@ std::string Sfml::registerEvents()
 {
     while (this->_window.pollEvent(this->_event))
     {
-        switch (this->_event.type) {
-            case sf::Event::Closed:
-                this->_window.close();
+        if (this->_event.type == sf::Event::Closed)
                 return ("CLOSE");
-            default:
-                break;
-        }
         switch (this->_event.key.code) {
             case sf::Keyboard::P:
                 return ("P");
@@ -46,6 +41,8 @@ std::string Sfml::registerEvents()
                 return ("Q");
             case sf::Keyboard::D:
                 return ("D");
+            case sf::Keyboard::Escape:
+                return ("ESCAPE");
             default:
                 break;
         }

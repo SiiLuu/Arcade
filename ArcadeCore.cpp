@@ -91,6 +91,8 @@ void ArcadeCore::eventInSfml()
         this->swapLib("2");
     if (!event.compare("3"))
         this->swapLib("3");
+    if (!event.compare("ESCAPE"))
+        this->_scene->sceneNumber = 1;
     if (!event.compare("P")) {
         this->_gameToDisplay = "PACMAN";
         this->_scene->sceneNumber = 2;
