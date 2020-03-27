@@ -65,8 +65,8 @@ class ArcadeCore {
         std::vector<std::string> libPath = {"./lib/lib_arcade_sfml.so",
                                             "./lib/lib_arcade_sdl.so",
                                             "./lib/lib_arcade_ncurses.so"};
-        std::vector<std::string> gamePath = {"./game/lib_arcade_pacman.so",
-                                            "./game/lib_arcade_nibbler.so"};
+        std::vector<std::string> gamePath = {"./games/lib_arcade_pacman.so",
+                                            "./games/lib_arcade_nibbler.so"};
 };
 
 #endif /* !ARCADECORE_HPP_ */
