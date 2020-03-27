@@ -32,8 +32,6 @@ int ArcadeCore::findLib()
     if (this->_av.at(1).at(0) == '.' && this->_av.at(1).at(1) == '/')
         this->_av.at(1).erase(0, 2);
     it = std::find(this->libPath.begin(), this->libPath.end(), this->_av.at(1));
-    std::cout << it - this->libPath.begin() << std::endl;
-    std::cout << this->libPath.size() << std::endl;
     return (it - this->libPath.begin());
 }
 
