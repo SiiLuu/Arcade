@@ -26,22 +26,14 @@ std::string Sdl::registerEvents()
         if (this->_events.type == SDL_QUIT)
             return ("CLOSE");
         switch (this->_events.key.keysym.sym) {
-        case SDLK_p:
-            return ("P");
-        case SDLK_n:
-            return ("N");
-        case SDLK_1:
-            return ("1");
-        case SDLK_3:
-            return ("3");
-        case SDLK_z:
-            return ("Z");
-        case SDLK_q:
-            return ("Q");
-        case SDLK_s:
-            return ("S");
-        case SDLK_d:
-            return ("D");
+        case SDLK_LEFT:
+            return ("KEYLEFT");
+        case SDLK_RIGHT:
+            return ("KEYRIGHT");
+        case SDLK_DOWN:
+            return ("KEYDOWN");
+        case SDLK_UP:
+            return ("KEYUP");
         case SDLK_ESCAPE:
             return ("ESCAPE");
         default:

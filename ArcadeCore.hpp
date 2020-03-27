@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <dlfcn.h>
+#include <dirent.h>
 
 #ifndef ARCADECORE_HPP_
 #define ARCADECORE_HPP_
@@ -51,7 +52,10 @@ class ArcadeCore {
         games _game;
         std::string _gameToDisplay;
         std::vector<std::string> _av;
+        int _actualLibrary;
+        int _actualGame;
 
+        void readDir(const std::string path, std::vector<std::string> &vector);
         void setLibrary();
         void setPlayerName();
         void setGame();
@@ -61,12 +65,10 @@ class ArcadeCore {
         void eventInSfml();
         void eventInSdl();
         void eventInNcurses();
+        int findLib();
         library getLib(std::string liba) const;
-        std::vector<std::string> libPath = {"./lib/lib_arcade_sfml.so",
-                                            "./lib/lib_arcade_sdl.so",
-                                            "./lib/lib_arcade_ncurses.so"};
-        std::vector<std::string> gamePath = {"./game/lib_arcade_pacman.so",
-                                            "./game/lib_arcade_nibbler.so"};
+        std::vector<std::string> libPath;
+        std::vector<std::string> gamePath;
 };
 
 #endif /* !ARCADECORE_HPP_ */
