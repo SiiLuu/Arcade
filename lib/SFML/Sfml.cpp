@@ -21,22 +21,14 @@ std::string Sfml::registerEvents()
         if (this->_event.type == sf::Event::Closed)
                 return ("CLOSE");
         switch (this->_event.key.code) {
-            case sf::Keyboard::P:
-                return ("P");
-            case sf::Keyboard::N:
-                return ("N");
-            case sf::Keyboard::Num2:
-                return ("2");
-            case sf::Keyboard::Num3:
-                return ("3");
-            case sf::Keyboard::Z:
-                return ("Z");
-            case sf::Keyboard::S:
-                return ("S");
-            case sf::Keyboard::Q:
-                return ("Q");
-            case sf::Keyboard::D:
-                return ("D");
+            case sf::Keyboard::Left:
+                return ("KEYLEFT");
+            case sf::Keyboard::Right:
+                return ("KEYRIGHT");
+            case sf::Keyboard::Down:
+                return ("KEYDOWN");
+            case sf::Keyboard::Up:
+                return ("KEYUP");
             case sf::Keyboard::Escape:
                 return ("ESCAPE");
             default:

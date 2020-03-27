@@ -4,6 +4,7 @@
 ** File description:
 ** Arcade core
 */
+
 #include "ArcadeCore.hpp"
 
 ArcadeCore::ArcadeCore(std::vector<std::string> av)
@@ -14,7 +15,35 @@ ArcadeCore::ArcadeCore(std::vector<std::string> av)
     this->_game = ArcadeCore::games::NOTHING;
     this->_scene->sceneNumber = 1;
     this->_av = av;
+    readDir("lib/", this->libPath);
+    readDir("games/", this->gamePath);
+    this->_actualLibrary = findLib();
     this->gameLoop();
+}
+
+int ArcadeCore::findLib()
+{
+    std::vector<std::string>::iterator it;
+    if (this->_av.at(1).at(0) == '.' && this->_av.at(1).at(1) == '/')
+        this->_av.at(1).erase(0, 2);
+    it = std::find(this->libPath.begin(), this->libPath.end(), this->_av.at(1));
+    return (it - this->libPath.begin());
+}
+
+void ArcadeCore::readDir(const std::string path, std::vector<std::string> &vector)
+{
+    DIR *dir;
+    struct dirent *dirent;
+    std::string name;
+    size_t pos;
+
+    dir = opendir(path.c_str());
+    while ((dirent = readdir(dir))) {
+        name = dirent->d_name;
+        if (name.find(".so") != std::string::npos)
+            vector.push_back(path + name);
+    }
+    closedir(dir);
 }
 
 ArcadeCore::ArcadeCore() {}
@@ -35,51 +64,29 @@ ArcadeCore::library ArcadeCore::getLib(std::string lib) const
 
 void ArcadeCore::swapLib(std::string str)
 {
-    if (!str.compare("1")) {
-        this->_lib->destroyGraphical();
-        this->_library = ArcadeCore::library::SFML;
-        this->_lib->loadGraphical(this->libPath.at(0));
-    }
-    if (!str.compare("2")) {
-        this->_lib->destroyGraphical();
-        this->_library = ArcadeCore::library::SDL;
-        this->_lib->loadGraphical(this->libPath.at(1));
-    }
-    if (!str.compare("3")) {
-        this->_lib->destroyGraphical();
-        this->_library = ArcadeCore::library::NCURSES;
-        this->_lib->loadGraphical(this->libPath.at(2));
-    }
+    this->_lib->destroyGraphical();
+    if (!str.compare("KEYRIGHT"))
+        (this->_actualLibrary + 1 > this->libPath.size()) ? this->_actualLibrary = 0 : this->_actualLibrary++;
+    else if (!str.compare("KEYLEFT"))
+        (this->_actualLibrary - 1 < 0) ? this->_actualLibrary = this->libPath.size() : this->_actualLibrary--;
+    this->_lib->loadGraphical(this->libPath.at(this->_actualLibrary));
 }
 
 void ArcadeCore::swapGame(std::string str)
 {
-    if (!str.compare("p")) {
+    if (!str.compare("KEYUP")) {
         if (this->_game != ArcadeCore::games::NOTHING)
             this->_lib->destroyGames();
         this->_game = ArcadeCore::games::PACMAN;
         this->_lib->loadGames(this->gamePath.at(0));
     }
-    if (!str.compare("n")) {
+    if (!str.compare("KEYDOWN")) {
         if (this->_game != ArcadeCore::games::NOTHING)
             this->_lib->destroyGames();
         this->_game = ArcadeCore::games::NIBBLER;
         this->_lib->loadGames(this->gamePath.at(1));
     }
 }
-/*
-void ArcadeCore::event(std::string event)
-{
-    if (!event.compare("z"))
-        this->_lib->_actual_game_lib->MoveForward();
-    if (!event.compare("s"))
-        this->_lib->_actual_game_lib->MoveBackward();
-    if (!event.compare("q"))
-        this->_lib->_actual_game_lib->MoveLeft();
-    if (!event.compare("d"))
-        this->_lib->_actual_game_lib->MoveRight();
-}*/
-
 
 void ArcadeCore::eventInSfml()
 {
@@ -87,18 +94,19 @@ void ArcadeCore::eventInSfml()
 
     if (!event.compare("CLOSE"))
         this->_library = ArcadeCore::library::NONE;
-    if (!event.compare("2"))
-        this->swapLib("2");
-    if (!event.compare("3"))
-        this->swapLib("3");
+    if (!event.compare("KEYLEFT"))
+        this->swapLib("KEYLEFT");
+    if (!event.compare("KEYRIGHT"))
+        this->swapLib("KEYRIGHT");
     if (!event.compare("ESCAPE"))
         this->_scene->sceneNumber = 1;
-    if (!event.compare("P")) {
+
+    if (!event.compare("KEYUP")) {
         this->_gameToDisplay = "PACMAN";
         this->_scene->sceneNumber = 2;
         this->swapGame("p");
     }
-    if (!event.compare("N")) {
+    if (!event.compare("KEYDOWN")) {
         this->_gameToDisplay = "NIBBLER";
         this->_scene->sceneNumber = 2;
         this->swapGame("n");
