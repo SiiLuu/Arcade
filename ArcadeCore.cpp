@@ -11,7 +11,6 @@ ArcadeCore::ArcadeCore(std::vector<std::string> av)
 {
     this->_lib = new LibLoader();
     this->_scene = new Scene();
-    this->_library = getLib(av.at(1));
     this->_game = ArcadeCore::games::NOTHING;
     this->_scene->sceneNumber = 1;
     this->_av = av;
@@ -51,18 +50,6 @@ void ArcadeCore::readDir(const std::string path, std::vector<std::string> &vecto
     closedir(dir);
 }
 
-ArcadeCore::library ArcadeCore::getLib(std::string lib) const
-{
-    if (lib.find("sfml") != std::string::npos)
-        return (ArcadeCore::library::SFML);
-    else if (lib.find("ncurses") != std::string::npos)
-        return (ArcadeCore::library::NCURSES);
-    else if (lib.find("sdl") != std::string::npos)
-        return (ArcadeCore::library::SDL);
-    else
-        return (ArcadeCore::library::NONE);
-}
-
 void ArcadeCore::swapLib(std::string str)
 {
     this->_lib->destroyGraphical();
@@ -89,12 +76,12 @@ void ArcadeCore::swapGame(std::string str)
     }
 }
 
-void ArcadeCore::eventInSfml()
+void ArcadeCore::events()
 {
     std::string event = this->_lib->_actual_graphical_lib->registerEvents();
 
     if (!event.compare("CLOSE"))
-        this->_library = ArcadeCore::library::NONE;
+        this->_state = ArcadeCore::arcadeState::CLOSED;
     if (!event.compare("KEYLEFT"))
         this->swapLib("KEYLEFT");
     if (!event.compare("KEYRIGHT"))
@@ -114,47 +101,14 @@ void ArcadeCore::eventInSfml()
     }
 }
 
-void ArcadeCore::eventInSdl()
-{
-    std::string event = this->_lib->_actual_graphical_lib->registerEvents();
-
-    if (event == "CLOSE")
-        this->_library = ArcadeCore::library::NONE;
-    if (event == "1")
-        this->swapLib("1");
-    if (event == "3")
-        this->swapLib("3");
-    if (!event.compare("ESCAPE"))
-        this->_scene->sceneNumber = 1;
-    if (!event.compare("P")) {
-        this->_gameToDisplay = "PACMAN";
-        this->_scene->sceneNumber = 2;
-        this->swapGame("p");
-    }
-    if (!event.compare("N")) {
-        this->_gameToDisplay = "NIBBLER";
-        this->_scene->sceneNumber = 2;
-        this->swapGame("n");
-    }
-}
-
 void ArcadeCore::gameLoop()
 {
     this->_lib->loadGraphical(this->_av.at(1));
+    this->_state = ArcadeCore::arcadeState::RUNNING;
 
-    while (this->_library != ArcadeCore::library::NONE)
+    while (this->_state != ArcadeCore::arcadeState::CLOSED)
     {
-        if (this->_library == ArcadeCore::library::SFML) {
-            this->eventInSfml();
-            this->_scene->display(this->_lib->_actual_graphical_lib, this->_gameToDisplay);
-        }
-        if (this->_library == ArcadeCore::library::SDL) {
-            this->eventInSdl();
-            this->_scene->display(this->_lib->_actual_graphical_lib, this->_gameToDisplay);
-        }
-        //std::getline(std::cin, str);
-        //swapLib(str);
-        //swapGame(str);
-        //event(str);
+        this->events();
+        this->_scene->display(this->_lib->_actual_graphical_lib, this->_gameToDisplay);
     }
 }

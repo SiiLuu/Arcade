@@ -27,14 +27,11 @@ class ArcadeCore {
 
     protected:
     private:
-        enum library
+        enum arcadeState
         {
-            NONE,
-            SFML,
-            SDL,
-            NCURSES
+            RUNNING,
+            CLOSED
         };
-
         enum games
         {
             NOTHING,
@@ -48,7 +45,7 @@ class ArcadeCore {
         LibLoader *_lib;
         std::string _playerName;
         std::string _score;
-        library _library;
+        arcadeState _state;
         games _game;
         std::string _gameToDisplay;
         std::vector<std::string> _av;
@@ -62,11 +59,8 @@ class ArcadeCore {
         void setScore();
         void swapLib(std::string str);
         void swapGame(std::string str);
-        void eventInSfml();
-        void eventInSdl();
-        void eventInNcurses();
+        void events();
         int findLib();
-        library getLib(std::string liba) const;
         std::vector<std::string> libPath;
         std::vector<std::string> gamePath;
 };
