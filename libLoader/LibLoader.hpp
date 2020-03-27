@@ -7,7 +7,7 @@
 //#pragma once
 //#include "../game/AGame/AbstractGame.hpp"
 #include "../lib/AGraph/AbstractGraph.hpp"
-#include "../game/AGame/AbstractGame.hpp"
+#include "../games/AGame/AbstractGame.hpp"
 #include <vector>
 #include <iostream>
 #include <dlfcn.h>

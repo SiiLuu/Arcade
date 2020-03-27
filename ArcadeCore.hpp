@@ -6,7 +6,7 @@
 */
 #include "scene/Scene.hpp"
 #include "libLoader/LibLoader.hpp"
-#include "game/AGame/AbstractGame.hpp"
+#include "games/AGame/AbstractGame.hpp"
 #include <string>
 #include <iostream>
 #include <vector>

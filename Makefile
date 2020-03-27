@@ -33,7 +33,7 @@ graphicals:
 	make -C ./lib
 
 games:
-	make -C ./game
+	make -C ./games
 
 clean:
 	rm -f *.o
@@ -45,13 +45,15 @@ clean:
 	rm -f scene/sceneMainMenu/*.o
 	rm -f libLoader/*.o
 	make -C ./lib clean
-	make -C ./game clean
+	make -C ./games clean
 
 fclean:	clean
 	rm -f $(NAME)
 	make -C ./lib fclean
-	make -C ./game fclean
+	make -C ./games fclean
 
 re: fclean all
 	make -C ./lib re
-	make -C ./game re
+	make -C ./games re
+
+.PHONY: re clean fclean games graphicals core
