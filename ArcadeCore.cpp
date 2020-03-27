@@ -21,12 +21,19 @@ ArcadeCore::ArcadeCore(std::vector<std::string> av)
     this->gameLoop();
 }
 
+ArcadeCore::ArcadeCore() {}
+
+ArcadeCore::~ArcadeCore() {}
+
+
 int ArcadeCore::findLib()
 {
     std::vector<std::string>::iterator it;
     if (this->_av.at(1).at(0) == '.' && this->_av.at(1).at(1) == '/')
         this->_av.at(1).erase(0, 2);
     it = std::find(this->libPath.begin(), this->libPath.end(), this->_av.at(1));
+    std::cout << it - this->libPath.begin() << std::endl;
+    std::cout << this->libPath.size() << std::endl;
     return (it - this->libPath.begin());
 }
 
@@ -46,10 +53,6 @@ void ArcadeCore::readDir(const std::string path, std::vector<std::string> &vecto
     closedir(dir);
 }
 
-ArcadeCore::ArcadeCore() {}
-
-ArcadeCore::~ArcadeCore() {}
-
 ArcadeCore::library ArcadeCore::getLib(std::string lib) const
 {
     if (lib.find("sfml") != std::string::npos)
@@ -68,7 +71,7 @@ void ArcadeCore::swapLib(std::string str)
     if (!str.compare("KEYRIGHT"))
         (this->_actualLibrary + 1 > this->libPath.size()) ? this->_actualLibrary = 0 : this->_actualLibrary++;
     else if (!str.compare("KEYLEFT"))
-        (this->_actualLibrary - 1 < 0) ? this->_actualLibrary = this->libPath.size() : this->_actualLibrary--;
+        (this->_actualLibrary - 1 < 0) ? this->_actualLibrary = this->libPath.size() - 1 : this->_actualLibrary--;
     this->_lib->loadGraphical(this->libPath.at(this->_actualLibrary));
 }
 
