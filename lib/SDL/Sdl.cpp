@@ -22,29 +22,26 @@ Sdl::~Sdl()
 
 std::string Sdl::registerEvents()
 {
-
     this->_clock += 1;
-    while (SDL_PollEvent(&this->_events))
-    {
+    while (SDL_PollEvent(&this->_events)) {
         if (this->_events.type == SDL_QUIT)
             return ("CLOSE");
-        if (this->_clock > 100)
-        {
+        if (this->_clock > 100) {
             this->_clock = 0;
-            switch (this->_events.key.keysym.sym)
-            {
-            case SDLK_LEFT:
-                return ("KEYLEFT");
-            case SDLK_RIGHT:
-                return ("KEYRIGHT");
-            case SDLK_DOWN:
-                return ("KEYDOWN");
-            case SDLK_UP:
-                return ("KEYUP");
-            case SDLK_ESCAPE:
-                return ("ESCAPE");
-            default:
-                return ("");
+            switch (this->_events.key.keysym.sym) {
+                case SDLK_LEFT:
+                    return ("KEYLEFT");
+                case SDLK_RIGHT:
+                    return ("KEYRIGHT");
+                case SDLK_DOWN:
+                    return ("KEYDOWN");
+                case SDLK_UP:
+                    return ("KEYUP");
+                case SDLK_ESCAPE:
+                    return ("ESCAPE");
+                default:
+                    return ("");
+            }
         }
     }
     return ("");

@@ -18,6 +18,8 @@ ArcadeCore::ArcadeCore(std::vector<std::string> av)
     this->_actualLibrary = findLib();
     this->_actualGame = -1;
     this->_menu = 1;
+    this->info.push_back(libPath);
+    this->info.push_back(gamePath);
     this->gameLoop();
 }
 
