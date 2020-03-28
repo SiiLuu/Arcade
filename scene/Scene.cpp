@@ -16,10 +16,10 @@ Scene::Scene()
 
 Scene::~Scene() {}
 
-void Scene::display(AbstractGraph *lib, std::string game)
+void Scene::display(AbstractGraph *lib, std::string game, std::vector<std::vector<std::string>> info)
 {
     if (this->sceneNumber == 1)
-        this->_sceneMenu->display(lib);
+        this->_sceneMenu->display(lib, info);
     else if (this->sceneNumber == 2)
         this->_sceneGame->display(lib, game);
     else if (this->sceneNumber == 3)

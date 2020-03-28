@@ -10,6 +10,7 @@
 #include <SDL2/SDL.h>
 #include "SDL2/SDL_image.h"
 #include <curses.h>
+#include <vector>
 
 #ifndef ABSTRACTGRAPH_HPP_
 #define ABSTRACTGRAPH_HPP_
@@ -21,7 +22,7 @@ class AbstractGraph : public IModuleGraph {
         virtual ~AbstractGraph();
         virtual void createWindow() = 0;
         virtual void displayGame(std::string game) = 0;
-        virtual void displayMenu() = 0;
+        virtual void displayMenu(std::vector<std::vector<std::string>>) = 0;
         virtual std::string registerEvents() = 0;
 
     protected:

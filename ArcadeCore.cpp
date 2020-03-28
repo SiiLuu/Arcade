@@ -11,12 +11,13 @@ ArcadeCore::ArcadeCore(std::vector<std::string> av)
 {
     this->_lib = new LibLoader();
     this->_scene = new Scene();
-    this->_game = ArcadeCore::games::NOTHING;
     this->_scene->sceneNumber = 1;
     this->_av = av;
     readDir("lib/", this->libPath);
     readDir("games/", this->gamePath);
     this->_actualLibrary = findLib();
+    this->_actualGame = -1;
+    this->_menu = 1;
     this->gameLoop();
 }
 
@@ -63,17 +64,18 @@ void ArcadeCore::swapLib(std::string str)
 void ArcadeCore::swapGame(std::string str)
 {
     if (!str.compare("KEYUP")) {
-        if (this->_game != ArcadeCore::games::NOTHING)
+        if (this->_menu != 1)
             this->_lib->destroyGames();
-        this->_game = ArcadeCore::games::PACMAN;
-        this->_lib->loadGames(this->gamePath.at(0));
+        (this->_actualGame + 1 > this->gamePath.size() - 1) ? this->_actualGame = 0 : this->_actualGame++;
+        this->_menu = 0;
     }
-    if (!str.compare("KEYDOWN")) {
-        if (this->_game != ArcadeCore::games::NOTHING)
+    else if (!str.compare("KEYDOWN")) {
+        if (this->_menu != 1)
             this->_lib->destroyGames();
-        this->_game = ArcadeCore::games::NIBBLER;
-        this->_lib->loadGames(this->gamePath.at(1));
+        (this->_actualGame - 1 < 0) ? this->_actualGame = this->gamePath.size() - 1 : this->_actualGame--;
+        this->_menu = 0;
     }
+    this->_lib->loadGames(this->gamePath.at(this->_actualGame));
 }
 
 void ArcadeCore::events()
@@ -86,18 +88,18 @@ void ArcadeCore::events()
         this->swapLib("KEYLEFT");
     if (!event.compare("KEYRIGHT"))
         this->swapLib("KEYRIGHT");
-    if (!event.compare("ESCAPE"))
+    if (!event.compare("ESCAPE")) {
+        this->_menu = 1;
         this->_scene->sceneNumber = 1;
+    }
 
     if (!event.compare("KEYUP")) {
-        this->_gameToDisplay = "PACMAN";
         this->_scene->sceneNumber = 2;
-        this->swapGame("p");
+        this->swapGame("KEYUP");
     }
     if (!event.compare("KEYDOWN")) {
-        this->_gameToDisplay = "NIBBLER";
         this->_scene->sceneNumber = 2;
-        this->swapGame("n");
+        this->swapGame("KEYDOWN");
     }
 }
 
@@ -109,6 +111,6 @@ void ArcadeCore::gameLoop()
     while (this->_state != ArcadeCore::arcadeState::CLOSED)
     {
         this->events();
-        this->_scene->display(this->_lib->_actual_graphical_lib, this->_gameToDisplay);
+        (this->_menu != 1) ? this->_scene->display(this->_lib->_actual_graphical_lib, this->gamePath.at(this->_actualGame), this->info) : this->_scene->display(this->_lib->_actual_graphical_lib, "menu", this->info);
     }
 }

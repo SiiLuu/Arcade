@@ -6,6 +6,7 @@
 */
 #pragma once
 #include "../../lib/AGraph/AbstractGraph.hpp"
+#include <vector>
 
 #ifndef SCENEMAINMENU_HPP_
 #define SCENEMAINMENU_HPP_
@@ -16,7 +17,7 @@ class SceneMainMenu {
         SceneMainMenu(/* args */);
         ~SceneMainMenu();
 
-        void display(AbstractGraph *);
+        void display(AbstractGraph *, std::vector<std::vector<std::string>>);
 
     private:
         int test;

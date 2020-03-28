@@ -32,12 +32,6 @@ class ArcadeCore {
             RUNNING,
             CLOSED
         };
-        enum games
-        {
-            NOTHING,
-            PACMAN,
-            NIBBLER
-        };
 
         Scene *_scene;
         AbstractGraph *shared_lib;
@@ -46,9 +40,8 @@ class ArcadeCore {
         std::string _playerName;
         std::string _score;
         arcadeState _state;
-        games _game;
-        std::string _gameToDisplay;
         std::vector<std::string> _av;
+        int _menu;
         int _actualLibrary;
         int _actualGame;
 
@@ -63,6 +56,7 @@ class ArcadeCore {
         int findLib();
         std::vector<std::string> libPath;
         std::vector<std::string> gamePath;
+        std::vector<std::vector<std::string>> info; 
 };
 
 #endif /* !ARCADECORE_HPP_ */
