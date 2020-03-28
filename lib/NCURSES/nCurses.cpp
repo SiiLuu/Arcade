@@ -82,22 +82,16 @@ void nCurses::displayMenu(std::vector<std::vector<std::string>> info)
     while (1) {
         clear();
         set_legend();
-        refresh();
     }
 }
 
 void nCurses::createWindow()
 {
-    char c;
-
-    std::cout << "init window" << std::endl;
     initscr();
-    c = getch();
-    if (c == 'q') {
-        std::cout << "close window" << std::endl;
-        endwin();
-    }
+    noecho();
     refresh();
+    getch();
+    endwin();
 }
 
 extern "C" AbstractGraph *create()
