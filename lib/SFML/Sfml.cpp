@@ -44,20 +44,22 @@ std::string Sfml::registerEvents()
 void Sfml::displayGame(std::string game)
 {
     this->_window.clear();
-    if (!game.compare("PACMAN")) {
+    if (game.find("pacman") != std::string::npos) {
         this->_window.draw(this->_pacmanSprite);
     }
-    else if (!game.compare("NIBBLER")) {
+    else if (game.find("nibbler") != std::string::npos) {
         this->_window.draw(this->_nibblerSprite);
     }
     this->_window.display();
 }
 
-void Sfml::displayMenu()
+void Sfml::displayMenu(std::vector<std::vector<std::string>> info)
 {
     this->_window.clear();
     this->_window.draw(this->_backgroundSprite);
     this->_window.display();
+    //std::cout << libPath.at(0) << std::endl;
+    //std::cout << gamePath.at(0) << std::endl;
 }
 
 void Sfml::setTexture()

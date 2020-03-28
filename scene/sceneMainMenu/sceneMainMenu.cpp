@@ -11,7 +11,7 @@ SceneMainMenu::SceneMainMenu(/* args */) {}
 
 SceneMainMenu::~SceneMainMenu() {}
 
-void SceneMainMenu::display(AbstractGraph *lib)
+void SceneMainMenu::display(AbstractGraph *lib, std::vector<std::vector<std::string>> info)
 {
-    lib->displayMenu();
+    lib->displayMenu(info);
 }

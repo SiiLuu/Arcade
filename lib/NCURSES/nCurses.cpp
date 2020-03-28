@@ -12,33 +12,55 @@ nCurses::nCurses()
     this->createWindow();
 }
 
-nCurses::~nCurses()
-{
-    std::cout << "NCURSES destroyed" << std::endl;
-}
+nCurses::~nCurses() {}
 
 void nCurses::displayGame(std::string game)
 {
+    if (game.find("pacman") != std::string::npos) {
+        attron(A_BOLD);
+        printw("PACMAN\n");
+        attroff(A_BOLD);
+    }
+    if (game.find("nibbler") != std::string::npos) {
+        attron(A_BOLD);
+        printw("NIBBLER\n");
+        attroff(A_BOLD);
+    }
 }
 
-void nCurses::displayMenu()
+void nCurses::displayMenu(std::vector<std::vector<std::string>> info)
 {
-    std::cout << "NCURSES -> Game displayed" << std::endl;
+    attron(A_BOLD);
+    printw("MENU PRINCIPALE\n");
+    attroff(A_BOLD);
 }
 
 std::string nCurses::registerEvents()
 {
-    std::cout << "NCURSES -> Gestion des inputs" << std::endl;
-    return ("");
+    char event = getch();
+
+    timeout(100);
+    switch (event) {
+    case 27:
+        return ("ESCAPE");
+    case 37:
+        return ("KEYLEFT");
+    case 39:
+        return ("KEYRIGHT");
+    case 40:
+        return ("KEYDOWN");
+    case 38:
+        return ("KEYUP");
+    default:
+        return("");
+    }
 }
 
 void nCurses::createWindow()
 {
-    std::cout << "NCURSES -> Window Created" << std::endl;
     initscr();
-    printw("Hello World !!!");
+    keypad(stdscr, TRUE);
     refresh();
-    getch();
     endwin();
 }
 

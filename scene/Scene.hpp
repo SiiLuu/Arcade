@@ -7,6 +7,7 @@
 #include "sceneMainMenu/sceneMainMenu.hpp"
 #include "scenePauseMenu/scenePauseMenu.hpp"
 #include "sceneMainGame/sceneMainGame.hpp"
+#include <vector>
 
 #ifndef SCENE_HPP_
 #define SCENE_HPP_
@@ -15,7 +16,7 @@ class Scene {
     public:
         Scene();
         ~Scene();
-        void display(AbstractGraph *, std::string);
+        void display(AbstractGraph *, std::string, std::vector<std::vector<std::string>>);
         int sceneNumber;
 
     protected:

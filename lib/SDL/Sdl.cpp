@@ -44,8 +44,7 @@ std::string Sdl::registerEvents()
             case SDLK_ESCAPE:
                 return ("ESCAPE");
             default:
-                break;
-            }
+                return ("");
         }
     }
     return ("");
@@ -54,18 +53,16 @@ std::string Sdl::registerEvents()
 void Sdl::displayGame(std::string game)
 {
     SDL_RenderClear(renderer);
-    if (!game.compare("PACMAN"))
-    {
+    if (game.find("pacman") != std::string::npos) {
         SDL_RenderCopy(renderer, tpacman, NULL, NULL);
     }
-    else if (!game.compare("NIBBLER"))
-    {
+    if (game.find("nibbler") != std::string::npos) {
         SDL_RenderCopy(renderer, tnibbler, NULL, NULL);
     }
     SDL_RenderPresent(renderer);
 }
 
-void Sdl::displayMenu()
+void Sdl::displayMenu(std::vector<std::vector<std::string>> info)
 {
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, tbg, NULL, NULL);
