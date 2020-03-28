@@ -45,6 +45,7 @@ std::string Sdl::registerEvents()
                 return ("ESCAPE");
             default:
                 return ("");
+            }
         }
     }
     return ("");
