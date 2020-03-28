@@ -10,6 +10,7 @@
 Sdl::Sdl()
 {
     this->createWindow();
+    this->_clock = 0;
 }
 
 Sdl::~Sdl()
@@ -21,23 +22,30 @@ Sdl::~Sdl()
 
 std::string Sdl::registerEvents()
 {
+
+    this->_clock += 1;
     while (SDL_PollEvent(&this->_events))
     {
         if (this->_events.type == SDL_QUIT)
             return ("CLOSE");
-        switch (this->_events.key.keysym.sym) {
-        case SDLK_LEFT:
-            return ("KEYLEFT");
-        case SDLK_RIGHT:
-            return ("KEYRIGHT");
-        case SDLK_DOWN:
-            return ("KEYDOWN");
-        case SDLK_UP:
-            return ("KEYUP");
-        case SDLK_ESCAPE:
-            return ("ESCAPE");
-        default:
-            break;
+        if (this->_clock > 100)
+        {
+            this->_clock = 0;
+            switch (this->_events.key.keysym.sym)
+            {
+            case SDLK_LEFT:
+                return ("KEYLEFT");
+            case SDLK_RIGHT:
+                return ("KEYRIGHT");
+            case SDLK_DOWN:
+                return ("KEYDOWN");
+            case SDLK_UP:
+                return ("KEYUP");
+            case SDLK_ESCAPE:
+                return ("ESCAPE");
+            default:
+                break;
+            }
         }
     }
     return ("");
@@ -46,10 +54,12 @@ std::string Sdl::registerEvents()
 void Sdl::displayGame(std::string game)
 {
     SDL_RenderClear(renderer);
-    if (!game.compare("PACMAN")) {
+    if (!game.compare("PACMAN"))
+    {
         SDL_RenderCopy(renderer, tpacman, NULL, NULL);
     }
-    else if (!game.compare("NIBBLER")) {
+    else if (!game.compare("NIBBLER"))
+    {
         SDL_RenderCopy(renderer, tnibbler, NULL, NULL);
     }
     SDL_RenderPresent(renderer);
