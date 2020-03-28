@@ -107,6 +107,7 @@ void ArcadeCore::gameLoop()
     this->_lib->loadGraphical(this->_av.at(1));
     this->_state = ArcadeCore::arcadeState::RUNNING;
 
+    std::cout << "gameloop" << std::endl;
     while (this->_state != ArcadeCore::arcadeState::CLOSED)
     {
         this->events();

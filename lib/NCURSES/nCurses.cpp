@@ -12,56 +12,92 @@ nCurses::nCurses()
     this->createWindow();
 }
 
-nCurses::~nCurses() {}
+nCurses::~nCurses()
+{
+    std::cout << "NCURSES destroyed" << std::endl;
+}
 
 void nCurses::displayGame(std::string game)
 {
-    if (game.find("pacman") != std::string::npos) {
-        attron(A_BOLD);
-        printw("PACMAN\n");
-        attroff(A_BOLD);
-    }
-    if (game.find("nibbler") != std::string::npos) {
-        attron(A_BOLD);
-        printw("NIBBLER\n");
-        attroff(A_BOLD);
-    }
+    clear();
+    if (!game.compare("PACMAN"))
+        mvprintw(LINES / 2, COLS / 2, "Pacman");
+    else if (!game.compare("NIBBLER"))
+        mvprintw(LINES / 2, COLS / 2, "Nibbler");
+    else if (!game.compare("QIX"))
+        mvprintw(LINES / 2, COLS / 2, "Qix");
 }
 
-void nCurses::displayMenu(std::vector<std::vector<std::string>> info)
+void nCurses::set_legend()
 {
-    attron(A_BOLD);
-    printw("MENU PRINCIPALE\n");
-    attroff(A_BOLD);
+    WINDOW *legend;
+
+    legend = subwin(stdscr, LINES / 6, COLS / 3 + COLS / 15, LINES / 2 + LINES / 3, COLS / 2 + COLS / 10);
+    box(legend, ACS_VLINE, ACS_HLINE);
+    wattron(legend, A_BOLD);
+    mvwprintw(legend, 1, 1, "To select a library press number (1 to 9)");
+    mvwprintw(legend, 3, 1, "To select a game press 'p' for Pacman");
+    mvwprintw(legend, 5, 1, "To select a game press 'n' for nibbler");
+    mvwprintw(legend, 7, 1, "To quit the window press 'q'");
 }
 
 std::string nCurses::registerEvents()
 {
-    char event = getch();
+    char c;
 
-    timeout(100);
-    switch (event) {
-    case 27:
-        return ("ESCAPE");
-    case 37:
-        return ("KEYLEFT");
-    case 39:
-        return ("KEYRIGHT");
-    case 40:
-        return ("KEYDOWN");
-    case 38:
-        return ("KEYUP");
-    default:
-        return("");
+    c = getch();
+    switch (c) {
+        case 'p':
+            return ("P");
+        case 'n':
+            return ("N");
+        case 'w':
+            return ("Z");
+        case 's':
+            return ("S");
+        case 'a':
+            return ("Q");
+        case 'd':
+            return ("D");
+        case '1':
+            return ("1");
+        case '2':
+            return ("2");
+        case 27:
+            return ("ESCAPE");
+        case 'q':
+            endwin();
+            return ("QUIT");
+        default:
+            break;
+    }
+    return ("");
+}
+
+void nCurses::displayMenu(std::vector<std::vector<std::string>> info)
+{
+    char c;
+
+    initscr();
+    while (1) {
+        clear();
+        set_legend();
+        refresh();
     }
 }
 
 void nCurses::createWindow()
 {
+    char c;
+
+    std::cout << "init window" << std::endl;
     initscr();
-    keypad(stdscr, TRUE);
+    c = getch();
+    if (c == 'q') {
+        std::cout << "close window" << std::endl;
+        endwin();
+    }
     refresh();
-    endwin();
 }
 
 extern "C" AbstractGraph *create()

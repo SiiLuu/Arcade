@@ -5,6 +5,7 @@
 ** nCurses class
 */
 #include "../AGraph/AbstractGraph.hpp"
+#include <ncurses.h>
 
 #ifndef NCURSES_HPP_
 #define NCURSES_HPP_
@@ -20,7 +21,8 @@ class nCurses : public AbstractGraph
         void displayMenu(std::vector<std::vector<std::string>>);
         std::string registerEvents();
 
-    private:
+        private:
+            void set_legend();
 };
 
 #endif /* !NCURSES_HPP_ */
