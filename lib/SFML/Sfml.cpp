@@ -55,11 +55,15 @@ void Sfml::displayGame(std::string game)
 
 void Sfml::displayMenu(std::vector<std::vector<std::string>> info)
 {
+    this->_info = info;
+    this->setText();
     this->_window.clear();
     this->_window.draw(this->_backgroundSprite);
+    this->_window.draw(this->_txtGames);
+    this->_window.draw(this->_txtLibs);
+    this->_window.draw(this->_txtName);
+    this->_window.draw(this->_txtScore);
     this->_window.display();
-    //std::cout << libPath.at(0) << std::endl;
-    //std::cout << gamePath.at(0) << std::endl;
 }
 
 void Sfml::setTexture()
@@ -70,6 +74,47 @@ void Sfml::setTexture()
     this->_pacmanSprite.setTexture(this->_pacman);
     this->_nibbler.loadFromFile("assets/snake.png");
     this->_nibblerSprite.setTexture(this->_nibbler);
+}
+
+void Sfml::setText()
+{
+    this->getLists();
+    this->_font.loadFromFile("assets/arial.ttf");
+    this->_txtGames.setFont(this->_font);
+    this->_txtGames.setString(this->_listGames);
+    this->_txtGames.setCharacterSize(25);
+    this->_txtGames.setStyle(sf::Text::Bold);
+    this->_txtGames.setPosition(130, 115);
+
+    this->_txtLibs.setFont(this->_font);
+    this->_txtLibs.setString(this->_listLibs);
+    this->_txtLibs.setCharacterSize(25);
+    this->_txtLibs.setStyle(sf::Text::Bold);
+    this->_txtLibs.setPosition(930, 115);
+
+    this->_txtName.setFont(this->_font);
+    this->_txtName.setString(this->_name);
+    this->_txtName.setCharacterSize(25);
+    this->_txtName.setStyle(sf::Text::Bold);
+    this->_txtName.setPosition(930, 660);
+
+    this->_txtScore.setFont(this->_font);
+    this->_txtScore.setString(this->_score);
+    this->_txtScore.setCharacterSize(25);
+    this->_txtScore.setStyle(sf::Text::Bold);
+    this->_txtScore.setPosition(130, 660);
+}
+
+void Sfml::getLists()
+{
+    if (this->_listGames.empty() == true)
+        for (int i = 0; i < this->_info.at(1).size(); i++)
+            this->_listGames.append("-> " + this->_info.at(1).at(i) + "\n");
+    if (this->_listLibs.empty() == true)
+        for (int i = 0; i < this->_info.at(0).size(); i++)
+            this->_listLibs.append("-> " + this->_info.at(0).at(i) + "\n");
+    this->_name = "-> " + this->_info.at(2).at(0);
+    this->_score = "-> 10000";
 }
 
 void Sfml::createWindow()

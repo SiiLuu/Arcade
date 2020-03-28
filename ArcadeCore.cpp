@@ -18,6 +18,8 @@ ArcadeCore::ArcadeCore(std::vector<std::string> av)
     this->_actualLibrary = findLib();
     this->_actualGame = -1;
     this->_menu = 1;
+    this->info.push_back(libPath);
+    this->info.push_back(gamePath);
     this->gameLoop();
 }
 
@@ -102,9 +104,12 @@ void ArcadeCore::events()
 
 void ArcadeCore::gameLoop()
 {
+    std::cout << "Enter a user name :" << std::endl;
+    std::getline(std::cin, this->_name);
+    this->nameScore.push_back(_name);
+    this->info.push_back(nameScore);
     this->_lib->loadGraphical(this->_av.at(1));
     this->_state = ArcadeCore::arcadeState::RUNNING;
-
     while (this->_state != ArcadeCore::arcadeState::CLOSED)
     {
         this->events();
