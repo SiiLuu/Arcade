@@ -20,19 +20,22 @@ std::string Sfml::registerEvents()
     {
         if (this->_event.type == sf::Event::Closed)
                 return ("CLOSE");
-        switch (this->_event.key.code) {
-            case sf::Keyboard::Left:
-                return ("KEYLEFT");
-            case sf::Keyboard::Right:
-                return ("KEYRIGHT");
-            case sf::Keyboard::Down:
-                return ("KEYDOWN");
-            case sf::Keyboard::Up:
-                return ("KEYUP");
-            case sf::Keyboard::Escape:
-                return ("ESCAPE");
-            default:
-                break;
+        if (this->_clock.getElapsedTime().asMilliseconds() > 200) {
+            this->_clock.restart();
+            switch (this->_event.key.code) {
+                case sf::Keyboard::Left:
+                    return ("KEYLEFT");
+                case sf::Keyboard::Right:
+                    return ("KEYRIGHT");
+                case sf::Keyboard::Down:
+                    return ("KEYDOWN");
+                case sf::Keyboard::Up:
+                    return ("KEYUP");
+                case sf::Keyboard::Escape:
+                    return ("ESCAPE");
+                default:
+                    return ("");
+            }
         }
     }
     return ("");
