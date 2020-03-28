@@ -91,11 +91,10 @@ void ArcadeCore::events()
     else if (!event.compare("ESCAPE"))
         (this->_scene->sceneNumber == 1) ? this->_state = ArcadeCore::arcadeState::CLOSED : this->_scene->sceneNumber = 1;
     else if (!event.compare("KEYUP")) {
-        this->_gameToDisplay = "PACMAN";
         this->_scene->sceneNumber = 2;
         this->swapGame("KEYUP");
     }
-    if (!event.compare("KEYDOWN")) {
+    else if (!event.compare("KEYDOWN")) {
         this->_scene->sceneNumber = 2;
         this->swapGame("KEYDOWN");
     }
