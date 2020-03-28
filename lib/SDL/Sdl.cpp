@@ -10,6 +10,7 @@
 Sdl::Sdl()
 {
     this->createWindow();
+    this->_clock = 0;
 }
 
 Sdl::~Sdl()
@@ -21,11 +22,17 @@ Sdl::~Sdl()
 
 std::string Sdl::registerEvents()
 {
+
+    this->_clock += 1;
     while (SDL_PollEvent(&this->_events))
     {
         if (this->_events.type == SDL_QUIT)
             return ("CLOSE");
-        switch (this->_events.key.keysym.sym) {
+        if (this->_clock > 100)
+        {
+            this->_clock = 0;
+            switch (this->_events.key.keysym.sym)
+            {
             case SDLK_LEFT:
                 return ("KEYLEFT");
             case SDLK_RIGHT:
