@@ -28,6 +28,7 @@ class Sfml : public AbstractGraph
         sf::Sprite _pacmanSprite;
         sf::Texture _nibbler;
         sf::Sprite _nibblerSprite;
+        sf::Clock _clock;
         void setTexture();
 };
 

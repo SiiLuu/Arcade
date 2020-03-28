@@ -82,18 +82,18 @@ void ArcadeCore::events()
 
     if (!event.compare("CLOSE"))
         this->_state = ArcadeCore::arcadeState::CLOSED;
-    if (!event.compare("KEYLEFT"))
+    else if (!event.compare("KEYLEFT"))
         this->swapLib("KEYLEFT");
-    if (!event.compare("KEYRIGHT"))
+    else if (!event.compare("KEYRIGHT"))
         this->swapLib("KEYRIGHT");
-    if (!event.compare("ESCAPE"))
-        (this->_scene->sceneNumber = 1) ? this->_state = ArcadeCore::arcadeState::CLOSED : this->_scene->sceneNumber = 1;
-    if (!event.compare("KEYUP")) {
+    else if (!event.compare("ESCAPE"))
+        (this->_scene->sceneNumber == 1) ? this->_state = ArcadeCore::arcadeState::CLOSED : this->_scene->sceneNumber = 1;
+    else if (!event.compare("KEYUP")) {
         this->_gameToDisplay = "PACMAN";
         this->_scene->sceneNumber = 2;
         this->swapGame("p");
     }
-    if (!event.compare("KEYDOWN")) {
+    else if (!event.compare("KEYDOWN")) {
         this->_gameToDisplay = "NIBBLER";
         this->_scene->sceneNumber = 2;
         this->swapGame("n");
