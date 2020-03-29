@@ -64,7 +64,6 @@ void Sdl::displayGame(std::string game)
 void Sdl::displayMenu(std::vector<std::vector<std::string>> info)
 {
     this->_info = info;
-    this->setText();
     SDL_RenderClear(this->renderer);
     SDL_RenderCopy(this->renderer, this->tbg, NULL, NULL);
     SDL_RenderCopy(this->renderer, this->_ttxt, NULL, &this->pos);
@@ -88,7 +87,7 @@ void Sdl::setText()
 {
     SDL_Color whiteColor = {255, 255, 255};
 
-    this->getLists();
+    //this->getLists();
     this->_font = TTF_OpenFont("assets/arial.ttf", 65);
     this->_txt = TTF_RenderText_Blended(this->_font, "oui", whiteColor);
     pos.x = 130;
@@ -130,6 +129,7 @@ void Sdl::createWindow()
     }
     this->renderer = SDL_CreateRenderer(this->_window, -1, SDL_RENDERER_ACCELERATED);
     this->setTexture();
+    this->setText();
 }
 
 extern "C" AbstractGraph *create()
