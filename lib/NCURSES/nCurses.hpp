@@ -4,8 +4,8 @@
 ** File description:
 ** nCurses class
 */
+
 #include "../AGraph/AbstractGraph.hpp"
-#include <ncurses.h>
 
 #ifndef NCURSES_HPP_
 #define NCURSES_HPP_
@@ -21,7 +21,16 @@ class nCurses : public AbstractGraph
         std::string registerEvents();
 
         private:
-            void set_legend();
+            std::vector<std::vector<std::string>> _info;
+            caca_canvas_t *_canvas;
+            caca_display_t *_window;
+            caca_event_t _event;
+            caca_color _currentColor;
+            std::string _listGames;
+            std::string _listLibs;
+            std::string _score;
+            std::string _name;
+            void getLists();
 };
 
 #endif /* !NCURSES_HPP_ */
