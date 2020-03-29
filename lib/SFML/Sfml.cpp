@@ -7,8 +7,9 @@
 
 #include "Sfml.hpp"
 
-Sfml::Sfml()
+Sfml::Sfml(std::vector<std::vector<std::string>> info)
 {
+    this->_info = info;
     this->createWindow();
 }
 
@@ -41,28 +42,19 @@ std::string Sfml::registerEvents()
     return ("");
 }
 
-void Sfml::displayGame(std::string game)
+void Sfml::display(std::vector<std::vector<std::string>> infos, int scene)
 {
     this->_window.clear();
-    if (game.find("pacman") != std::string::npos) {
+    if (scene == 1) {
+        this->_window.draw(this->_backgroundSprite);
+        this->_window.draw(this->_txtGames);
+        this->_window.draw(this->_txtLibs);
+        this->_window.draw(this->_txtName);
+        this->_window.draw(this->_txtScore);
+    }
+    else if (scene == 2) {
         this->_window.draw(this->_pacmanSprite);
     }
-    else if (game.find("nibbler") != std::string::npos) {
-        this->_window.draw(this->_nibblerSprite);
-    }
-    this->_window.display();
-}
-
-void Sfml::displayMenu(std::vector<std::vector<std::string>> info)
-{
-    this->_info = info;
-    this->setText();
-    this->_window.clear();
-    this->_window.draw(this->_backgroundSprite);
-    this->_window.draw(this->_txtGames);
-    this->_window.draw(this->_txtLibs);
-    this->_window.draw(this->_txtName);
-    this->_window.draw(this->_txtScore);
     this->_window.display();
 }
 
@@ -124,11 +116,12 @@ void Sfml::createWindow()
     this->_window.create(sf::VideoMode(1600, 900), "Arcade");
     this->_window.setFramerateLimit(60);
     this->setTexture();
+    this->setText();
 }
 
-extern "C" AbstractGraph *create()
+extern "C" AbstractGraph *create(std::vector<std::vector<std::string>> name)
 {
-    return new Sfml();
+    return new Sfml(name);
 }
 
 extern "C" void destroy(AbstractGraph *object)

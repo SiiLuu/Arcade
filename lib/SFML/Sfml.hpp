@@ -11,12 +11,11 @@
 class Sfml : public AbstractGraph
 {
     public:
-        Sfml();
+        Sfml(std::vector<std::vector<std::string>>);
         ~Sfml();
 
         void createWindow();
-        void displayGame(std::string game);
-        void displayMenu(std::vector<std::vector<std::string>>);
+        void display(std::vector<std::vector<std::string>>, int);
         std::string registerEvents();
 
     private:

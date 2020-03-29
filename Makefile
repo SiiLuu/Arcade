@@ -13,7 +13,6 @@ SRC 	=	main.cpp 								\
 			scene/Scene.cpp							\
 			scene/sceneMainMenu/sceneMainMenu.cpp	\
 			scene/sceneMainGame/sceneMainGame.cpp	\
-			scene/scenePauseMenu/scenePauseMenu.cpp	\
 			libLoader/LibLoader.cpp
 
 OBJ 	=	$(SRC:.cpp=.o)
@@ -40,7 +39,6 @@ clean:
 	rm -f scene/*.o
 	rm -f errorGestion/*.o
 	rm -f config/*.o
-	rm -f scene/scenePauseMenu/*.o
 	rm -f scene/sceneMainGame/*.o
 	rm -f scene/sceneMainMenu/*.o
 	rm -f libLoader/*.o

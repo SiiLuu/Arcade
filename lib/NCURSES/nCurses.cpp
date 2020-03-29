@@ -7,32 +7,25 @@
 
 #include "nCurses.hpp"
 
-nCurses::nCurses()
+nCurses::nCurses(std::vector<std::vector<std::string>> name)
 {
     this->createWindow();
 }
 
 nCurses::~nCurses() {}
 
-void nCurses::displayGame(std::string game)
+void nCurses::display(std::vector<std::vector<std::string>> infos, int scene)
 {
-    if (game.find("pacman") != std::string::npos) {
+    if (scene == 1) {
+        attron(A_BOLD);
+        printw("MENU PRINCIPALE\n");
+        attroff(A_BOLD);
+    }
+    else if (scene == 2) {
         attron(A_BOLD);
         printw("PACMAN\n");
         attroff(A_BOLD);
     }
-    if (game.find("nibbler") != std::string::npos) {
-        attron(A_BOLD);
-        printw("NIBBLER\n");
-        attroff(A_BOLD);
-    }
-}
-
-void nCurses::displayMenu(std::vector<std::vector<std::string>> info)
-{
-    attron(A_BOLD);
-    printw("MENU PRINCIPALE\n");
-    attroff(A_BOLD);
 }
 
 std::string nCurses::registerEvents()
@@ -64,9 +57,9 @@ void nCurses::createWindow()
     endwin();
 }
 
-extern "C" AbstractGraph *create()
+extern "C" AbstractGraph *create(std::vector<std::vector<std::string>> name)
 {
-    return new nCurses();
+    return new nCurses(name);
 }
 
 extern "C" void destroy(AbstractGraph *object)

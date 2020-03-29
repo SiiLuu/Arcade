@@ -7,7 +7,7 @@
 
 #include "Sdl.hpp"
 
-Sdl::Sdl()
+Sdl::Sdl(std::vector<std::vector<std::string>> name)
 {
     this->createWindow();
     this->_clock = 0;
@@ -49,14 +49,14 @@ std::string Sdl::registerEvents()
     return ("");
 }
 
-void Sdl::displayGame(std::string game)
+void Sdl::display(std::vector<std::vector<std::string>> infos, int scene)
 {
     SDL_RenderClear(renderer);
-    if (game.find("pacman") != std::string::npos) {
-        SDL_RenderCopy(renderer, tpacman, NULL, NULL);
+    if (scene == 1) {
+        SDL_RenderCopy(renderer, tbg, NULL, NULL);
     }
-    if (game.find("nibbler") != std::string::npos) {
-        SDL_RenderCopy(renderer, tnibbler, NULL, NULL);
+    else if (scene == 2) {
+        SDL_RenderCopy(renderer, tpacman, NULL, NULL);
     }
     SDL_RenderPresent(renderer);
 }
@@ -132,9 +132,9 @@ void Sdl::createWindow()
     this->setText();
 }
 
-extern "C" AbstractGraph *create()
+extern "C" AbstractGraph *create(std::vector<std::vector<std::string>> name)
 {
-    return new Sdl();
+    return new Sdl(name);
 }
 
 extern "C" void destroy(AbstractGraph *object)

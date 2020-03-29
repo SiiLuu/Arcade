@@ -13,12 +13,11 @@
 class Sdl : public AbstractGraph
 {
     public:
-        Sdl();
+        Sdl(std::vector<std::vector<std::string>>);
         ~Sdl();
 
         void createWindow();
-        void displayGame(std::string game);
-        void displayMenu(std::vector<std::vector<std::string>>);
+        void display(std::vector<std::vector<std::string>>, int);
         std::string registerEvents();
 
     private:
