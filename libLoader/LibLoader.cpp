@@ -10,7 +10,7 @@ LibLoader::LibLoader() {}
 
 LibLoader::~LibLoader() {}
 
-void LibLoader::loadGraphical(std::string av)
+void LibLoader::loadGraphical(std::string av, std::vector<std::vector<std::string>> infos)
 {
     this->_handle_lib = dlopen(av.c_str(), RTLD_LAZY);
 
@@ -26,7 +26,7 @@ void LibLoader::loadGraphical(std::string av)
         std::cerr << "Cannot load symbol destroy: " << dlsym_error << '\n';
         exit(84);
     }
-    this->_actual_graphical_lib = load_lib();
+    this->_actual_graphical_lib = load_lib(infos);
 }
 
 void LibLoader::destroyGraphical()

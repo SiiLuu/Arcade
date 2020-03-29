@@ -7,7 +7,7 @@
 
 #include "nCurses.hpp"
 
-nCurses::nCurses()
+nCurses::nCurses(std::vector<std::vector<std::string>> name)
 {
     this->createWindow();
 }
@@ -28,7 +28,7 @@ void nCurses::displayGame(std::string game)
     }
 }
 
-void nCurses::displayMenu(std::vector<std::vector<std::string>> info)
+void nCurses::displayMenu()
 {
     attron(A_BOLD);
     printw("MENU PRINCIPALE\n");
@@ -64,9 +64,9 @@ void nCurses::createWindow()
     endwin();
 }
 
-extern "C" AbstractGraph *create()
+extern "C" AbstractGraph *create(std::vector<std::vector<std::string>> name)
 {
-    return new nCurses();
+    return new nCurses(name);
 }
 
 extern "C" void destroy(AbstractGraph *object)

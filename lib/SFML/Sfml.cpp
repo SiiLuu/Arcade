@@ -7,8 +7,9 @@
 
 #include "Sfml.hpp"
 
-Sfml::Sfml()
+Sfml::Sfml(std::vector<std::vector<std::string>> info)
 {
+    this->_info = info;
     this->createWindow();
 }
 
@@ -53,9 +54,8 @@ void Sfml::displayGame(std::string game)
     this->_window.display();
 }
 
-void Sfml::displayMenu(std::vector<std::vector<std::string>> info)
+void Sfml::displayMenu()
 {
-    this->_info = info;
     this->setText();
     this->_window.clear();
     this->_window.draw(this->_backgroundSprite);
@@ -124,9 +124,9 @@ void Sfml::createWindow()
     this->setTexture();
 }
 
-extern "C" AbstractGraph *create()
+extern "C" AbstractGraph *create(std::vector<std::vector<std::string>> name)
 {
-    return new Sfml();
+    return new Sfml(name);
 }
 
 extern "C" void destroy(AbstractGraph *object)

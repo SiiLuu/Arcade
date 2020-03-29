@@ -7,7 +7,7 @@
 
 #include "Sdl.hpp"
 
-Sdl::Sdl()
+Sdl::Sdl(std::vector<std::vector<std::string>> name)
 {
     this->createWindow();
     this->_clock = 0;
@@ -59,7 +59,7 @@ void Sdl::displayGame(std::string game)
     SDL_RenderPresent(renderer);
 }
 
-void Sdl::displayMenu(std::vector<std::vector<std::string>> info)
+void Sdl::displayMenu()
 {
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, tbg, NULL, NULL);
@@ -97,9 +97,9 @@ void Sdl::createWindow()
     setTexture();
 }
 
-extern "C" AbstractGraph *create()
+extern "C" AbstractGraph *create(std::vector<std::vector<std::string>> name)
 {
-    return new Sdl();
+    return new Sdl(name);
 }
 
 extern "C" void destroy(AbstractGraph *object)

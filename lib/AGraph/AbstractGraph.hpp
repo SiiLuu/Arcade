@@ -22,14 +22,14 @@ class AbstractGraph : public IModuleGraph {
         virtual ~AbstractGraph();
         virtual void createWindow() = 0;
         virtual void displayGame(std::string game) = 0;
-        virtual void displayMenu(std::vector<std::vector<std::string>>) = 0;
+        virtual void displayMenu() = 0;
         virtual std::string registerEvents() = 0;
 
     protected:
     private:
 };
 
-typedef AbstractGraph *createGraphical_t();
+typedef AbstractGraph *createGraphical_t(std::vector<std::vector<std::string>> name);
 typedef void destroyGraphical_t(AbstractGraph *);
 
 #endif /* !ABSTRACTGRAPH_HPP_ */

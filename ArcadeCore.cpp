@@ -60,7 +60,7 @@ void ArcadeCore::swapLib(std::string str)
         (this->_actualLibrary + 1 > this->libPath.size()) ? this->_actualLibrary = 0 : this->_actualLibrary++;
     else if (!str.compare("KEYLEFT"))
         (this->_actualLibrary - 1 < 0) ? this->_actualLibrary = this->libPath.size() - 1 : this->_actualLibrary--;
-    this->_lib->loadGraphical(this->libPath.at(this->_actualLibrary));
+    this->_lib->loadGraphical(this->libPath.at(this->_actualLibrary), this->info);
 }
 
 void ArcadeCore::swapGame(std::string str)
@@ -108,7 +108,7 @@ void ArcadeCore::gameLoop()
     std::getline(std::cin, this->_name);
     this->nameScore.push_back(_name);
     this->info.push_back(nameScore);
-    this->_lib->loadGraphical(this->_av.at(1));
+    this->_lib->loadGraphical(this->_av.at(1), this->info);
     this->_state = ArcadeCore::arcadeState::RUNNING;
     while (this->_state != ArcadeCore::arcadeState::CLOSED)
     {

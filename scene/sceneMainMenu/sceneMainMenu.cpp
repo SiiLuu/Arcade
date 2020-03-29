@@ -13,5 +13,5 @@ SceneMainMenu::~SceneMainMenu() {}
 
 void SceneMainMenu::display(AbstractGraph *lib, std::vector<std::vector<std::string>> info)
 {
-    lib->displayMenu(info);
+    lib->displayMenu();
 }

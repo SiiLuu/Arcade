@@ -12,12 +12,12 @@
 class nCurses : public AbstractGraph
 {
     public:
-        nCurses();
+        nCurses(std::vector<std::vector<std::string>>);
         ~nCurses();
 
         void createWindow();
         void displayGame(std::string game);
-        void displayMenu(std::vector<std::vector<std::string>>);
+        void displayMenu();
         std::string registerEvents();
 
     private:
