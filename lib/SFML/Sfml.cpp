@@ -99,14 +99,11 @@ void Sfml::setText()
 
 void Sfml::getLists()
 {
-    if (this->_listGames.empty() == true)
-        for (int i = 0; i < this->_info.at(1).size(); i++)
-            this->_listGames.append("-> " + this->_info.at(1).at(i) + "\n");
-    if (this->_listLibs.empty() == true) {
-        for (int i = 0; i < this->_info.at(0).size(); i++)
-            this->_listLibs.append("-> " + this->_info.at(0).at(i) + "\n");
-        this->_listLibs.append("\n\nACTUAL LIBRARY : SFML");
-    }
+    for (int i = 0; i < this->_info.at(1).size(); i++)
+        this->_listGames.append("-> " + this->_info.at(1).at(i) + "\n");
+    for (int i = 0; i < this->_info.at(0).size(); i++)
+        this->_listLibs.append("-> " + this->_info.at(0).at(i) + "\n");
+    this->_listLibs.append("\n\nACTUAL LIBRARY : SFML");
     this->_name = "-> " + this->_info.at(2).at(0);
     this->_score = "-> 10000";
 }

@@ -7,10 +7,11 @@
 
 #include "Sdl.hpp"
 
-Sdl::Sdl(std::vector<std::vector<std::string>> name)
+Sdl::Sdl(std::vector<std::vector<std::string>> info)
 {
-    this->createWindow();
+    this->_info = info;
     this->_clock = 0;
+    this->createWindow();
 }
 
 Sdl::~Sdl()
@@ -53,21 +54,15 @@ void Sdl::display(std::vector<std::vector<std::string>> infos, int scene)
 {
     SDL_RenderClear(renderer);
     if (scene == 1) {
-        SDL_RenderCopy(renderer, tbg, NULL, NULL);
+        SDL_RenderClear(this->renderer);
+        SDL_RenderCopy(this->renderer, this->tbg, NULL, NULL);
+        SDL_RenderCopy(this->renderer, this->_ttxt, NULL, &this->pos);
+        SDL_RenderPresent(this->renderer);
     }
     else if (scene == 2) {
         SDL_RenderCopy(renderer, tpacman, NULL, NULL);
     }
     SDL_RenderPresent(renderer);
-}
-
-void Sdl::displayMenu(std::vector<std::vector<std::string>> info)
-{
-    this->_info = info;
-    SDL_RenderClear(this->renderer);
-    SDL_RenderCopy(this->renderer, this->tbg, NULL, NULL);
-    SDL_RenderCopy(this->renderer, this->_ttxt, NULL, &this->pos);
-    SDL_RenderPresent(this->renderer);
 }
 
 void Sdl::setTexture()
@@ -87,7 +82,7 @@ void Sdl::setText()
 {
     SDL_Color whiteColor = {255, 255, 255};
 
-    //this->getLists();
+    this->getLists();
     this->_font = TTF_OpenFont("assets/arial.ttf", 65);
     this->_txt = TTF_RenderText_Blended(this->_font, "oui", whiteColor);
     pos.x = 130;
@@ -100,14 +95,11 @@ void Sdl::setText()
 
 void Sdl::getLists()
 {
-    if (this->_listGames.empty() == true)
-        for (int i = 0; i < this->_info.at(1).size(); i++)
-            this->_listGames.append("-> " + this->_info.at(1).at(i) + "\n");
-    if (this->_listLibs.empty() == true) {
-        for (int i = 0; i < this->_info.at(0).size(); i++)
-            this->_listLibs.append("-> " + this->_info.at(0).at(i) + "\n");
-        this->_listLibs.append("\n\nACTUAL LIBRARY : SDL");
-    }
+    for (int i = 0; i < this->_info.at(1).size(); i++)
+        this->_listGames.append("-> " + this->_info.at(1).at(i) + "\n");
+    for (int i = 0; i < this->_info.at(0).size(); i++)
+        this->_listLibs.append("-> " + this->_info.at(0).at(i) + "\n");
+    this->_listLibs.append("\n\nACTUAL LIBRARY : SDL");
     this->_name = "-> " + this->_info.at(2).at(0);
     this->_score = "-> 10000";
 }
@@ -132,9 +124,9 @@ void Sdl::createWindow()
     this->setText();
 }
 
-extern "C" AbstractGraph *create(std::vector<std::vector<std::string>> name)
+extern "C" AbstractGraph *create(std::vector<std::vector<std::string>> info)
 {
-    return new Sdl(name);
+    return new Sdl(info);
 }
 
 extern "C" void destroy(AbstractGraph *object)
