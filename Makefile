@@ -22,7 +22,7 @@ NAME 	=	arcade
 
 CFLAGS 	+=	-W -Wall -Wextra -Werror -Wpedantic -ldl
 
-LIBS 	+=	-lncurses -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lSDL2 -lSDL2_image
+LIBS 	+=	-lncurses -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lSDL2 -lSDL2_image -lSDL2_ttf
 
 all:	core games graphicals
 

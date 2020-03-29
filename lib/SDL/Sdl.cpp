@@ -17,6 +17,8 @@ Sdl::~Sdl()
 {
     SDL_DestroyRenderer(this->renderer);
     SDL_DestroyWindow(this->_window);
+    TTF_CloseFont(this->_font);
+    TTF_Quit();
     SDL_Quit();
 }
 
@@ -61,27 +63,60 @@ void Sdl::displayGame(std::string game)
 
 void Sdl::displayMenu(std::vector<std::vector<std::string>> info)
 {
-    SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, tbg, NULL, NULL);
-    SDL_RenderPresent(renderer);
+    this->_info = info;
+    this->setText();
+    SDL_RenderClear(this->renderer);
+    SDL_RenderCopy(this->renderer, this->tbg, NULL, NULL);
+    SDL_RenderCopy(this->renderer, this->_ttxt, NULL, &this->pos);
+    SDL_RenderPresent(this->renderer);
 }
 
 void Sdl::setTexture()
 {
     this->bg = IMG_Load("assets/arcade.jpg");
     this->tbg = SDL_CreateTextureFromSurface(this->renderer, this->bg);
-    SDL_FreeSurface(bg);
+    SDL_FreeSurface(this->bg);
     this->spacman = IMG_Load("assets/pacman.png");
     this->tpacman = SDL_CreateTextureFromSurface(this->renderer, this->spacman);
-    SDL_FreeSurface(spacman);
+    SDL_FreeSurface(this->spacman);
     this->snibbler = IMG_Load("assets/snake.png");
     this->tnibbler = SDL_CreateTextureFromSurface(this->renderer, this->snibbler);
-    SDL_FreeSurface(snibbler);
+    SDL_FreeSurface(this->snibbler);
+}
+
+void Sdl::setText()
+{
+    SDL_Color whiteColor = {255, 255, 255};
+
+    this->getLists();
+    this->_font = TTF_OpenFont("assets/arial.ttf", 65);
+    this->_txt = TTF_RenderText_Blended(this->_font, "oui", whiteColor);
+    pos.x = 130;
+    pos.y = 115;
+    pos.h = 50;
+    pos.w = 50;
+    this->_ttxt = SDL_CreateTextureFromSurface(this->renderer, this->_txt);
+    SDL_FreeSurface(this->_txt);
+}
+
+void Sdl::getLists()
+{
+    if (this->_listGames.empty() == true)
+        for (int i = 0; i < this->_info.at(1).size(); i++)
+            this->_listGames.append("-> " + this->_info.at(1).at(i) + "\n");
+    if (this->_listLibs.empty() == true) {
+        for (int i = 0; i < this->_info.at(0).size(); i++)
+            this->_listLibs.append("-> " + this->_info.at(0).at(i) + "\n");
+        this->_listLibs.append("\n\nACTUAL LIBRARY : SDL");
+    }
+    this->_name = "-> " + this->_info.at(2).at(0);
+    this->_score = "-> 10000";
 }
 
 void Sdl::createWindow()
 {
     SDL_Init(SDL_INIT_VIDEO);
+    TTF_Init();
     this->_window = SDL_CreateWindow(
         "Arcade",
         SDL_WINDOWPOS_UNDEFINED,
@@ -94,7 +129,7 @@ void Sdl::createWindow()
         std::cout << "Could not create window Arcade." << std::endl;
     }
     this->renderer = SDL_CreateRenderer(this->_window, -1, SDL_RENDERER_ACCELERATED);
-    setTexture();
+    this->setTexture();
 }
 
 extern "C" AbstractGraph *create()
