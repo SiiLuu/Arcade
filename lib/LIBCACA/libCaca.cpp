@@ -2,24 +2,24 @@
 ** EPITECH PROJECT, 2020
 ** Arcade
 ** File description:
-** nCurses functions
+** libCaca functions
 */
 
-#include "nCurses.hpp"
+#include "libCaca.hpp"
 
-nCurses::nCurses(std::vector<std::vector<std::string>> info)
+libCaca::libCaca(std::vector<std::vector<std::string>> info)
 {
     this->_info = info;
     this->createWindow();
 }
 
-nCurses::~nCurses()
+libCaca::~libCaca()
 {
     caca_free_canvas(this->_canvas);  
     caca_free_display(this->_window);
 }
 
-void nCurses::display(std::vector<std::vector<std::string>> infos, int scene)
+void libCaca::display(std::vector<std::vector<std::string>> infos, int scene)
 {
     this->clear();
     if (scene == 1)
@@ -30,7 +30,7 @@ void nCurses::display(std::vector<std::vector<std::string>> infos, int scene)
     caca_refresh_display(this->_window);
 }
 
-std::string nCurses::registerEvents()
+std::string libCaca::registerEvents()
 {
     caca_get_event(this->_window, CACA_EVENT_KEY_PRESS, &_event, -1);
     switch (caca_get_event_key_ch(&this->_event))  {
@@ -50,14 +50,14 @@ std::string nCurses::registerEvents()
     return ("");
 }
 
-void nCurses::clear()
+void libCaca::clear()
 {
     caca_set_color_ansi(this->_canvas, CACA_BLACK, CACA_BLACK);
     caca_clear_canvas(this->_canvas);
     caca_set_color_ansi(this->_canvas, CACA_BLACK, this->_currentColor);
 }
 
-void nCurses::drawMen()
+void libCaca::drawMen()
 {
     int pos = 7;
 
@@ -82,14 +82,14 @@ void nCurses::drawMen()
     this->text(160, 27, ("-> " + this->_info.at(2).at(0)));
 }
 
-void nCurses::text(int x, int y, std::string str)
+void libCaca::text(int x, int y, std::string str)
 {
     caca_set_color_ansi(this->_canvas, this->_currentColor, CACA_TRANSPARENT);
     caca_put_str(this->_canvas, x, y, str.c_str());
     caca_set_color_ansi(this->_canvas, CACA_BLACK, this->_currentColor);
 }
 
-void nCurses::createWindow()
+void libCaca::createWindow()
 {
     this->_canvas = caca_create_canvas(267, 42);
     this->_window = caca_create_display(this->_canvas);
@@ -103,7 +103,7 @@ void nCurses::createWindow()
 
 extern "C" AbstractGraph *create(std::vector<std::vector<std::string>> info)
 {
-    return new nCurses(info);
+    return new libCaca(info);
 }
 
 extern "C" void destroy(AbstractGraph *object)

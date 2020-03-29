@@ -2,19 +2,19 @@
 ** EPITECH PROJECT, 2020
 ** Arcade
 ** File description:
-** nCurses class
+** libCaca class
 */
 
 #include "../AGraph/AbstractGraph.hpp"
 
-#ifndef NCURSES_HPP_
-#define NCURSES_HPP_
+#ifndef libCaca_HPP_
+#define libCaca_HPP_
 
-class nCurses : public AbstractGraph
+class libCaca : public AbstractGraph
 {
     public:
-        nCurses(std::vector<std::vector<std::string>>);
-        ~nCurses();
+        libCaca(std::vector<std::vector<std::string>>);
+        ~libCaca();
 
         void createWindow();
         void display(std::vector<std::vector<std::string>>, int);
@@ -37,4 +37,4 @@ class nCurses : public AbstractGraph
 
 };
 
-#endif /* !NCURSES_HPP_ */
+#endif /* !libCaca_HPP_ */

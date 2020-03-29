@@ -57,7 +57,7 @@ void ArcadeCore::swapLib(std::string str)
 {
     this->_lib->destroyGraphical();
     if (!str.compare("KEYRIGHT"))
-        (this->_actualLibrary + 1 > this->libPath.size()) ? this->_actualLibrary = 0 : this->_actualLibrary++;
+        (this->_actualLibrary + 1 > (this->libPath.size() - 1)) ? this->_actualLibrary = 0 : this->_actualLibrary++;
     else if (!str.compare("KEYLEFT"))
         (this->_actualLibrary - 1 < 0) ? this->_actualLibrary = this->libPath.size() - 1 : this->_actualLibrary--;
     this->_lib->loadGraphical(this->libPath.at(this->_actualLibrary), this->info);

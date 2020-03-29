@@ -6,30 +6,30 @@
 ##
 
 SRC 			= 	AGraph/AbstractGraph.cpp
-SRC_NCURSES		=	NCURSES/nCurses.cpp
+SRC_CACA		=	LIBCACA/libCaca.cpp
 SRC_SDL			=	SDL/Sdl.cpp
 SRC_SFML		=	SFML/Sfml.cpp
 
 OBJ				=	$(SRC:.cpp=.o)
-OBJ_NCURSES		=	$(SRC_NCURSES:.cpp=.o)
+OBJ_CACA		=	$(SRC_CACA:.cpp=.o)
 OBJ_SDL			=	$(SRC_SDL:.cpp=.o)
 OBJ_SFML		=	$(SRC_SFML:.cpp=.o)
 
-NCURSES 		=	lib_arcade_ncurses.so
+CACA 			=	lib_arcade_libcaca.so
 SDL 			=	lib_arcade_sdl.so
 SFML	 		=	lib_arcade_sfml.so
 
-all: $(NCURSES)
+all: $(CACA)
 
 %.o : %.cpp
-		g++ -fPIC -c $(SRC) $(SRC_NCURSES) $(SRC_SDL) $(SRC_SFML)
+		g++ -fPIC -c $(SRC) $(SRC_CACA) $(SRC_SDL) $(SRC_SFML)
 		mv AbstractGraph.o AGraph/
-		mv nCurses.o NCURSES/
+		mv libCaca.o LIBCACA/
 		mv Sdl.o SDL/
 		mv Sfml.o SFML/
 
-$(NCURSES): $(OBJ_NCURSES)
-		g++ -shared -rdynamic $(OBJ) $(OBJ_NCURSES) -o $(NCURSES)
+$(CACA): $(OBJ_CACA)
+		g++ -shared -rdynamic $(OBJ) $(OBJ_CACA) -o $(CACA)
 		g++ -shared -rdynamic $(OBJ) $(OBJ_SDL) -o $(SDL)
 		g++ -shared -rdynamic $(OBJ) $(OBJ_SFML) -o $(SFML)
 
@@ -37,10 +37,10 @@ clean:
 	rm -f AGraph/*.o
 	rm -f SFML/*.o
 	rm -f SDL/*.o
-	rm -f NCURSES/*.o
+	rm -f LIBCACA/*.o
 
 fclean:	clean
-	rm -f $(NCURSES)
+	rm -f $(CACA)
 	rm -f $(SDL)
 	rm -f $(SFML)
 

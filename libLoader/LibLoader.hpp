@@ -27,7 +27,7 @@ class LibLoader {
             NONE,
             SFML,
             SDL,
-            NCURSES
+            libCaca
         };
 
         void loadGraphical(std::string av, std::vector<std::vector<std::string>> infos);
