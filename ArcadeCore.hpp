@@ -58,7 +58,8 @@ class ArcadeCore {
         std::vector<std::string> libPath;
         std::vector<std::string> gamePath;
         std::vector<std::string> nameScore;
-        std::vector<std::vector<std::string>> info; 
+        std::vector<std::vector<std::string>> info;
+        std::vector<std::vector<std::string>> _gamesInfos;
 };
 
 #endif /* !ARCADECORE_HPP_ */

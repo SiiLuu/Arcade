@@ -18,7 +18,7 @@ class SceneMainGame {
         SceneMainGame(/* args */);
         ~SceneMainGame();
 
-        void display(AbstractGraph *, std::string);
+        void display(AbstractGraph *,std::vector<std::vector<std::string>> gameInfos, int scene);
 };
 
 #endif /* !SCENEMAINGAME_HPP_ */

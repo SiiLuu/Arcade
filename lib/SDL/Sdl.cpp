@@ -47,22 +47,15 @@ std::string Sdl::registerEvents()
     return ("");
 }
 
-void Sdl::displayGame(std::string game)
+void Sdl::display(std::vector<std::vector<std::string>> infos, int scene)
 {
     SDL_RenderClear(renderer);
-    if (game.find("pacman") != std::string::npos) {
+    if (scene == 1) {
+        SDL_RenderCopy(renderer, tbg, NULL, NULL);
+    }
+    else if (scene == 2) {
         SDL_RenderCopy(renderer, tpacman, NULL, NULL);
     }
-    if (game.find("nibbler") != std::string::npos) {
-        SDL_RenderCopy(renderer, tnibbler, NULL, NULL);
-    }
-    SDL_RenderPresent(renderer);
-}
-
-void Sdl::displayMenu()
-{
-    SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, tbg, NULL, NULL);
     SDL_RenderPresent(renderer);
 }
 

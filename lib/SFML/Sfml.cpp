@@ -42,27 +42,21 @@ std::string Sfml::registerEvents()
     return ("");
 }
 
-void Sfml::displayGame(std::string game)
+
+void Sfml::display(std::vector<std::vector<std::string>> infos, int scene)
 {
     this->_window.clear();
-    if (game.find("pacman") != std::string::npos) {
+    if (scene == 1) {
+        this->setText();
+        this->_window.draw(this->_backgroundSprite);
+        this->_window.draw(this->_txtGames);
+        this->_window.draw(this->_txtLibs);
+        this->_window.draw(this->_txtName);
+        this->_window.draw(this->_txtScore);
+    }
+    else if (scene == 2) {
         this->_window.draw(this->_pacmanSprite);
     }
-    else if (game.find("nibbler") != std::string::npos) {
-        this->_window.draw(this->_nibblerSprite);
-    }
-    this->_window.display();
-}
-
-void Sfml::displayMenu()
-{
-    this->setText();
-    this->_window.clear();
-    this->_window.draw(this->_backgroundSprite);
-    this->_window.draw(this->_txtGames);
-    this->_window.draw(this->_txtLibs);
-    this->_window.draw(this->_txtName);
-    this->_window.draw(this->_txtScore);
     this->_window.display();
 }
 

@@ -110,9 +110,10 @@ void ArcadeCore::gameLoop()
     this->info.push_back(nameScore);
     this->_lib->loadGraphical(this->_av.at(1), this->info);
     this->_state = ArcadeCore::arcadeState::RUNNING;
+
     while (this->_state != ArcadeCore::arcadeState::CLOSED)
     {
         this->events();
-        (this->_menu != 1) ? this->_scene->display(this->_lib->_actual_graphical_lib, this->gamePath.at(this->_actualGame), this->info) : this->_scene->display(this->_lib->_actual_graphical_lib, "menu", this->info);
+        this->_scene->display(this->_lib->_actual_graphical_lib, this->_gamesInfos);
     }
 }

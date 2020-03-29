@@ -5,7 +5,6 @@
 ** Scene Class
 */
 #include "sceneMainMenu/sceneMainMenu.hpp"
-#include "scenePauseMenu/scenePauseMenu.hpp"
 #include "sceneMainGame/sceneMainGame.hpp"
 #include <vector>
 
@@ -16,14 +15,13 @@ class Scene {
     public:
         Scene();
         ~Scene();
-        void display(AbstractGraph *, std::string, std::vector<std::vector<std::string>>);
+        void display(AbstractGraph *, std::vector<std::vector<std::string>> gameInfos);
         int sceneNumber;
 
     protected:
     private:
         SceneMainMenu *_sceneMenu;
         SceneMainGame *_sceneGame;
-        ScenePause *_scenePause;
         AbstractGraph *graphicalLib;
 };
 

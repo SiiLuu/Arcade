@@ -15,8 +15,7 @@ class Sfml : public AbstractGraph
         ~Sfml();
 
         void createWindow();
-        void displayGame(std::string game);
-        void displayMenu();
+        void display(std::vector<std::vector<std::string>>, int);
         std::string registerEvents();
 
     private:

@@ -17,10 +17,9 @@ class SceneMainMenu {
         SceneMainMenu(/* args */);
         ~SceneMainMenu();
 
-        void display(AbstractGraph *, std::vector<std::vector<std::string>>);
+        void display(AbstractGraph *,std::vector<std::vector<std::string>> gameInfos, int scene);
 
     private:
-        int test;
 
 };
 
