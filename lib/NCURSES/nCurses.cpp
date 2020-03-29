@@ -16,85 +16,88 @@ nCurses::nCurses(std::vector<std::vector<std::string>> info)
 nCurses::~nCurses()
 {
     caca_free_canvas(this->_canvas);  
-    caca_free_display(this->_window);  
+    caca_free_display(this->_window);
 }
 
 void nCurses::display(std::vector<std::vector<std::string>> infos, int scene)
 {
-    if (scene == 1) {
-        
-    }
+    this->clear();
+    if (scene == 1)
+        this->drawMen();
     else if (scene == 2) {
+        caca_put_str(this->_canvas, 1400 / 8, 100 / 16, "GAMEEE");
     }
+    caca_refresh_display(this->_window);
 }
-
-/*
-        caca_get_event_key_utf32(&_event) == 'q')
-        caca_get_event_key_utf32(&_event) == 'Q')
-        caca_get_event_key_ch(&_event) == CACA_KEY_LEFT);
-        caca_get_event_key_utf32(&_event) == 'd')
-        caca_get_event_key_utf32(&_event) == 'D')
-        caca_get_event_key_ch(&_event) == CACA_KEY_RIGHT);
-        caca_get_event_key_utf32(&_event) == 'z')
-        caca_get_event_key_utf32(&_event) == 'Z')
-        caca_get_event_key_ch(&_event) == CACA_KEY_UP);
-        caca_get_event_key_utf32(&_event) == 's')
-        caca_get_event_key_utf32(&_event) == 'S')
-        caca_get_event_key_ch(&_event) == CACA_KEY_DOWN);
-        caca_get_event_key_utf32(&_event) == 'a')
-        caca_get_event_key_utf32(&_event) == 'A');
-        caca_get_event_key_utf32(&_event) == 'e')
-        caca_get_event_key_utf32(&_event) == 'E');
-        caca_get_event_key_utf32(&_event) == 'w')
-        caca_get_event_key_utf32(&_event) == 'W');
-        caca_get_event_key_utf32(&_event) == 'x')
-        caca_get_event_key_utf32(&_event) == 'X');
-        caca_get_event_key_utf32(&_event) == ' ');
-        caca_get_event_key_ch(&_event) == CACA_KEY_ESCAPE);
-        caca_get_event_key_utf32(&_event) == 'j')
-        caca_get_event_key_utf32(&_event) == 'J');
-        caca_get_event_key_utf32(&_event) == 'k')
-        caca_get_event_key_utf32(&_event) == 'K');
-        caca_get_event_key_utf32(&_event) == 'u')
-        caca_get_event_key_utf32(&_event) == 'U');
-        caca_get_event_key_utf32(&_event) == 'i')
-        caca_get_event_key_utf32(&_event) == 'I');
-        caca_get_event_key_utf32(&_event) == 'm')
-        caca_get_event_key_utf32(&_event) == 'M');
-        caca_get_event_key_utf32(&_event) == 'r')
-        caca_get_event_key_utf32(&_event) == 'R');
-        caca_get_event_key_ch(&_event) == CACA_KEY_BACKSPACE);
-        caca_get_event_key_ch(&_event) == CACA_KEY_RETURN);
-}
-*/
 
 std::string nCurses::registerEvents()
 {
     caca_get_event(this->_window, CACA_EVENT_KEY_PRESS, &_event, -1);
-    if (caca_get_event_key_ch(&this->_event) == CACA_KEY_ESCAPE)
-        return ("CLOSE");
+    switch (caca_get_event_key_ch(&this->_event))  {
+        case CACA_KEY_ESCAPE:
+            return ("ESCAPE");
+        case CACA_KEY_LEFT:
+            return ("KEYLEFT");
+        case CACA_KEY_RIGHT:
+            return ("KEYRIGHT");
+        case CACA_KEY_UP:
+            return ("KEYUP");
+        case CACA_KEY_DOWN:
+            return ("KEYDOWN");
+        default:
+            return ("");
+    }
     return ("");
 }
 
-void nCurses::getLists()
+void nCurses::clear()
 {
-    for (int i = 0; i < this->_info.at(1).size(); i++)
-        this->_listGames.append("->" + this->_info.at(1).at(i) + "\n");
-    for (int i = 0; i < this->_info.at(0).size(); i++)
-        this->_listLibs.append("-> " + this->_info.at(0).at(i) + "\n");
-    this->_listLibs.append("\n\nACTUAL LIBRARY : SDL");
-    this->_name = "-> " + this->_info.at(2).at(0);
-    this->_score = "-> 10000";
+    caca_set_color_ansi(this->_canvas, CACA_BLACK, CACA_BLACK);
+    caca_clear_canvas(this->_canvas);
+    caca_set_color_ansi(this->_canvas, CACA_BLACK, this->_currentColor);
+}
+
+void nCurses::drawMen()
+{
+    int pos = 7;
+
+    caca_draw_box(this->_canvas, 15, 3, 105, 16, ' ');
+    this->text(60, 5, "GAMES AVAILABLE");
+    for (int i = 0; i < this->_info.at(1).size(); i++) {
+        this->text(20, pos, ("-> " + this->_info.at(1).at(i)));
+        pos += 1.5;
+    }
+    pos = 7;
+    caca_draw_box(this->_canvas, 150, 3, 105, 16, ' ');
+    this->text(196, 5, "LIBRARIES AVAILABLE");
+    for (int i = 0; i < this->_info.at(0).size(); i++) {
+        this->text(160, pos, ("-> " + this->_info.at(0).at(i)));
+        pos += 1.5;
+    }
+    caca_draw_box(this->_canvas, 15, 23, 105, 16, ' ');
+    this->text(60, 25, "YOUR SCORES");
+    this->text(20, 27, "-> 10000");
+    caca_draw_box(this->_canvas, 150, 23, 105, 16, ' ');
+    this->text(196, 25, "YOUR NAME");
+    this->text(160, 27, ("-> " + this->_info.at(2).at(0)));
+}
+
+void nCurses::text(int x, int y, std::string str)
+{
+    caca_set_color_ansi(this->_canvas, this->_currentColor, CACA_TRANSPARENT);
+    caca_put_str(this->_canvas, x, y, str.c_str());
+    caca_set_color_ansi(this->_canvas, CACA_BLACK, this->_currentColor);
 }
 
 void nCurses::createWindow()
 {
-    this->_canvas = caca_create_canvas(1600 / 8, 900 / 16);
+    this->_canvas = caca_create_canvas(267, 42);
     this->_window = caca_create_display(this->_canvas);
     caca_set_display_time(this->_window, 1000000 / 12);
     caca_set_display_title(this->_window, "Arcade");
     this->_currentColor = CACA_WHITE;
     caca_set_color_ansi(this->_canvas, CACA_BLACK, this->_currentColor);
+    this->drawMen();
     caca_refresh_display(this->_window);
 }
 

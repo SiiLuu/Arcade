@@ -31,6 +31,10 @@ class nCurses : public AbstractGraph
             std::string _score;
             std::string _name;
             void getLists();
+            void clear();
+            void drawMen();
+            void text(int x, int y, std::string str);
+
 };
 
 #endif /* !NCURSES_HPP_ */
