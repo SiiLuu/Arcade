@@ -56,7 +56,10 @@ void Sdl::display(std::vector<std::vector<std::string>> infos, int scene)
     if (scene == 1) {
         SDL_RenderClear(this->renderer);
         SDL_RenderCopy(this->renderer, this->tbg, NULL, NULL);
-        SDL_RenderCopy(this->renderer, this->_ttxt, NULL, &this->pos);
+        SDL_RenderCopy(this->renderer, this->_ttxtGames, NULL, &this->posGames);
+        SDL_RenderCopy(this->renderer, this->_ttxtLibs, NULL, &this->posLibs);
+        SDL_RenderCopy(this->renderer, this->_ttxtName, NULL, &this->posName);
+        SDL_RenderCopy(this->renderer, this->_ttxtScore, NULL, &this->posScore);
         SDL_RenderPresent(this->renderer);
     }
     else if (scene == 2) {
@@ -84,19 +87,43 @@ void Sdl::setText()
 
     this->getLists();
     this->_font = TTF_OpenFont("assets/arial.ttf", 65);
-    this->_txt = TTF_RenderText_Blended(this->_font, "oui", whiteColor);
-    pos.x = 130;
-    pos.y = 115;
-    pos.h = 50;
-    pos.w = 50;
-    this->_ttxt = SDL_CreateTextureFromSurface(this->renderer, this->_txt);
-    SDL_FreeSurface(this->_txt);
+    this->_txtGames = TTF_RenderText_Blended_Wrapped(this->_font, this->_listGames.c_str(), whiteColor, 2000);
+    posGames.x = 130;
+    posGames.y = 115;
+    posGames.h = 100;
+    posGames.w = 800;
+    this->_ttxtGames = SDL_CreateTextureFromSurface(this->renderer, this->_txtGames);
+    SDL_FreeSurface(this->_txtGames);
+
+    this->_txtLibs = TTF_RenderText_Blended_Wrapped(this->_font, this->_listLibs.c_str(), whiteColor, 2000);
+    posLibs.x = 930;
+    posLibs.y = 115;
+    posLibs.h = 200;
+    posLibs.w = 800;
+    this->_ttxtLibs = SDL_CreateTextureFromSurface(this->renderer, this->_txtLibs);
+    SDL_FreeSurface(this->_txtLibs);
+
+    this->_txtName = TTF_RenderText_Blended_Wrapped(this->_font, this->_name.c_str(), whiteColor, 2000);
+    posName.x = 930;
+    posName.y = 660;
+    posName.h = 40;
+    posName.w = 200;
+    this->_ttxtName = SDL_CreateTextureFromSurface(this->renderer, this->_txtName);
+    SDL_FreeSurface(this->_txtName);
+
+    this->_txtScore = TTF_RenderText_Blended_Wrapped(this->_font, this->_score.c_str(), whiteColor, 2000);
+    posScore.x = 130;
+    posScore.y = 660;
+    posScore.h = 40;
+    posScore.w = 200;
+    this->_ttxtScore = SDL_CreateTextureFromSurface(this->renderer, this->_txtScore);
+    SDL_FreeSurface(this->_txtScore);
 }
 
 void Sdl::getLists()
 {
     for (int i = 0; i < this->_info.at(1).size(); i++)
-        this->_listGames.append("-> " + this->_info.at(1).at(i) + "\n");
+        this->_listGames.append("->" + this->_info.at(1).at(i) + "\n");
     for (int i = 0; i < this->_info.at(0).size(); i++)
         this->_listLibs.append("-> " + this->_info.at(0).at(i) + "\n");
     this->_listLibs.append("\n\nACTUAL LIBRARY : SDL");

@@ -75,25 +75,21 @@ void Sfml::setText()
     this->_txtGames.setFont(this->_font);
     this->_txtGames.setString(this->_listGames);
     this->_txtGames.setCharacterSize(25);
-    this->_txtGames.setStyle(sf::Text::Bold);
     this->_txtGames.setPosition(130, 115);
 
     this->_txtLibs.setFont(this->_font);
     this->_txtLibs.setString(this->_listLibs);
     this->_txtLibs.setCharacterSize(25);
-    this->_txtLibs.setStyle(sf::Text::Bold);
     this->_txtLibs.setPosition(930, 115);
 
     this->_txtName.setFont(this->_font);
     this->_txtName.setString(this->_name);
     this->_txtName.setCharacterSize(25);
-    this->_txtName.setStyle(sf::Text::Bold);
     this->_txtName.setPosition(930, 660);
 
     this->_txtScore.setFont(this->_font);
     this->_txtScore.setString(this->_score);
     this->_txtScore.setCharacterSize(25);
-    this->_txtScore.setStyle(sf::Text::Bold);
     this->_txtScore.setPosition(130, 660);
 }
 

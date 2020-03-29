@@ -35,9 +35,18 @@ class Sdl : public AbstractGraph
         size_t _lastTime;
 
         TTF_Font *_font;
-        SDL_Rect pos;
-        SDL_Surface *_txt;
-        SDL_Texture *_ttxt;
+        SDL_Rect posGames;
+        SDL_Rect posLibs;
+        SDL_Rect posName;
+        SDL_Rect posScore;
+        SDL_Surface *_txtGames;
+        SDL_Texture *_ttxtGames;
+        SDL_Surface *_txtLibs;
+        SDL_Texture *_ttxtLibs;
+        SDL_Surface *_txtName;
+        SDL_Texture *_ttxtName;
+        SDL_Surface *_txtScore;
+        SDL_Texture *_ttxtScore;
         std::string _listGames;
         std::string _listLibs;
         std::string _score;
