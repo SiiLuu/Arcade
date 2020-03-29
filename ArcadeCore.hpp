@@ -38,7 +38,6 @@ class ArcadeCore {
         AbstractGame *shared_game;
         LibLoader *_lib;
         std::string _playerName;
-        std::string _score;
         arcadeState _state;
         std::vector<std::string> _av;
         int _menu;
@@ -54,9 +53,13 @@ class ArcadeCore {
         void swapGame(std::string str);
         void events();
         int findLib();
+        std::string _score;
+        std::string _name;
         std::vector<std::string> libPath;
         std::vector<std::string> gamePath;
-        std::vector<std::vector<std::string>> info; 
+        std::vector<std::string> nameScore;
+        std::vector<std::vector<std::string>> info;
+        std::vector<std::vector<std::string>> _gamesInfos;
 };
 
 #endif /* !ARCADECORE_HPP_ */

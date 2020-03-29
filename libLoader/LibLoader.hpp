@@ -30,7 +30,7 @@ class LibLoader {
             NCURSES
         };
 
-        void loadGraphical(std::string av);
+        void loadGraphical(std::string av, std::vector<std::vector<std::string>> infos);
         void loadGames(std::string av);
         void destroyGames();
         void destroyGraphical();

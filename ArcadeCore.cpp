@@ -60,7 +60,7 @@ void ArcadeCore::swapLib(std::string str)
         (this->_actualLibrary + 1 > this->libPath.size()) ? this->_actualLibrary = 0 : this->_actualLibrary++;
     else if (!str.compare("KEYLEFT"))
         (this->_actualLibrary - 1 < 0) ? this->_actualLibrary = this->libPath.size() - 1 : this->_actualLibrary--;
-    this->_lib->loadGraphical(this->libPath.at(this->_actualLibrary));
+    this->_lib->loadGraphical(this->libPath.at(this->_actualLibrary), this->info);
 }
 
 void ArcadeCore::swapGame(std::string str)
@@ -104,13 +104,17 @@ void ArcadeCore::events()
 
 void ArcadeCore::gameLoop()
 {
-    this->_lib->loadGraphical(this->_av.at(1));
+    std::cout << "Enter a user name :" << std::endl;
+    std::getline(std::cin, this->_name);
+    this->nameScore.push_back(_name);
+    this->info.push_back(nameScore);
+    this->_lib->loadGraphical(this->_av.at(1), this->info);
     this->_state = ArcadeCore::arcadeState::RUNNING;
 
     std::cout << "gameloop" << std::endl;
     while (this->_state != ArcadeCore::arcadeState::CLOSED)
     {
         this->events();
-        (this->_menu != 1) ? this->_scene->display(this->_lib->_actual_graphical_lib, this->gamePath.at(this->_actualGame), this->info) : this->_scene->display(this->_lib->_actual_graphical_lib, "menu", this->info);
+        this->_scene->display(this->_lib->_actual_graphical_lib, this->_gamesInfos);
     }
 }

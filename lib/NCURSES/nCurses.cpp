@@ -7,7 +7,7 @@
 
 #include "nCurses.hpp"
 
-nCurses::nCurses()
+nCurses::nCurses(std::vector<std::vector<std::string>> name)
 {
     this->createWindow();
 }
@@ -17,7 +17,7 @@ nCurses::~nCurses()
     std::cout << "NCURSES destroyed" << std::endl;
 }
 
-void nCurses::displayGame(std::string game)
+void nCurses::display(std::vector<std::vector<std::string>> infos, int scene)
 {
     clear();
     if (!game.compare("PACMAN"))
@@ -94,9 +94,9 @@ void nCurses::createWindow()
     endwin();
 }
 
-extern "C" AbstractGraph *create()
+extern "C" AbstractGraph *create(std::vector<std::vector<std::string>> name)
 {
-    return new nCurses();
+    return new nCurses(name);
 }
 
 extern "C" void destroy(AbstractGraph *object)

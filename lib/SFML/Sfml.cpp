@@ -7,8 +7,9 @@
 
 #include "Sfml.hpp"
 
-Sfml::Sfml()
+Sfml::Sfml(std::vector<std::vector<std::string>> info)
 {
+    this->_info = info;
     this->createWindow();
 }
 
@@ -41,28 +42,19 @@ std::string Sfml::registerEvents()
     return ("");
 }
 
-void Sfml::displayGame(std::string game)
+void Sfml::display(std::vector<std::vector<std::string>> infos, int scene)
 {
     this->_window.clear();
-    if (game.find("pacman") != std::string::npos) {
+    if (scene == 1) {
+        this->_window.draw(this->_backgroundSprite);
+        this->_window.draw(this->_txtGames);
+        this->_window.draw(this->_txtLibs);
+        this->_window.draw(this->_txtName);
+        this->_window.draw(this->_txtScore);
+    }
+    else if (scene == 2) {
         this->_window.draw(this->_pacmanSprite);
     }
-    else if (game.find("nibbler") != std::string::npos) {
-        this->_window.draw(this->_nibblerSprite);
-    }
-    this->_window.display();
-}
-
-void Sfml::displayMenu(std::vector<std::vector<std::string>> info)
-{
-    this->_info = info;
-    this->setText();
-    this->_window.clear();
-    this->_window.draw(this->_backgroundSprite);
-    this->_window.draw(this->_txtGames);
-    this->_window.draw(this->_txtLibs);
-    this->_window.draw(this->_txtName);
-    this->_window.draw(this->_txtScore);
     this->_window.display();
 }
 
@@ -83,38 +75,33 @@ void Sfml::setText()
     this->_txtGames.setFont(this->_font);
     this->_txtGames.setString(this->_listGames);
     this->_txtGames.setCharacterSize(25);
-    this->_txtGames.setStyle(sf::Text::Bold);
     this->_txtGames.setPosition(130, 115);
 
     this->_txtLibs.setFont(this->_font);
     this->_txtLibs.setString(this->_listLibs);
     this->_txtLibs.setCharacterSize(25);
-    this->_txtLibs.setStyle(sf::Text::Bold);
     this->_txtLibs.setPosition(930, 115);
 
     this->_txtName.setFont(this->_font);
     this->_txtName.setString(this->_name);
     this->_txtName.setCharacterSize(25);
-    this->_txtName.setStyle(sf::Text::Bold);
     this->_txtName.setPosition(930, 660);
 
     this->_txtScore.setFont(this->_font);
     this->_txtScore.setString(this->_score);
     this->_txtScore.setCharacterSize(25);
-    this->_txtScore.setStyle(sf::Text::Bold);
     this->_txtScore.setPosition(130, 660);
 }
 
 void Sfml::getLists()
 {
-    if (this->_listGames.empty() == true)
-        for (int i = 0; i < this->_info.at(1).size(); i++)
-            this->_listGames.append("-> " + this->_info.at(1).at(i) + "\n");
-    if (this->_listLibs.empty() == true)
-        for (int i = 0; i < this->_info.at(0).size(); i++)
-            this->_listLibs.append("-> " + this->_info.at(0).at(i) + "\n");
+    for (int i = 0; i < this->_info.at(1).size(); i++)
+        this->_listGames.append("-> " + this->_info.at(1).at(i) + "\n");
+    for (int i = 0; i < this->_info.at(0).size(); i++)
+        this->_listLibs.append("-> " + this->_info.at(0).at(i) + "\n");
+    this->_listLibs.append("\n\nACTUAL LIBRARY : SFML");
+    this->_name = "-> " + this->_info.at(2).at(0);
     this->_score = "-> 10000";
-    this->_name = "-> TAMER";
 }
 
 void Sfml::createWindow()
@@ -122,11 +109,12 @@ void Sfml::createWindow()
     this->_window.create(sf::VideoMode(1600, 900), "Arcade");
     this->_window.setFramerateLimit(60);
     this->setTexture();
+    this->setText();
 }
 
-extern "C" AbstractGraph *create()
+extern "C" AbstractGraph *create(std::vector<std::vector<std::string>> name)
 {
-    return new Sfml();
+    return new Sfml(name);
 }
 
 extern "C" void destroy(AbstractGraph *object)

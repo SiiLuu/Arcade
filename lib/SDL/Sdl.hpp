@@ -4,6 +4,7 @@
 ** File description:
 ** sdl class
 */
+
 #include "../AGraph/AbstractGraph.hpp"
 
 #ifndef SDL_HPP_
@@ -12,15 +13,15 @@
 class Sdl : public AbstractGraph
 {
     public:
-        Sdl();
+        Sdl(std::vector<std::vector<std::string>>);
         ~Sdl();
 
         void createWindow();
-        void displayGame(std::string game);
-        void displayMenu(std::vector<std::vector<std::string>>);
+        void display(std::vector<std::vector<std::string>>, int);
         std::string registerEvents();
 
     private:
+        std::vector<std::vector<std::string>> _info;
         SDL_Window *_window;
         SDL_Renderer *renderer;
         SDL_Surface *bg;
@@ -32,7 +33,27 @@ class Sdl : public AbstractGraph
         SDL_Event _events;
         size_t _clock;
         size_t _lastTime;
+
+        TTF_Font *_font;
+        SDL_Rect posGames;
+        SDL_Rect posLibs;
+        SDL_Rect posName;
+        SDL_Rect posScore;
+        SDL_Surface *_txtGames;
+        SDL_Texture *_ttxtGames;
+        SDL_Surface *_txtLibs;
+        SDL_Texture *_ttxtLibs;
+        SDL_Surface *_txtName;
+        SDL_Texture *_ttxtName;
+        SDL_Surface *_txtScore;
+        SDL_Texture *_ttxtScore;
+        std::string _listGames;
+        std::string _listLibs;
+        std::string _score;
+        std::string _name;
         void setTexture();
+        void setText();
+        void getLists();
 };
 
 #endif /* !SDL_HPP_ */
