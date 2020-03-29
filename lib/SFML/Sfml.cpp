@@ -42,12 +42,10 @@ std::string Sfml::registerEvents()
     return ("");
 }
 
-
 void Sfml::display(std::vector<std::vector<std::string>> infos, int scene)
 {
     this->_window.clear();
     if (scene == 1) {
-        this->setText();
         this->_window.draw(this->_backgroundSprite);
         this->_window.draw(this->_txtGames);
         this->_window.draw(this->_txtLibs);
@@ -116,6 +114,7 @@ void Sfml::createWindow()
     this->_window.create(sf::VideoMode(1600, 900), "Arcade");
     this->_window.setFramerateLimit(60);
     this->setTexture();
+    this->setText();
 }
 
 extern "C" AbstractGraph *create(std::vector<std::vector<std::string>> name)
