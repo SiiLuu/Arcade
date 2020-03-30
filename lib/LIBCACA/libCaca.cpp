@@ -74,6 +74,8 @@ void libCaca::drawMen()
         this->text(160, pos, ("-> " + this->_info.at(0).at(i)));
         pos += 1.5;
     }
+    this->text(160, 16, "CURRENT LIBARRY : LIBCACA");
+    this->text(196, 5, "LIBRARIES AVAILABLE");
     caca_draw_box(this->_canvas, 15, 23, 105, 16, ' ');
     this->text(60, 25, "YOUR SCORES");
     this->text(20, 27, "-> 10000");
