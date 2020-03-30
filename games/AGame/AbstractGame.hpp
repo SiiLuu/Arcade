@@ -10,7 +10,8 @@
 #ifndef ABSTRACTGAME_HPP_
 #define ABSTRACTGAME_HPP_
 
-class AbstractGame : public game::IModuleGame {
+class AbstractGame : public game::IModuleGame
+{
     public:
         AbstractGame();
         virtual ~AbstractGame();

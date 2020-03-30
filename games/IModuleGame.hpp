@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <fstream>
 
 #ifndef IMODULEGAME_HPP_
 #define IMODULEGAME_HPP_

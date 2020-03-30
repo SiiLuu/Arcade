@@ -10,12 +10,22 @@
 Pacman::Pacman()
 {
     this->_hp = 3;
+    this->_state = game::state::RUNNING;
+    this->init();
     std::cout << "PACMAN -> created" << std::endl;
 }
 
 Pacman::~Pacman()
 {
     std::cout << "PACMAN -> Game destroyed" << std::endl;
+}
+
+void Pacman::init()
+{
+    std::ifstream input("games/pacman/pacmanMap.txt");
+
+    for (std::string line; getline(input, line);)
+        this->_map.push_back(line);
 }
 
 void Pacman::MoveForward()
@@ -80,11 +90,6 @@ void Pacman::moveEnemy()
 }
 
 void Pacman::update()
-{
-
-}
-
-void Pacman::init()
 {
 
 }

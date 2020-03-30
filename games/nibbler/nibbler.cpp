@@ -9,12 +9,21 @@
 
 nibbler::nibbler()
 {
+    this->init();
     std::cout << "NIBBLER -> created" << std::endl;
 }
 
 nibbler::~nibbler()
 {
     std::cout << "NIBBLER -> game destroyed" << std::endl;
+}
+
+void nibbler::init()
+{
+    std::ifstream input("games/nibbler/nibblerMap.txt");
+
+    for (std::string line; getline(input, line);)
+        this->_map.push_back(line);
 }
 
 void nibbler::MoveForward()
@@ -79,10 +88,6 @@ void nibbler::moveEnemy()
 }
 
 void nibbler::update()
-{
-}
-
-void nibbler::init()
 {
 }
 
