@@ -141,11 +141,9 @@ void Sdl::createWindow()
         SDL_WINDOWPOS_UNDEFINED,
         1600,
         900,
-        SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+        SDL_WINDOW_SHOWN);
     if (this->_window == NULL)
-    {
         std::cout << "Could not create window Arcade." << std::endl;
-    }
     this->renderer = SDL_CreateRenderer(this->_window, -1, SDL_RENDERER_ACCELERATED);
     this->setTexture();
     this->setText();

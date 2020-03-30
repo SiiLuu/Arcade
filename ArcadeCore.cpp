@@ -91,7 +91,15 @@ void ArcadeCore::events()
     else if (!event.compare("KEYRIGHT"))
         this->swapLib("KEYRIGHT");
     else if (!event.compare("ESCAPE"))
-        (this->_scene->sceneNumber == 1) ? this->_state = ArcadeCore::arcadeState::CLOSED : this->_scene->sceneNumber = 1;
+        if (this->_scene->sceneNumber == 1) {
+            this->_state = ArcadeCore::arcadeState::CLOSED;
+        }
+        else {
+            this->_lib->destroyGames();
+            this->_menu = 1;
+            this->_actualGame = -1;
+            this->_scene->sceneNumber = 1;
+        }
     else if (!event.compare("KEYUP")) {
         this->_scene->sceneNumber = 2;
         this->swapGame("KEYUP");
