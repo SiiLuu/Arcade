@@ -31,7 +31,7 @@ class Sdl : public AbstractGraph
         SDL_Surface *snibbler;
         SDL_Texture *tnibbler;
         SDL_Event _events;
-        size_t _clock;
+        size_t _actualTime;
         size_t _lastTime;
 
         TTF_Font *_font;

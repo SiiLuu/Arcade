@@ -10,7 +10,6 @@
 Sdl::Sdl(std::vector<std::vector<std::string>> info)
 {
     this->_info = info;
-    this->_clock = 0;
     this->createWindow();
 }
 
@@ -25,12 +24,13 @@ Sdl::~Sdl()
 
 std::string Sdl::registerEvents()
 {
-    this->_clock += 1;
     while (SDL_PollEvent(&this->_events)) {
         if (this->_events.type == SDL_QUIT)
             return ("CLOSE");
-        if (this->_clock > 50) {
-            this->_clock = 0;
+        this->_actualTime = SDL_GetTicks();
+        if (this->_actualTime - this->_lastTime > 200)
+        {
+            this->_lastTime = this->_actualTime;
             switch (this->_events.key.keysym.sym) {
                 case SDLK_LEFT:
                     return ("KEYLEFT");
