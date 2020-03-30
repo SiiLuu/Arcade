@@ -20,30 +20,54 @@ Pacman::~Pacman()
 
 void Pacman::MoveForward()
 {
-    if (this->_map[this->_position.y + 1][this->_position.x] == 'o') {
+    if (this->_map.at(this->_position.y + 1).at(this->_position.x) == 'o') {
         this->_position.y += 1;
-        this->_map[this->_position.y][this->_posotion.x] = " ";
-    } else if (this->_map[this->_position.y + 1][this->_position.x] == " ")
+        this->_map.at(this->_position.y).at(this->_position.x) = ' ';
+    } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == ' ')
         this->_position.y += 1;
-    else if (this->_map[this->_position.y + 1][this->_position.x] == 'E') {
+    else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == 'E') {
         this->_hp = 0;
-        game::state::LOOSE;
+        this->_state = game::state::LOOSE;
     }
 }
 
 void Pacman::MoveBackward()
 {
-    std::cout << "PACMAN -> player go to the back" << std::endl;
+    if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'o') {
+        this->_position.y -= 1;
+        this->_map.at(this->_position.y).at(this->_position.x) = ' ';
+    } else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == ' ')
+        this->_position.y -= 1;
+    else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'E') {
+        this->_hp = 0;
+        game::state::LOOSE;
+    }
 }
 
 void Pacman::MoveLeft()
 {
-    std::cout << "PACMAN -> player go to the left" << std::endl;
+    if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'o') {
+        this->_position.x -= 1;
+        this->_map.at(this->_position.y).at(this->_position.x) = ' ';
+    } else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == ' ')
+        this->_position.x -= 1;
+    else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'E') {
+        this->_hp = 0;
+        game::state::LOOSE;
+    }
 }
 
 void Pacman::MoveRight()
 {
-    std::cout << "PACMAN -> player go to the right" << std::endl;
+    if (this->_map.at(this->_position.y).at(this->_position.x + 1) == 'o') {
+        this->_position.x += 1;
+        this->_map.at(this->_position.y).at(this->_position.x) = ' ';
+    } else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == ' ')
+        this->_position.x += 1;
+    else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == 'E') {
+        this->_hp = 0;
+        game::state::LOOSE;
+    }
 }
 
 void Pacman::moveEnemy()
