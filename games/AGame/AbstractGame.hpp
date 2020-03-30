@@ -16,6 +16,7 @@ class AbstractGame : public game::IModuleGame {
         virtual ~AbstractGame();
 
         virtual void moveEnemy() = 0;
+        virtual void init() = 0;
         virtual void MoveForward() = 0;
         virtual void MoveBackward() = 0;
         virtual void MoveLeft() = 0;

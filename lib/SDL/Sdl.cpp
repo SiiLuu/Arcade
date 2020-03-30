@@ -42,6 +42,14 @@ std::string Sdl::registerEvents()
                     return ("KEYUP");
                 case SDLK_ESCAPE:
                     return ("ESCAPE");
+                case SDLK_z:
+                    return ("z");
+                case SDLK_q:
+                    return ("q");
+                case SDLK_s:
+                    return ("s");
+                case SDLK_d:
+                    return ("d");
                 default:
                     return ("");
             }

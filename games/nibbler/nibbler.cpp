@@ -46,6 +46,10 @@ void nibbler::update()
 {
 }
 
+void nibbler::init()
+{
+}
+
 size_t nibbler::getScore() const
 {
     return (this->_score);

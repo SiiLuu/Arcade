@@ -9,6 +9,7 @@
 
 Pacman::Pacman()
 {
+    this->_hp = 1;
     std::cout << "PACMAN -> created" << std::endl;
 }
 
@@ -19,7 +20,15 @@ Pacman::~Pacman()
 
 void Pacman::MoveForward()
 {
-    std::cout << "PACMAN -> player go to the front" << std::endl;
+    if (this->_map[this->_position.y + 1][this->_position.x] == 'o') {
+        this->_position.y += 1;
+        this->_map[this->_position.y][this->_posotion.x] = " ";
+    } else if (this->_map[this->_position.y + 1][this->_position.x] == " ")
+        this->_position.y += 1;
+    else if (this->_map[this->_position.y + 1][this->_position.x] == 'E') {
+        this->_hp = 0;
+        game::state::LOOSE;
+    }
 }
 
 void Pacman::MoveBackward()
@@ -43,6 +52,10 @@ void Pacman::moveEnemy()
 }
 
 void Pacman::update()
+{
+}
+
+void Pacman::init()
 {
 }
 

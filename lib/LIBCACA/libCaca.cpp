@@ -47,6 +47,18 @@ std::string libCaca::registerEvents()
         default:
             return ("");
     }
+    switch (caca_get_event_key_utf32(&this->_event))  {
+        case 'z':
+            return ("z");
+        case 'q':
+            return ("q");
+        case 's':
+            return ("s");
+        case 'd':
+            return ("d");
+        default:
+            return ("");
+    }
     return ("");
 }
 

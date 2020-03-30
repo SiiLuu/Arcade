@@ -32,6 +32,14 @@ std::string Sfml::registerEvents()
                     return ("KEYDOWN");
                 case sf::Keyboard::Up:
                     return ("KEYUP");
+                case sf::Keyboard::Z:
+                    return ("z");
+                case sf::Keyboard::Q:
+                    return ("q");
+                case sf::Keyboard::S:
+                    return ("s");
+                case sf::Keyboard::D:
+                    return ("d");
                 case sf::Keyboard::Escape:
                     return ("ESCAPE");
                 default:

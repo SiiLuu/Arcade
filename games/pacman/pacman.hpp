@@ -12,10 +12,19 @@
 
 class Pacman : public AbstractGame
 {
+    class Position
+    {
+        public:
+            unsigned int x;
+            unsigned int y;
+    };
+
     private:
         size_t _score;
         game::state _state;
         std::vector<std::string> _map;
+        Position _position;
+        int _hp;
 
     public:
         Pacman(/* args */);
@@ -23,6 +32,7 @@ class Pacman : public AbstractGame
 
         void moveEnemy();
         void update();
+        void init();
         void MoveForward();
         void MoveBackward();
         void MoveLeft();

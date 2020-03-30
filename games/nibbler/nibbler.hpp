@@ -22,6 +22,7 @@ class nibbler : public AbstractGame
         ~nibbler();
 
         void moveEnemy();
+        void init();
         void MoveForward();
         void MoveBackward();
         void MoveLeft();
