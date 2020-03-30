@@ -15,7 +15,7 @@ libCaca::libCaca(std::vector<std::vector<std::string>> info)
 
 libCaca::~libCaca()
 {
-    caca_free_canvas(this->_canvas);  
+    caca_free_canvas(this->_canvas);
     caca_free_display(this->_window);
 }
 

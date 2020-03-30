@@ -5,24 +5,40 @@
 ** Game Interface
 */
 
+#include <vector>
+#include <string>
+#include <iostream>
+
 #ifndef IMODULEGAME_HPP_
 #define IMODULEGAME_HPP_
 
-class IModuleGame {
-    public:
-        virtual ~IModuleGame() = default;
-        //virtual void update() = 0;
-        //virtual void init() = 0;
+namespace game {
 
-        enum state
+    enum state
         {
             WIN,
             LOOSE,
-            PAUSE
+            RUNNING
         };
 
-    protected:
-    private:
-};
+    class IModuleGame {
+        public:
+            virtual ~IModuleGame() = default;
+
+            virtual void moveEnemy() = 0;
+            virtual void MoveForward() = 0;
+            virtual void MoveBackward() = 0;
+            virtual void MoveLeft() = 0;
+            virtual void MoveRight() = 0;
+            virtual void update() = 0;
+            virtual size_t getScore() const = 0;
+            virtual game::state getState() const = 0;
+            virtual void setState() = 0;
+            virtual std::vector<std::string> getMap() const = 0;
+
+        protected:
+        private:
+    };
+}
 
 #endif /* !IMODULEGRAPH_HPP_ */

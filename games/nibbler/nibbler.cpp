@@ -10,8 +10,6 @@
 nibbler::nibbler()
 {
     std::cout << "NIBBLER -> created" << std::endl;
-    this->MoveIA();
-    this->MovePlayer();
 }
 
 nibbler::~nibbler()
@@ -25,28 +23,46 @@ void nibbler::MoveForward()
 }
 
 void nibbler::MoveBackward()
-{   
+{
     std::cout << "NIBBLER -> move backward" << std::endl;
 }
 
 void nibbler::MoveLeft()
 {
-    std::cout << "NIBBLER -> move left" << std::endl;   
+    std::cout << "NIBBLER -> move left" << std::endl;
 }
 
 void nibbler::MoveRight()
-{    
+{
     std::cout << "NIBBLER -> move right" << std::endl;
 }
 
-void nibbler::MoveIA()
+void nibbler::moveEnemy()
 {
-    std::cout << "NIBBLER -> move nibbler IA" << std::endl;
+    std::cout << "NIBBLER -> enemy mooved" << std::endl;
 }
 
-void nibbler::MovePlayer()
+void nibbler::update()
 {
-    std::cout << "NIBBLER -> move nibbler player" << std::endl;
+}
+
+size_t nibbler::getScore() const
+{
+    return (this->_score);
+}
+
+game::state nibbler::getState() const
+{
+    return (this->_state);
+}
+
+std::vector<std::string> nibbler::getMap() const
+{
+    return (this->_map);
+}
+
+void nibbler::setState()
+{
 }
 
 extern "C" AbstractGame *create()

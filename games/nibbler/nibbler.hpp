@@ -4,8 +4,8 @@
 ** File description:
 ** nibbler
 */
+
 #include "../AGame/AbstractGame.hpp"
-#include <iostream>
 
 #ifndef NIBBLER_HPP_
 #define NIBBLER_HPP_
@@ -13,17 +13,24 @@
 class nibbler : public AbstractGame
 {
     private:
-        /* data */
+        size_t _score;
+        game::state _state;
+        std::vector<std::string> _map;
+
     public:
         nibbler(/* args */);
         ~nibbler();
 
-        void MoveIA();
-        void MovePlayer();
+        void moveEnemy();
         void MoveForward();
         void MoveBackward();
         void MoveLeft();
         void MoveRight();
+        void update();
+        size_t getScore() const;
+        game::state getState() const;
+        void setState();
+        std::vector<std::string> getMap() const;
 };
 
 #endif /* !NIBBLER_HPP_ */

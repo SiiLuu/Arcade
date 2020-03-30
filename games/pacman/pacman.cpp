@@ -4,27 +4,17 @@
 ** File description:
 ** pacman class
 */
+
 #include "pacman.hpp"
 
-Pacman::Pacman(/* args */)
+Pacman::Pacman()
 {
     std::cout << "PACMAN -> created" << std::endl;
-    this->MoveIA();
 }
 
 Pacman::~Pacman()
 {
     std::cout << "PACMAN -> Game destroyed" << std::endl;
-}
-
-void Pacman::MoveIA()
-{
-    std::cout << "PACMAN -> move IA" << std::endl;
-}
-
-void Pacman::MovePlayer()
-{
-    std::cout << "PACMAN -> player has been mooved" << std::endl;
 }
 
 void Pacman::MoveForward()
@@ -45,6 +35,34 @@ void Pacman::MoveLeft()
 void Pacman::MoveRight()
 {
     std::cout << "PACMAN -> player go to the right" << std::endl;
+}
+
+void Pacman::moveEnemy()
+{
+    std::cout << "NIBBLER -> enemy mooved" << std::endl;
+}
+
+void Pacman::update()
+{
+}
+
+size_t Pacman::getScore() const
+{
+    return (this->_score);
+}
+
+game::state Pacman::getState() const
+{
+    return (this->_state);
+}
+
+std::vector<std::string> Pacman::getMap() const
+{
+    return (this->_map);
+}
+
+void Pacman::setState()
+{
 }
 
 extern "C" AbstractGame *create()

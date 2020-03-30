@@ -4,6 +4,7 @@
 ** File description:
 ** abstract graph class
 */
+
 #include "../IModuleGraph.hpp"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>

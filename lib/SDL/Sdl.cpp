@@ -28,7 +28,7 @@ std::string Sdl::registerEvents()
         if (this->_events.type == SDL_QUIT)
             return ("CLOSE");
         this->_actualTime = SDL_GetTicks();
-        if (this->_actualTime - this->_lastTime > 200)
+        if (this->_actualTime - this->_lastTime > 150)
         {
             this->_lastTime = this->_actualTime;
             switch (this->_events.key.keysym.sym) {
@@ -121,7 +121,7 @@ void Sdl::setText()
 void Sdl::getLists()
 {
     for (int i = 0; i < this->_info.at(1).size(); i++)
-        this->_listGames.append("->" + this->_info.at(1).at(i) + "\n");
+        this->_listGames.append("-> " + this->_info.at(1).at(i) + "\n");
     for (int i = 0; i < this->_info.at(0).size(); i++)
         this->_listLibs.append("-> " + this->_info.at(0).at(i) + "\n");
     this->_listLibs.append("\n\nACTUAL LIBRARY : SDL");
