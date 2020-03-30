@@ -29,7 +29,7 @@ std::string Sdl::registerEvents()
     while (SDL_PollEvent(&this->_events)) {
         if (this->_events.type == SDL_QUIT)
             return ("CLOSE");
-        if (this->_clock > 100) {
+        if (this->_clock > 50) {
             this->_clock = 0;
             switch (this->_events.key.keysym.sym) {
                 case SDLK_LEFT:
@@ -54,13 +54,11 @@ void Sdl::display(std::vector<std::vector<std::string>> infos, int scene)
 {
     SDL_RenderClear(renderer);
     if (scene == 1) {
-        SDL_RenderClear(this->renderer);
         SDL_RenderCopy(this->renderer, this->tbg, NULL, NULL);
         SDL_RenderCopy(this->renderer, this->_ttxtGames, NULL, &this->posGames);
         SDL_RenderCopy(this->renderer, this->_ttxtLibs, NULL, &this->posLibs);
         SDL_RenderCopy(this->renderer, this->_ttxtName, NULL, &this->posName);
         SDL_RenderCopy(this->renderer, this->_ttxtScore, NULL, &this->posScore);
-        SDL_RenderPresent(this->renderer);
     }
     else if (scene == 2) {
         SDL_RenderCopy(renderer, tpacman, NULL, NULL);
