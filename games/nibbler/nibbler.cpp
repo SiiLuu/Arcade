@@ -19,22 +19,58 @@ nibbler::~nibbler()
 
 void nibbler::MoveForward()
 {
-    std::cout << "NIBBLER -> move forward" << std::endl;
+    if (this->_map.at(this->_position.y + 1).at(this->_position.x) == 'o') {
+        this->_position.y += 1;
+        this->_map.at(this->_position.y).at(this->_position.x) = ' ';
+    } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == ' ')
+        this->_position.y += 1;
+    else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == 'E') {
+        this->_hp -= 1;
+        if (this->_hp == -1)
+            this->_state = game::state::LOOSE;
+    }
 }
 
 void nibbler::MoveBackward()
 {
-    std::cout << "NIBBLER -> move backward" << std::endl;
+    if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'o') {
+        this->_position.y -= 1;
+        this->_map.at(this->_position.y).at(this->_position.x) = ' ';
+    } else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == ' ')
+        this->_position.y -= 1;
+    else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'E') {
+        this->_hp -= 1;
+        if (this->_hp == -1)
+            this->_state = game::state::LOOSE;
+    }
 }
 
 void nibbler::MoveLeft()
 {
-    std::cout << "NIBBLER -> move left" << std::endl;
+    if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'o') {
+        this->_position.x -= 1;
+        this->_map.at(this->_position.y).at(this->_position.x) = ' ';
+    } else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == ' ')
+        this->_position.x -= 1;
+    else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'E') {
+        this->_hp -= 1;
+        if (this->_hp == -1)
+            this->_state = game::state::LOOSE;
+    }
 }
 
 void nibbler::MoveRight()
 {
-    std::cout << "NIBBLER -> move right" << std::endl;
+    if (this->_map.at(this->_position.y).at(this->_position.x + 1) == 'o') {
+        this->_position.x += 1;
+        this->_map.at(this->_position.y).at(this->_position.x) = ' ';
+    } else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == ' ')
+        this->_position.x += 1;
+    else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == 'E') {
+        this->_hp -= 1;
+        if (this->_hp == -1)
+            this->_state = game::state::LOOSE;
+    }
 }
 
 void nibbler::moveEnemy()

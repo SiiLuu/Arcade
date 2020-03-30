@@ -9,7 +9,7 @@
 
 Pacman::Pacman()
 {
-    this->_hp = 1;
+    this->_hp = 3;
     std::cout << "PACMAN -> created" << std::endl;
 }
 
@@ -26,8 +26,9 @@ void Pacman::MoveForward()
     } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == ' ')
         this->_position.y += 1;
     else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == 'E') {
-        this->_hp = 0;
-        this->_state = game::state::LOOSE;
+        this->_hp -= 1;
+        if (this->_hp == -1)
+            this->_state = game::state::LOOSE;
     }
 }
 
@@ -39,8 +40,9 @@ void Pacman::MoveBackward()
     } else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == ' ')
         this->_position.y -= 1;
     else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'E') {
-        this->_hp = 0;
-        game::state::LOOSE;
+        this->_hp -= 1;
+        if (this->_hp == -1)
+            this->_state = game::state::LOOSE;
     }
 }
 
@@ -52,8 +54,9 @@ void Pacman::MoveLeft()
     } else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == ' ')
         this->_position.x -= 1;
     else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'E') {
-        this->_hp = 0;
-        game::state::LOOSE;
+        this->_hp -= 1;
+        if (this->_hp == -1)
+            this->_state = game::state::LOOSE;
     }
 }
 
@@ -65,8 +68,9 @@ void Pacman::MoveRight()
     } else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == ' ')
         this->_position.x += 1;
     else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == 'E') {
-        this->_hp = 0;
-        game::state::LOOSE;
+        this->_hp -= 1;
+        if (this->_hp == -1)
+            this->_state = game::state::LOOSE;
     }
 }
 
@@ -77,10 +81,12 @@ void Pacman::moveEnemy()
 
 void Pacman::update()
 {
+
 }
 
 void Pacman::init()
 {
+
 }
 
 size_t Pacman::getScore() const

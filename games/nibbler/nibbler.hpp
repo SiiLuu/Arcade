@@ -12,10 +12,19 @@
 
 class nibbler : public AbstractGame
 {
+    class Position
+    {
+        public:
+            unsigned int x;
+            unsigned int y;
+    };
+
     private:
         size_t _score;
         game::state _state;
         std::vector<std::string> _map;
+        Position _position;
+        int _hp;
 
     public:
         nibbler(/* args */);

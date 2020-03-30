@@ -1,21 +1,22 @@
 XXXXXXXXXXXXXXXXXXXXX
-XoooooooooXoooooooooX
-XoXXoXXXXoooXXXXoXXoX
-XoooooooooooooooooooX
-XoXXoXoXXXXXXXoXoXXoX
-XooooXooooXooooXooooX
-XXXXoXXXXoXoXXXXoXXXX
-XXXXoXoooooooooXoXXXX
-XXXXoooXXX XXXoXoXXXX
-oooooooXEE EEXooooooo
-XXXXoXoXXXXXXXoXoXXXX
-XXXXoXooooPooooXoXXXX
-XXXXoXoXXXXXXXoXoXXXX
-XoooooooooXoooooooooX
-XoXXoXXXXoXoXXXXoXXoX
-XooXoooooooooooooXooX
-XXoXoXoXXXXXXXoXoXoXX
-XooooXooooXooooXooooX
-XoXXXXXXXoXoXXXXXXXoX
-XoooooooooooooooooooX
+X         X         X
+X XX XXXX   XXXX XX X
+X                   X
+X XX X XXXXXXX X XX X
+X    X    X    X    X
+XXXX XXXX X XXXX XXXX
+XXXX X         X XXXX
+XXXX X XXX XXX X XXXX
+       X     X       
+XXXX X X E E X X XXXX
+XXXX X X E E X X XXXX
+XXXX X X     X X XXXX
+XXXX X XXXXXXX X XXXX
+X         P         X
+X XX XXXX X XXXX XX X
+X  X             X  X
+XX X X XXXXXXX X X XX
+X    X    X    X    X
+X XXXXXXX X XXXXXXX X
+X                   X
 XXXXXXXXXXXXXXXXXXXXX
