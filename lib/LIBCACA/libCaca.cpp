@@ -24,9 +24,8 @@ void libCaca::display(std::vector<std::vector<std::string>> infos, int scene)
     this->clear();
     if (scene == 1)
         this->drawMen();
-    else if (scene == 2) {
-        caca_put_str(this->_canvas, 1400 / 8, 100 / 16, "GAMEEE");
-    }
+    else if (scene == 2)
+        this->drawGame(infos);
     caca_refresh_display(this->_window);
 }
 
@@ -44,18 +43,16 @@ std::string libCaca::registerEvents()
             return ("KEYUP");
         case CACA_KEY_DOWN:
             return ("KEYDOWN");
-        default:
-            return ("");
     }
     switch (caca_get_event_key_utf32(&this->_event))  {
         case 'z':
-            return ("z");
+            return ("Z");
         case 'q':
-            return ("q");
+            return ("Q");
         case 's':
-            return ("s");
+            return ("S");
         case 'd':
-            return ("d");
+            return ("D");
         default:
             return ("");
     }
@@ -67,6 +64,17 @@ void libCaca::clear()
     caca_set_color_ansi(this->_canvas, CACA_BLACK, CACA_BLACK);
     caca_clear_canvas(this->_canvas);
     caca_set_color_ansi(this->_canvas, CACA_BLACK, this->_currentColor);
+}
+
+void libCaca::drawGame(std::vector<std::vector<std::string>> info)
+{
+    int pos = 7;
+
+    for (int i = 0; i < info.at(0).size(); i++) {
+        this->text(125, pos, info.at(0).at(i));
+        pos += 1;
+    }
+    this->text(150, 5, ("YOUR SCORES IS : " + info.at(1).at(0)));
 }
 
 void libCaca::drawMen()

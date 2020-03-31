@@ -20,11 +20,11 @@ class Pacman : public AbstractGame
     };
 
     private:
-        size_t _score;
         game::state _state;
         std::vector<std::string> _map;
         Position _position;
         int _hp;
+        int _score;
 
     public:
         Pacman(/* args */);
@@ -39,7 +39,7 @@ class Pacman : public AbstractGame
         void MoveRight();
         size_t getScore() const;
         game::state getState() const;
-        void setState();
+        void setState(game::state state);
         std::vector<std::string> getMap() const;
 };
 

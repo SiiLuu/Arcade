@@ -33,7 +33,8 @@ class libCaca : public AbstractGraph
             void getLists();
             void clear();
             void drawMen();
-            void text(int x, int y, std::string str);
+            void drawGame(std::vector<std::vector<std::string>>);
+            void text(int, int, std::string);
 
 };
 

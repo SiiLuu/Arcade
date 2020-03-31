@@ -10,12 +10,11 @@
 nibbler::nibbler()
 {
     this->init();
-    std::cout << "NIBBLER -> created" << std::endl;
+    std::cout << "NIBBLER" << std::endl;
 }
 
 nibbler::~nibbler()
 {
-    std::cout << "NIBBLER -> game destroyed" << std::endl;
 }
 
 void nibbler::init()
@@ -106,9 +105,7 @@ std::vector<std::string> nibbler::getMap() const
     return (this->_map);
 }
 
-void nibbler::setState()
-{
-}
+void nibbler::setState(game::state state) {}
 
 extern "C" AbstractGame *create()
 {

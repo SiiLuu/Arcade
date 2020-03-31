@@ -78,6 +78,7 @@ void ArcadeCore::swapGame(std::string str)
         this->_menu = 0;
     }
     this->_lib->loadGames(this->gamePath.at(this->_actualGame));
+    this->_gamesInfos.push_back(this->_lib->_actual_game_lib->getMap());
 }
 
 void ArcadeCore::events()
@@ -93,8 +94,7 @@ void ArcadeCore::events()
     else if (!event.compare("ESCAPE"))
         if (this->_scene->sceneNumber == 1) {
             this->_state = ArcadeCore::arcadeState::CLOSED;
-        }
-        else {
+        } else {
             this->_lib->destroyGames();
             this->_menu = 1;
             this->_actualGame = -1;
@@ -103,10 +103,19 @@ void ArcadeCore::events()
     else if (!event.compare("KEYUP")) {
         this->_scene->sceneNumber = 2;
         this->swapGame("KEYUP");
-    }
-    else if (!event.compare("KEYDOWN")) {
+    } else if (!event.compare("KEYDOWN")) {
         this->_scene->sceneNumber = 2;
         this->swapGame("KEYDOWN");
+    }
+    if (this->_scene->sceneNumber == 2) {
+        if (!event.compare("Z"))
+            this->_lib->_actual_game_lib->MoveForward();
+        else if (!event.compare("Q"))
+            this->_lib->_actual_game_lib->MoveLeft();
+        else if (!event.compare("S"))
+            this->_lib->_actual_game_lib->MoveBackward();
+        else if (!event.compare("D"))
+            this->_lib->_actual_game_lib->MoveRight();
     }
 }
 
@@ -122,6 +131,22 @@ void ArcadeCore::gameLoop()
     while (this->_state != ArcadeCore::arcadeState::CLOSED)
     {
         this->events();
+        if (!this->_gamesInfos.empty())
+            this->_gamesInfos.clear();
+        if (this->_scene->sceneNumber == 2) {
+            this->_gamesInfos.push_back(this->_lib->_actual_game_lib->getMap());
+            this->_score.push_back(std::to_string(this->_lib->_actual_game_lib->getScore()).c_str());
+            this->_gamesInfos.push_back(this->_score);
+            if (this->_lib->_actual_game_lib->getState() == game::state::LOOSE) {
+                this->_lib->destroyGames();
+                this->_menu = 1;
+                this->_actualGame = -1;
+                this->_scene->sceneNumber = 1;
+            }
+        }
         this->_scene->display(this->_lib->_actual_graphical_lib, this->_gamesInfos);
+
+        this->_gamesInfos.clear();
+        this->_score.clear();
     }
 }

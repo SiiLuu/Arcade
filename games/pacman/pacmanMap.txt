@@ -1,22 +1,22 @@
-XXXXXXXXXXXXXXXXXXXXX
-X         X         X
-X XX XXXX   XXXX XX X
-X                   X
-X XX X XXXXXXX X XX X
-X    X    X    X    X
-XXXX XXXX X XXXX XXXX
-XXXX X         X XXXX
-XXXX X XXX XXX X XXXX
-       X     X       
-XXXX X X E E X X XXXX
-XXXX X X E E X X XXXX
-XXXX X X     X X XXXX
-XXXX X XXXXXXX X XXXX
-X         P         X
-X XX XXXX X XXXX XX X
-X  X             X  X
-XX X X XXXXXXX X X XX
-X    X    X    X    X
-X XXXXXXX X XXXXXXX X
-X                   X
-XXXXXXXXXXXXXXXXXXXXX
+|||||||||||||||||||||
+|ooooooooo|ooooooooo|
+|o||o||||o|o||||o||o|
+|ooooooooooooooooooo|
+|o||o|o|||||||o|o||o|
+|oooo|oooo|oooo|oooo|
+||||o||||o|o||||o||||
+||||o|ooooooooo|o||||
+||||o|o||| |||o|o||||
+ooooooo|     |ooooooo
+||||o|o| E E |o|o||||
+||||o|o| E E |o|o||||
+||||o|o|     |o|o||||
+||||o|o|||||||o|o||||
+|oooooooooPooooooooo|
+|o||o||||o|o||||o||o|
+|oo|ooooooooooooo|oo|
+||o|o|o|||||||o|o|o||
+|oooo|oooo|oooo|oooo|
+|o|||||||o|o|||||||o|
+|ooooooooooooooooooo|
+|||||||||||||||||||||

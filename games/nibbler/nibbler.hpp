@@ -39,7 +39,7 @@ class nibbler : public AbstractGame
         void update();
         size_t getScore() const;
         game::state getState() const;
-        void setState();
+        void setState(game::state state);
         std::vector<std::string> getMap() const;
 };
 

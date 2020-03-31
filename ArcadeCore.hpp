@@ -34,8 +34,6 @@ class ArcadeCore {
         };
 
         Scene *_scene;
-        AbstractGraph *shared_lib;
-        AbstractGame *shared_game;
         LibLoader *_lib;
         std::string _playerName;
         arcadeState _state;
@@ -53,7 +51,7 @@ class ArcadeCore {
         void swapGame(std::string str);
         void events();
         int findLib();
-        std::string _score;
+        std::vector<std::string> _score;
         std::string _name;
         std::vector<std::string> libPath;
         std::vector<std::string> gamePath;
