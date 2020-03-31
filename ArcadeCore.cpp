@@ -21,6 +21,7 @@ ArcadeCore::ArcadeCore(std::vector<std::string> av)
     this->info.push_back(libPath);
     this->info.push_back(gamePath);
     this->gameLoop();
+    this->defaultmove = 0;
 }
 
 ArcadeCore::ArcadeCore() {}
@@ -137,7 +138,7 @@ void ArcadeCore::gameLoop()
             this->_gamesInfos.push_back(this->_lib->_actual_game_lib->getMap());
             this->_score.push_back(std::to_string(this->_lib->_actual_game_lib->getScore()).c_str());
             this->_gamesInfos.push_back(this->_score);
-            if (this->_lib->_actual_game_lib->getState() == game::state::LOOSE) {
+            if (this->_lib->_actual_game_lib->getState() != game::state::RUNNING) {
                 this->_lib->destroyGames();
                 this->_menu = 1;
                 this->_actualGame = -1;

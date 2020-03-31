@@ -115,9 +115,51 @@ void Pacman::MoveRight()
     this->update();
 }
 
+bool Pacman::gameWon()
+{
+	int i = 0;
+    int j = 0;
+
+	while (i != this->_map.size()) {
+		while (j != this->_map[i].size()) {
+			if (this->_map[i][j] == 'o')
+				return (false);
+			j++;
+		}
+		i++;
+		j = 0;
+	}
+	return (true);
+}
+
+void Pacman::moveGhosts(int i)
+{
+    if (i == 1)
+		std::cout << "up" << std::endl;
+	else if (i == 2)
+		std::cout << "down" << std::endl;
+	else if (i == 3)
+		std::cout << "left" << std::endl;
+	else
+		std::cout << "right" << std::endl;
+}
+
+void Pacman::moveRand()
+{
+	srand(time(NULL));
+	int i = rand()%(4);
+	int j = rand()%(4);
+	int k = rand()%(4);
+	int l = rand()%(4);
+    this->moveGhosts(i);
+    this->moveGhosts(j);
+    this->moveGhosts(k);
+    this->moveGhosts(l);
+}
+
 void Pacman::moveEnemy()
 {
-    std::cout << "NIBBLER -> enemy mooved" << std::endl;
+    this->moveRand();
 }
 
 void Pacman::update()
@@ -125,6 +167,8 @@ void Pacman::update()
     this->_map.at(this->_position.y).at(this->_position.x) = 'P';
     if (this->_hp < 0)
         this->_state = game::state::LOOSE;
+    if (this->gameWon())
+        this->_state = game::state::WIN;
 }
 
 size_t Pacman::getScore() const

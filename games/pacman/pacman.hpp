@@ -30,6 +30,9 @@ class Pacman : public AbstractGame
         Pacman(/* args */);
         ~Pacman();
 
+        bool gameWon();
+        void moveGhosts(int i);
+        void moveRand();
         void moveEnemy();
         void update();
         void init();
