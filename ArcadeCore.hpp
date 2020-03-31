@@ -12,6 +12,7 @@
 #include <vector>
 #include <dlfcn.h>
 #include <dirent.h>
+#include <chrono>
 
 #ifndef ARCADECORE_HPP_
 #define ARCADECORE_HPP_
@@ -41,6 +42,7 @@ class ArcadeCore {
         int _menu;
         int _actualLibrary;
         int _actualGame;
+        int _clock;
 
         void readDir(const std::string path, std::vector<std::string> &vector);
         void setLibrary();
@@ -54,6 +56,7 @@ class ArcadeCore {
         int defaultmove;
         std::vector<std::string> _score;
         std::string _name;
+        std::string _lastMoveEvent;
         std::vector<std::string> libPath;
         std::vector<std::string> gamePath;
         std::vector<std::string> nameScore;

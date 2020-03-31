@@ -22,6 +22,8 @@ ArcadeCore::ArcadeCore(std::vector<std::string> av)
     this->info.push_back(gamePath);
     this->gameLoop();
     this->defaultmove = 0;
+    this->_clock = 0;
+    this->_lastMoveEvent = "D";
 }
 
 ArcadeCore::ArcadeCore() {}
@@ -32,6 +34,7 @@ ArcadeCore::~ArcadeCore() {}
 int ArcadeCore::findLib()
 {
     std::vector<std::string>::iterator it;
+
     if (this->_av.at(1).at(0) == '.' && this->_av.at(1).at(1) == '/')
         this->_av.at(1).erase(0, 2);
     it = std::find(this->libPath.begin(), this->libPath.end(), this->_av.at(1));
@@ -109,14 +112,20 @@ void ArcadeCore::events()
         this->swapGame("KEYDOWN");
     }
     if (this->_scene->sceneNumber == 2) {
-        if (!event.compare("Z"))
-            this->_lib->_actual_game_lib->MoveForward();
-        else if (!event.compare("Q"))
-            this->_lib->_actual_game_lib->MoveLeft();
-        else if (!event.compare("S"))
-            this->_lib->_actual_game_lib->MoveBackward();
-        else if (!event.compare("D"))
-            this->_lib->_actual_game_lib->MoveRight();
+        std::cout << this->_lastMoveEvent << std::endl;
+        if (!event.empty())
+            this->_lastMoveEvent = event;
+        if (this->_clock >= 2) {
+            this->_clock = 0;
+            if (!this->_lastMoveEvent.compare("Z"))
+                this->_lib->_actual_game_lib->MoveForward();
+            else if (!this->_lastMoveEvent.compare("Q"))
+                this->_lib->_actual_game_lib->MoveLeft();
+            else if (!this->_lastMoveEvent.compare("S"))
+                this->_lib->_actual_game_lib->MoveBackward();
+            else if (!this->_lastMoveEvent.compare("D"))
+                this->_lib->_actual_game_lib->MoveRight();
+        }
     }
 }
 
@@ -135,6 +144,7 @@ void ArcadeCore::gameLoop()
         if (!this->_gamesInfos.empty())
             this->_gamesInfos.clear();
         if (this->_scene->sceneNumber == 2) {
+            this->_clock += 1;
             this->_gamesInfos.push_back(this->_lib->_actual_game_lib->getMap());
             this->_score.push_back(std::to_string(this->_lib->_actual_game_lib->getScore()).c_str());
             this->_gamesInfos.push_back(this->_score);

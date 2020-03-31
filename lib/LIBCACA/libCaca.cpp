@@ -31,8 +31,10 @@ void libCaca::display(std::vector<std::vector<std::string>> infos, int scene)
 
 std::string libCaca::registerEvents()
 {
-    caca_get_event(this->_window, CACA_EVENT_KEY_PRESS, &_event, -1);
-    switch (caca_get_event_key_ch(&this->_event))  {
+    if (caca_get_event(this->_window, CACA_EVENT_KEY_PRESS, &_event, 50))
+    {
+        switch (caca_get_event_key_ch(&this->_event))
+        {
         case CACA_KEY_ESCAPE:
             return ("ESCAPE");
         case CACA_KEY_LEFT:
@@ -43,8 +45,9 @@ std::string libCaca::registerEvents()
             return ("KEYUP");
         case CACA_KEY_DOWN:
             return ("KEYDOWN");
-    }
-    switch (caca_get_event_key_utf32(&this->_event))  {
+        }
+        switch (caca_get_event_key_utf32(&this->_event))
+        {
         case 'z':
             return ("Z");
         case 'q':
@@ -55,6 +58,7 @@ std::string libCaca::registerEvents()
             return ("D");
         default:
             return ("");
+        }
     }
     return ("");
 }
@@ -70,7 +74,8 @@ void libCaca::drawGame(std::vector<std::vector<std::string>> info)
 {
     int pos = 7;
 
-    for (int i = 0; i < info.at(0).size(); i++) {
+    for (int i = 0; i < info.at(0).size(); i++)
+    {
         this->text(125, pos, info.at(0).at(i));
         pos += 1;
     }
@@ -83,14 +88,16 @@ void libCaca::drawMen()
 
     caca_draw_box(this->_canvas, 15, 3, 105, 16, ' ');
     this->text(60, 5, "GAMES AVAILABLE");
-    for (int i = 0; i < this->_info.at(1).size(); i++) {
+    for (int i = 0; i < this->_info.at(1).size(); i++)
+    {
         this->text(20, pos, ("-> " + this->_info.at(1).at(i)));
         pos += 1.5;
     }
     pos = 7;
     caca_draw_box(this->_canvas, 150, 3, 105, 16, ' ');
     this->text(196, 5, "LIBRARIES AVAILABLE");
-    for (int i = 0; i < this->_info.at(0).size(); i++) {
+    for (int i = 0; i < this->_info.at(0).size(); i++)
+    {
         this->text(160, pos, ("-> " + this->_info.at(0).at(i)));
         pos += 1.5;
     }
