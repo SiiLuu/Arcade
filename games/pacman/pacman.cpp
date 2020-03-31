@@ -36,11 +36,9 @@ void Pacman::MoveForward()
         this->_score += 10;
         this->_position.y -= 1;
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
-        this->update();
     } else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == ' ') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.y -= 1;
-        this->update();
     }
     else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'E') {
         this->_hp -= 1;
@@ -62,7 +60,6 @@ void Pacman::MoveBackward()
     } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == ' ') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.y += 1;
-        this->update();
     }
     else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'E') {
         this->_hp -= 1;
@@ -83,7 +80,6 @@ void Pacman::MoveLeft()
         this->_score += 10;
         this->_position.x -= 1;
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
-        this->update();
     } else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == ' ') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.x -= 1;
