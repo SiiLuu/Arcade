@@ -21,6 +21,7 @@ class Pacman : public AbstractGame
 
     private:
         game::state _state;
+        int _bonus;
         std::vector<std::string> _map;
         Position _position;
         Position _positionG1;
@@ -31,7 +32,7 @@ class Pacman : public AbstractGame
         int _score;
 
     public:
-        Pacman(/* args */);
+        Pacman();
         ~Pacman();
 
         bool gameWon();

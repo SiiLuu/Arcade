@@ -1,5 +1,5 @@
 |||||||||||||||||||||
-|ooooooooo|ooooooooo|
+|Ooooooooo|ooooooooO|
 |o||o||||o|o||||o||o|
 |ooooooooooooooooooo|
 |o||o|o|||||||o|o||o|
@@ -18,5 +18,5 @@ ooooooo|     |ooooooo
 ||o|o|o|||||||o|o|o||
 |oooo|oooo|oooo|oooo|
 |o|||||||o|o|||||||o|
-|ooooooooooooooooooo|
+|OoooooooooooooooooO|
 |||||||||||||||||||||
