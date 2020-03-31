@@ -23,6 +23,10 @@ class Pacman : public AbstractGame
         game::state _state;
         std::vector<std::string> _map;
         Position _position;
+        Position _positionG1;
+        Position _positionG2;
+        Position _positionG3;
+        Position _positionG4;
         int _hp;
         int _score;
 
@@ -31,7 +35,7 @@ class Pacman : public AbstractGame
         ~Pacman();
 
         bool gameWon();
-        void moveGhosts(int i);
+        void moveGhosts(int i, Position &pos);
         void moveRand();
         void moveEnemy();
         void update();

@@ -6,7 +6,7 @@
 |oooo|oooo|oooo|oooo|
 ||||o||||o|o||||o||||
 ||||o|ooooooooo|o||||
-||||o|o||| |||o|o||||
+||||o|o|-----|o|o||||
 ooooooo|     |ooooooo
 ||||o|o| E E |o|o||||
 ||||o|o| E E |o|o||||

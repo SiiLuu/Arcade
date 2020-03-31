@@ -112,11 +112,11 @@ void ArcadeCore::events()
         this->swapGame("KEYDOWN");
     }
     if (this->_scene->sceneNumber == 2) {
-        std::cout << this->_lastMoveEvent << std::endl;
         if (!event.empty())
             this->_lastMoveEvent = event;
         if (this->_clock >= 2) {
             this->_clock = 0;
+            this->_lib->_actual_game_lib->moveEnemy();
             if (!this->_lastMoveEvent.compare("Z"))
                 this->_lib->_actual_game_lib->MoveForward();
             else if (!this->_lastMoveEvent.compare("Q"))
