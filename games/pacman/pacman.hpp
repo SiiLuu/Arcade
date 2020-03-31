@@ -35,7 +35,7 @@ class Pacman : public AbstractGame
         ~Pacman();
 
         bool gameWon();
-        void moveGhosts(int i, Position &pos);
+        void moveGhosts(int i, char &tmp, Position &pos);
         void moveRand();
         void moveEnemy();
         void update();
@@ -48,6 +48,10 @@ class Pacman : public AbstractGame
         game::state getState() const;
         void setState(game::state state);
         std::vector<std::string> getMap() const;
+        char tmp1;
+        char tmp2;
+        char tmp3;
+        char tmp4;
 };
 
 #endif /* !PACMAN_HPP_ */
