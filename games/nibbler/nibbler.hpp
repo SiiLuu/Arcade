@@ -26,10 +26,12 @@ class nibbler : public AbstractGame
         Position _position;
         Position _posfruit;
         int _hp;
+        int _fruits;
         int setFruit();
         void setBodyPos();
+        void setNewBody();
         std::vector<std::string> _body;
-        std::vector<Position> _posbody;
+        std::vector<Position> _posBody;
         std::vector<Position> _posy;
 
     public:

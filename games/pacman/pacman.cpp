@@ -9,7 +9,6 @@
 
 Pacman::Pacman()
 {
-    std::cout << "PACMAN" << std::endl;
     this->_position.x = 10;
     this->_position.y = 14;
     this->_positionG1.x = 9;
