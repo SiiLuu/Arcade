@@ -13,8 +13,8 @@ ArcadeCore::ArcadeCore(std::vector<std::string> av)
     this->_scene = new Scene();
     this->_scene->sceneNumber = 1;
     this->_av = av;
-    readDir("lib/", this->libPath);
-    readDir("games/", this->gamePath);
+    this->readDir("lib/", this->libPath);
+    this->readDir("games/", this->gamePath);
     this->_actualLibrary = findLib();
     this->_actualGame = -1;
     this->_menu = 1;
@@ -114,7 +114,7 @@ void ArcadeCore::events()
     if (this->_scene->sceneNumber == 2) {
         if (!event.empty())
             this->_lastMoveEvent = event;
-        if (this->_clock >= 2) {
+        if (this->_clock >= 20) {
             this->_clock = 0;
             this->_lib->_actual_game_lib->moveEnemy();
             if (!this->_lastMoveEvent.compare("Z"))
@@ -141,8 +141,6 @@ void ArcadeCore::gameLoop()
     while (this->_state != ArcadeCore::arcadeState::CLOSED)
     {
         this->events();
-        if (!this->_gamesInfos.empty())
-            this->_gamesInfos.clear();
         if (this->_scene->sceneNumber == 2) {
             this->_clock += 1;
             this->_gamesInfos.push_back(this->_lib->_actual_game_lib->getMap());
@@ -156,7 +154,6 @@ void ArcadeCore::gameLoop()
             }
         }
         this->_scene->display(this->_lib->_actual_graphical_lib, this->_gamesInfos);
-
         this->_gamesInfos.clear();
         this->_score.clear();
     }

@@ -10,6 +10,7 @@
 Sfml::Sfml(std::vector<std::vector<std::string>> info)
 {
     this->_info = info;
+    this->_setTexture = true;
     this->createWindow();
 }
 
@@ -33,13 +34,13 @@ std::string Sfml::registerEvents()
                 case sf::Keyboard::Up:
                     return ("KEYUP");
                 case sf::Keyboard::Z:
-                    return ("z");
+                    return ("Z");
                 case sf::Keyboard::Q:
-                    return ("q");
+                    return ("Q");
                 case sf::Keyboard::S:
-                    return ("s");
+                    return ("S");
                 case sf::Keyboard::D:
-                    return ("d");
+                    return ("D");
                 case sf::Keyboard::Escape:
                     return ("ESCAPE");
                 default:
@@ -48,6 +49,62 @@ std::string Sfml::registerEvents()
         }
     }
     return ("");
+}
+
+void Sfml::drawMap(std::vector<std::vector<std::string>> infos)
+{
+    std::map<int, sf::Sprite>::iterator it;
+
+    for (size_t k = 0; k < this->_mapBorder.size(); k++)
+        this->_window.draw(this->_mapBorder.at(k));
+    for (size_t k = 0; k < this->_mapFood.size(); k++)
+        this->_window.draw(this->_mapFood.at(k));
+    for (size_t k = 0; k < this->_mapGhost.size(); k++)
+        this->_window.draw(this->_mapGhost.at(k));
+    for (size_t k = 0; k < this->_mapPlayer.size(); k++)
+        this->_window.draw(this->_mapPlayer.at(k));
+    for (size_t k = 0; k < this->_mapGGhost.size(); k++)
+        this->_window.draw(this->_mapGGhost.at(k));
+    for (size_t k = 0; k < this->_mapBonus.size(); k++)
+        this->_window.draw(this->_mapBonus.at(k));
+}
+
+void Sfml::setMaptexture(std::vector<std::vector<std::string>> infos)
+{
+    this->_mapBorder.clear();
+    this->_mapGhost.clear();
+    this->_mapGGhost.clear();
+    this->_mapBonus.clear();
+    this->_mapFood.clear();
+    this->_mapPlayer.clear();
+    for (size_t k = 0; k < infos.at(0).size(); k++) {
+        for (size_t i = 0; i < infos.at(0).at(k).size(); i++) {
+            if (infos.at(0).at(k).at(i) == '|') {
+                this->_mapBorderSprite.setPosition(450 + i * 30, k * 40);
+                this->_mapBorder.push_back(this->_mapBorderSprite);
+            }
+            else if (infos.at(0).at(k).at(i) == 'o') {
+                this->_foodSprite.setPosition(460 + i * 30, 10 + k * 40);
+                this->_mapFood.push_back(this->_foodSprite);
+            }
+            else if (infos.at(0).at(k).at(i) == 'E') {
+                this->_ghostSprite.setPosition(450 + i * 30, k * 40);
+                this->_mapGhost.push_back(this->_ghostSprite);
+            }
+            else if (infos.at(0).at(k).at(i) == 'P') {
+                this->_playerSprite.setPosition(450 + i * 30, 10 + k * 40);
+                this->_mapPlayer.push_back(this->_playerSprite);
+            }
+            else if (infos.at(0).at(k).at(i) == 'A') {
+                this->_gGhostSprite.setPosition(450 + i * 30, k * 40);
+                this->_mapGGhost.push_back(this->_gGhostSprite);
+            }
+            else if (infos.at(0).at(k).at(i) == 'O') {
+                this->_bonusSprite.setPosition(450 + i * 30, k * 40);
+                this->_mapBonus.push_back(this->_bonusSprite);
+            }
+        }
+    }
 }
 
 void Sfml::display(std::vector<std::vector<std::string>> infos, int scene)
@@ -61,7 +118,8 @@ void Sfml::display(std::vector<std::vector<std::string>> infos, int scene)
         this->_window.draw(this->_txtScore);
     }
     else if (scene == 2) {
-        this->_window.draw(this->_pacmanSprite);
+            this->setMaptexture(infos);
+            this->drawMap(infos);
     }
     this->_window.display();
 }
@@ -70,10 +128,24 @@ void Sfml::setTexture()
 {
     this->_background.loadFromFile("assets/arcade.jpg");
     this->_backgroundSprite.setTexture(this->_background);
-    this->_pacman.loadFromFile("assets/pacman.png");
-    this->_pacmanSprite.setTexture(this->_pacman);
-    this->_nibbler.loadFromFile("assets/snake.png");
-    this->_nibblerSprite.setTexture(this->_nibbler);
+    this->_player.loadFromFile("assets/player3.png");
+    this->_playerSprite.setTexture(this->_player);
+    this->_playerSprite.setScale(0.1, 0.1);
+    this->_food.loadFromFile("assets/food.png");
+    this->_foodSprite.setTexture(this->_food);
+    this->_foodSprite.setScale(0.05, 0.05);
+    this->_ghost.loadFromFile("assets/enemy2.png");
+    this->_ghostSprite.setTexture(this->_ghost);
+    this->_ghostSprite.setScale(0.075, 0.075);
+    this->_gGhost.loadFromFile("assets/enemy.png");
+    this->_gGhostSprite.setTexture(this->_gGhost);
+    this->_gGhostSprite.setScale(0.075, 0.075);
+    this->_bonus.loadFromFile("assets/bonus.png");
+    this->_bonusSprite.setTexture(this->_bonus);
+    this->_bonusSprite.setScale(0.05, 0.05);
+    this->_mapBorderTexture.loadFromFile("assets/carre.png");
+    this->_mapBorderSprite.setTexture(this->_mapBorderTexture);
+    this->_mapBorderSprite.setScale(0.075, 0.1);
 }
 
 void Sfml::setText()

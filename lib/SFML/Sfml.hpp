@@ -24,11 +24,20 @@ class Sfml : public AbstractGraph
         sf::Event _event;
         sf::Texture _background;
         sf::Sprite _backgroundSprite;
-        sf::Texture _pacman;
-        sf::Sprite _pacmanSprite;
-        sf::Texture _nibbler;
-        sf::Sprite _nibblerSprite;
+        sf::Texture _mapBorderTexture;
+        sf::Sprite _mapBorderSprite;
+        sf::Texture _player;
+        sf::Sprite _playerSprite;
+        sf::Texture _ghost;
+        sf::Sprite _ghostSprite;
+        sf::Texture _gGhost;
+        sf::Sprite _gGhostSprite;
+        sf::Texture _food;
+        sf::Sprite _foodSprite;
+        sf::Texture _bonus;
+        sf::Sprite _bonusSprite;
         sf::Clock _clock;
+        bool _setTexture;
 
         sf::Font _font;
         sf::Text _txtGames;
@@ -39,10 +48,17 @@ class Sfml : public AbstractGraph
         std::string _listLibs;
         std::string _score;
         std::string _name;
+        std::vector<sf::Sprite> _mapBorder;
+        std::vector<sf::Sprite> _mapFood;
+        std::vector<sf::Sprite> _mapPlayer;
+        std::vector<sf::Sprite> _mapGhost;
+        std::vector<sf::Sprite> _mapGGhost;
+        std::vector<sf::Sprite> _mapBonus;
         void setTexture();
+        void setMaptexture(std::vector<std::vector<std::string>> infos);
         void setText();
         void getLists();
-
+        void drawMap(std::vector<std::vector<std::string>> infos);
 };
 
 #endif /* !SFML_HPP_ */
