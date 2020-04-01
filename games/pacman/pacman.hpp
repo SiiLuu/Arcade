@@ -31,13 +31,16 @@ class Pacman : public AbstractGame
         int _hp;
         int _score;
 
+        bool gameWon();
+        void moveGhosts(int i, char &tmp, Position &pos);
+        void moveRand();
+        void respawnEnemyY();
+        void respawnEnemyX();
+
     public:
         Pacman();
         ~Pacman();
 
-        bool gameWon();
-        void moveGhosts(int i, char &tmp, Position &pos);
-        void moveRand();
         void moveEnemy();
         void update();
         void init();

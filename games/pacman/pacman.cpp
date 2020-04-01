@@ -42,6 +42,54 @@ void Pacman::init()
     }
 }
 
+void Pacman::respawnEnemyY()
+{
+    if (this->_positionG1.y == this->_position.y) {
+        this->_positionG1.x = 9;
+        this->_positionG1.y = 11;
+        this->tmp1 = ' ';
+    }
+    if (this->_positionG2.y == this->_position.y) {
+        this->_positionG2.x = 11;
+        this->_positionG2.y = 11;
+        this->tmp2 = ' ';
+    }
+    if (this->_positionG3.y == this->_position.y) {
+        this->_positionG3.x = 9;
+        this->_positionG3.y = 10;
+        this->tmp3 = ' ';
+    }
+    if (this->_positionG4.y == this->_position.y) {
+        this->_positionG4.x = 11;
+        this->_positionG4.y = 10;
+        this->tmp4 = ' ';
+    }
+}
+
+void Pacman::respawnEnemyX()
+{
+    if (this->_positionG1.x == this->_position.x) {
+        this->_positionG1.x = 9;
+        this->_positionG1.y = 11;
+        this->tmp1 = ' ';
+    }
+    if (this->_positionG2.x == this->_position.x) {
+        this->_positionG2.x = 11;
+        this->_positionG2.y = 11;
+        this->tmp2 = ' ';
+    }
+    if (this->_positionG3.x == this->_position.x) {
+        this->_positionG3.x = 9;
+        this->_positionG3.y = 10;
+        this->tmp3 = ' ';
+    }
+    if (this->_positionG4.x == this->_position.x) {
+        this->_positionG4.x = 11;
+        this->_positionG4.y = 10;
+        this->tmp4 = ' ';
+    }
+}
+
 void Pacman::MoveForward()
 {
     if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'o') {
@@ -51,6 +99,7 @@ void Pacman::MoveForward()
     } else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'A') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.y -= 1;
+        this->respawnEnemyY();
     } else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'O') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_bonus = 60;
@@ -79,6 +128,7 @@ void Pacman::MoveBackward()
     } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == 'A') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.y += 1;
+        this->respawnEnemyY();
     } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == 'O') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_bonus = 60;
@@ -87,8 +137,7 @@ void Pacman::MoveBackward()
     } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == ' ') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.y += 1;
-    }
-    else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'E') {
+    } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == 'E') {
         this->_hp -= 1;
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.x = 10;
@@ -111,6 +160,7 @@ void Pacman::MoveLeft()
     } else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'A') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.x -= 1;
+        this->respawnEnemyX();
     } else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'O') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_bonus = 60;
@@ -143,12 +193,15 @@ void Pacman::MoveRight()
     } else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == 'A') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.x += 1;
+        this->respawnEnemyX();
     } else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == 'O') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_bonus = 60;
         this->_score += 100;
         this->_position.x += 1;
-    } else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == ' ') {
+    }
+    else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == ' ')
+    {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.x += 1;
     } else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == 'E') {
@@ -190,7 +243,7 @@ void Pacman::moveGhosts(int i, char &tmp, Position &pos)
             this->_map.at(pos.y).at(pos.x) = tmp;
             tmp = 'O';
             pos.y -= 1;
-        }else if (this->_map.at(pos.y - 1).at(pos.x) == ' ') {
+        } else if (this->_map.at(pos.y - 1).at(pos.x) == ' ') {
             this->_map.at(pos.y).at(pos.x) = tmp;
             tmp = ' ';
             pos.y -= 1;
@@ -201,14 +254,9 @@ void Pacman::moveGhosts(int i, char &tmp, Position &pos)
         } else if (this->_map.at(pos.y - 1).at(pos.x) == 'P') {
             pos.y -= 1;
             tmp = ' ';
-            if (!this->_bonus) {
-                this->_hp -= 1;
-                this->_position.x = 10;
-                this->_position.y = 14;
-            } else {
-                pos.x = 9;
-                pos.y = 11;
-            }
+            this->_hp -= 1;
+            this->_position.x = 10;
+            this->_position.y = 14;
         }
     } else if (i == 2) {
         if (this->_map.at(pos.y + 1).at(pos.x) == 'o') {
@@ -226,14 +274,9 @@ void Pacman::moveGhosts(int i, char &tmp, Position &pos)
         } else if (this->_map.at(pos.y + 1).at(pos.x) == 'P') {
             pos.y += 1;
             tmp = ' ';
-            if (!this->_bonus) {
-                this->_hp -= 1;
-                this->_position.x = 10;
-                this->_position.y = 14;
-            } else {
-                pos.x = 9;
-                pos.y = 11;
-            }
+            this->_hp -= 1;
+            this->_position.x = 10;
+            this->_position.y = 14;
         }
     } else if (i == 3) {
         if (this->_map.at(pos.y).at(pos.x - 1) == 'o') {
@@ -251,14 +294,9 @@ void Pacman::moveGhosts(int i, char &tmp, Position &pos)
         } else if (this->_map.at(pos.y).at(pos.x - 1) == 'P') {
             pos.x -= 1;
             tmp = ' ';
-            if (!this->_bonus) {
-                this->_hp -= 1;
-                this->_position.x = 10;
-                this->_position.y = 14;
-            } else {
-                pos.x = 9;
-                pos.y = 11;
-            }
+            this->_hp -= 1;
+            this->_position.x = 10;
+            this->_position.y = 14;
         }
     } else {
         if (this->_map.at(pos.y).at(pos.x + 1) == 'o') {
@@ -276,14 +314,9 @@ void Pacman::moveGhosts(int i, char &tmp, Position &pos)
         } else if (this->_map.at(pos.y).at(pos.x + 1) == 'P') {
             pos.x += 1;
             tmp = ' ';
-            if (!this->_bonus) {
-                this->_hp -= 1;
-                this->_position.x = 10;
-                this->_position.y = 14;
-            } else {
-                pos.x = 9;
-                pos.y = 11;
-            }
+            this->_hp -= 1;
+            this->_position.x = 10;
+            this->_position.y = 14;
         }
     }
 }
