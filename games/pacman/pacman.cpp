@@ -114,7 +114,7 @@ void Pacman::MoveForward()
         this->_position.x = 10;
         this->_position.y = 14;
     }
-    if (this->_bonus)
+    if (this->_bonus > 0)
         this->_bonus -= 1;
     this->update();
 }
@@ -143,7 +143,7 @@ void Pacman::MoveBackward()
         this->_position.x = 10;
         this->_position.y = 14;
     }
-    if (this->_bonus)
+    if (this->_bonus > 0)
         this->_bonus -= 1;
     this->update();
 }
@@ -176,7 +176,7 @@ void Pacman::MoveLeft()
         this->_position.x = 10;
         this->_position.y = 14;
     }
-    if (this->_bonus)
+    if (this->_bonus > 0)
         this->_bonus -= 1;
     this->update();
 }
@@ -210,7 +210,7 @@ void Pacman::MoveRight()
         this->_position.x = 10;
         this->_position.y = 14;
     }
-    if (this->_bonus)
+    if (this->_bonus > 0)
         this->_bonus -= 1;
     this->update();
 }
@@ -222,7 +222,7 @@ bool Pacman::gameWon()
 
 	while (i != this->_map.size()) {
 		while (j != this->_map[i].size()) {
-			if (this->_map[i][j] == 'o')
+			if (this->_map[i][j] == 'o' || this->_map[i][j] == 'O')
 				return (false);
 			j++;
 		}
@@ -251,7 +251,7 @@ void Pacman::moveGhosts(int i, char &tmp, Position &pos)
             this->_map.at(pos.y).at(pos.x) = tmp;
             tmp = 'o';
             pos.y -= 2;
-        } else if (this->_map.at(pos.y - 1).at(pos.x) == 'P') {
+        } else if (this->_map.at(pos.y - 1).at(pos.x) == 'P' && this->_bonus < 0) {
             pos.y -= 1;
             tmp = ' ';
             this->_hp -= 1;
@@ -271,7 +271,7 @@ void Pacman::moveGhosts(int i, char &tmp, Position &pos)
             this->_map.at(pos.y).at(pos.x) = tmp;
             tmp = ' ';
             pos.y += 1;
-        } else if (this->_map.at(pos.y + 1).at(pos.x) == 'P') {
+        } else if (this->_map.at(pos.y + 1).at(pos.x) == 'P' && this->_bonus < 0) {
             pos.y += 1;
             tmp = ' ';
             this->_hp -= 1;
@@ -291,7 +291,7 @@ void Pacman::moveGhosts(int i, char &tmp, Position &pos)
             this->_map.at(pos.y).at(pos.x) = tmp;
             tmp = ' ';
             pos.x -= 1;
-        } else if (this->_map.at(pos.y).at(pos.x - 1) == 'P') {
+        } else if (this->_map.at(pos.y).at(pos.x - 1) == 'P' && this->_bonus < 0) {
             pos.x -= 1;
             tmp = ' ';
             this->_hp -= 1;
@@ -311,7 +311,7 @@ void Pacman::moveGhosts(int i, char &tmp, Position &pos)
             this->_map.at(pos.y).at(pos.x) = tmp;
             tmp = ' ';
             pos.x += 1;
-        } else if (this->_map.at(pos.y).at(pos.x + 1) == 'P') {
+        } else if (this->_map.at(pos.y).at(pos.x + 1) == 'P' && this->_bonus < 0) {
             pos.x += 1;
             tmp = ' ';
             this->_hp -= 1;
@@ -343,10 +343,10 @@ void Pacman::moveEnemy()
 void Pacman::update()
 {
     this->_map.at(this->_position.y).at(this->_position.x) = 'P';
-    (this->_bonus ? this->_map.at(this->_positionG1.y).at(this->_positionG1.x) = 'A' : this->_map.at(this->_positionG1.y).at(this->_positionG1.x) = 'E');
-    (this->_bonus ? this->_map.at(this->_positionG2.y).at(this->_positionG2.x) = 'A' : this->_map.at(this->_positionG2.y).at(this->_positionG2.x) = 'E');
-    (this->_bonus ? this->_map.at(this->_positionG3.y).at(this->_positionG3.x) = 'A' : this->_map.at(this->_positionG3.y).at(this->_positionG3.x) = 'E');
-    (this->_bonus ? this->_map.at(this->_positionG4.y).at(this->_positionG4.x) = 'A' : this->_map.at(this->_positionG4.y).at(this->_positionG4.x) = 'E');
+    ((this->_bonus > 0) ? this->_map.at(this->_positionG1.y).at(this->_positionG1.x) = 'A' : this->_map.at(this->_positionG1.y).at(this->_positionG1.x) = 'E');
+    ((this->_bonus > 0) ? this->_map.at(this->_positionG2.y).at(this->_positionG2.x) = 'A' : this->_map.at(this->_positionG2.y).at(this->_positionG2.x) = 'E');
+    ((this->_bonus > 0) ? this->_map.at(this->_positionG3.y).at(this->_positionG3.x) = 'A' : this->_map.at(this->_positionG3.y).at(this->_positionG3.x) = 'E');
+    ((this->_bonus > 0) ? this->_map.at(this->_positionG4.y).at(this->_positionG4.x) = 'A' : this->_map.at(this->_positionG4.y).at(this->_positionG4.x) = 'E');
     if (this->_hp < 0)
         this->_state = game::state::LOOSE;
     if (this->gameWon())
