@@ -51,10 +51,8 @@ std::string Sfml::registerEvents()
     return ("");
 }
 
-void Sfml::drawMap(std::vector<std::vector<std::string>> infos)
+void Sfml::drawMap()
 {
-    std::map<int, sf::Sprite>::iterator it;
-
     for (size_t k = 0; k < this->_mapBorder.size(); k++)
         this->_window.draw(this->_mapBorder.at(k));
     for (size_t k = 0; k < this->_mapFood.size(); k++)
@@ -119,7 +117,7 @@ void Sfml::display(std::vector<std::vector<std::string>> infos, int scene)
     }
     else if (scene == 2) {
             this->setMaptexture(infos);
-            this->drawMap(infos);
+            this->drawMap();
     }
     this->_window.display();
 }

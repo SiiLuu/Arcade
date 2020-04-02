@@ -26,10 +26,18 @@ class Sdl : public AbstractGraph
         SDL_Renderer *renderer;
         SDL_Surface *bg;
         SDL_Texture *tbg;
-        SDL_Surface *spacman;
-        SDL_Texture *tpacman;
-        SDL_Surface *snibbler;
-        SDL_Texture *tnibbler;
+        SDL_Texture *_mapBorderTexture;
+        SDL_Surface *_mapBorderSprite;
+        SDL_Texture *_player;
+        SDL_Surface *_playerSprite;
+        SDL_Texture *_ghost;
+        SDL_Surface *_ghostSprite;
+        SDL_Texture *_gGhost;
+        SDL_Surface *_gGhostSprite;
+        SDL_Texture *_food;
+        SDL_Surface *_foodSprite;
+        SDL_Texture *_bonus;
+        SDL_Surface *_bonusSprite;
         SDL_Event _events;
         size_t _actualTime;
         size_t _lastTime;
@@ -39,6 +47,12 @@ class Sdl : public AbstractGraph
         SDL_Rect posLibs;
         SDL_Rect posName;
         SDL_Rect posScore;
+        SDL_Rect rectMapBorder;
+        SDL_Rect rectFood;
+        SDL_Rect rectPlayer;
+        SDL_Rect rectGhost;
+        SDL_Rect rectGGhost;
+        SDL_Rect rectBonus;
         SDL_Surface *_txtGames;
         SDL_Texture *_ttxtGames;
         SDL_Surface *_txtLibs;
@@ -51,9 +65,18 @@ class Sdl : public AbstractGraph
         std::string _listLibs;
         std::string _score;
         std::string _name;
+        std::vector<SDL_Rect> _mapBorder;
+        std::vector<SDL_Rect> _mapFood;
+        std::vector<SDL_Rect> _mapPlayer;
+        std::vector<SDL_Rect> _mapGhost;
+        std::vector<SDL_Rect> _mapGGhost;
+        std::vector<SDL_Rect> _mapBonus;
         void setTexture();
+        void setMaptexture(std::vector<std::vector<std::string>> infos);
+        void drawMap();
         void setText();
         void getLists();
+        void setRect();
 };
 
 #endif /* !SDL_HPP_ */

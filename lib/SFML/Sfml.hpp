@@ -58,7 +58,7 @@ class Sfml : public AbstractGraph
         void setMaptexture(std::vector<std::vector<std::string>> infos);
         void setText();
         void getLists();
-        void drawMap(std::vector<std::vector<std::string>> infos);
+        void drawMap();
 };
 
 #endif /* !SFML_HPP_ */
