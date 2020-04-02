@@ -114,7 +114,7 @@ void ArcadeCore::events()
     if (this->_scene->sceneNumber == 2) {
         if (!event.empty())
             this->_lastMoveEvent = event;
-        if (this->_clock >= 60) {
+        if (this->_clock >= 10) {
             this->_clock = 0;
             this->_lib->_actual_game_lib->moveEnemy();
             if (!this->_lastMoveEvent.compare("Z"))

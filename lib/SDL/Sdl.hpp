@@ -85,6 +85,7 @@ class Sdl : public AbstractGraph
         void setText();
         void getLists();
         void setRect();
+        void destroyTextures();
 };
 
 #endif /* !SDL_HPP_ */

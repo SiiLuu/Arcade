@@ -15,11 +15,34 @@ Sdl::Sdl(std::vector<std::vector<std::string>> info)
 
 Sdl::~Sdl()
 {
+    this->destroyTextures();
+    SDL_DestroyTexture(this->_mapBorderTexture);
     SDL_DestroyRenderer(this->renderer);
     SDL_DestroyWindow(this->_window);
     TTF_CloseFont(this->_font);
     TTF_Quit();
     SDL_Quit();
+}
+
+void Sdl::destroyTextures()
+{
+    SDL_DestroyTexture(this->tbg);
+    SDL_DestroyTexture(this->_ttxtScore);
+    SDL_DestroyTexture(this->_ttxtGames);
+    SDL_DestroyTexture(this->_ttxtLibs);
+    SDL_DestroyTexture(this->_ttxtName);
+    SDL_DestroyTexture(this->_mapBorderTexture);
+    SDL_DestroyTexture(this->_player);
+    SDL_DestroyTexture(this->_ghost);
+    SDL_DestroyTexture(this->_gGhost);
+    SDL_DestroyTexture(this->_food);
+    SDL_DestroyTexture(this->_bonus);
+    SDL_DestroyTexture(this->_ttxtGames);
+    SDL_DestroyTexture(this->_ttxtLibs);
+    SDL_DestroyTexture(this->_ttxtName);
+    SDL_DestroyTexture(this->_ttxtScore);
+    //SDL_DestroyTexture(this->_ttxtScoreInGame);
+    //SDL_DestroyTexture(this->_ttxtHighScoreInGame);
 }
 
 std::string Sdl::registerEvents()
@@ -73,6 +96,7 @@ void Sdl::drawMap()
     for (size_t k = 0; k < this->_mapBonus.size(); k++)
         SDL_RenderCopy(this->renderer, this->_bonus, NULL, &this->_mapBonus.at(k));
     SDL_RenderCopy(this->renderer, this->_ttxtScoreInGame, NULL, &this->posScoreInGame);
+    //SDL_DestroyTexture(this->_ttxtScoreInGame);
     SDL_RenderCopy(this->renderer, this->_ttxtHighScoreInGame, NULL, &this->posHighScore);
 }
 
@@ -118,10 +142,10 @@ void Sdl::setMaptexture(std::vector<std::vector<std::string>> infos)
             }
         }
     }
-    SDL_FreeSurface(this->_txtScoreInGame);
     this->_scoreInGame = "SCORE : " + infos.at(1).at(0);
     this->_txtScoreInGame = TTF_RenderText_Blended_Wrapped(this->_font, this->_scoreInGame.c_str(), {255,255,255}, 2000);
     this->_ttxtScoreInGame = SDL_CreateTextureFromSurface(this->renderer, this->_txtScoreInGame);
+    SDL_FreeSurface(this->_txtScoreInGame);
 }
 
 void Sdl::display(std::vector<std::vector<std::string>> infos, int scene)
@@ -255,7 +279,7 @@ void Sdl::createWindow()
         SDL_WINDOWPOS_UNDEFINED,
         1600,
         900,
-        SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+        SDL_WINDOW_SHOWN);
     if (this->_window == NULL)
         std::cout << "Could not create window Arcade." << std::endl;
     this->renderer = SDL_CreateRenderer(this->_window, -1, SDL_RENDERER_ACCELERATED);
