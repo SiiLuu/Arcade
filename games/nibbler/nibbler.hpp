@@ -20,6 +20,7 @@ class nibbler : public AbstractGame
     };
 
     private:
+        std::string _highScore;
         size_t _score;
         game::state _state;
         std::vector<std::string> _map;
@@ -35,7 +36,7 @@ class nibbler : public AbstractGame
         std::vector<Position> _posy;
 
     public:
-        nibbler(/* args */);
+        nibbler();
         ~nibbler();
 
         void moveEnemy();

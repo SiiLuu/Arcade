@@ -179,6 +179,11 @@ void nibbler::update()
         this->_state = game::state::LOOSE;
 }
 
+std::string nibbler::getHighScore() const
+{
+    return (this->_highScore);
+}
+
 size_t nibbler::getScore() const
 {
     return (this->_score);
