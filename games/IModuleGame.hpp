@@ -34,6 +34,7 @@ namespace game {
             virtual void MoveRight() = 0;
             virtual void update() = 0;
             virtual size_t getScore() const = 0;
+            virtual std::string getHighScore() const = 0;
             virtual game::state getState() const = 0;
             virtual void setState(game::state) = 0;
             virtual std::vector<std::string> getMap() const = 0;

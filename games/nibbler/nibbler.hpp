@@ -46,6 +46,7 @@ class nibbler : public AbstractGame
         void MoveRight();
         void update();
         size_t getScore() const;
+        std::string getHighScore() const;
         game::state getState() const;
         void setState(game::state state);
         std::vector<std::string> getMap() const;

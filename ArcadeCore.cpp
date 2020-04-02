@@ -149,6 +149,7 @@ void ArcadeCore::gameLoop()
             this->_clock += 1;
             this->_gamesInfos.push_back(this->_lib->_actual_game_lib->getMap());
             this->_score.push_back(std::to_string(this->_lib->_actual_game_lib->getScore()).c_str());
+            this->_highScore.push_back(this->_lib->_actual_game_lib->getHighScore().c_str());
             this->_gamesInfos.push_back(this->_score);
             if (this->_lib->_actual_game_lib->getState() != game::state::RUNNING) {
                 this->_lib->destroyGames();
@@ -160,5 +161,6 @@ void ArcadeCore::gameLoop()
         this->_scene->display(this->_lib->_actual_graphical_lib, this->_gamesInfos);
         this->_gamesInfos.clear();
         this->_score.clear();
+        this->_highScore.clear();
     }
 }

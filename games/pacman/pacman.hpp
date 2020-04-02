@@ -51,6 +51,7 @@ class Pacman : public AbstractGame
         void MoveLeft();
         void MoveRight();
         size_t getScore() const;
+        std::string getHighScore() const;
         game::state getState() const;
         void setState(game::state state);
         std::vector<std::string> getMap() const;

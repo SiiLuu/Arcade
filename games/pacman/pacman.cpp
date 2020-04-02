@@ -385,6 +385,11 @@ void Pacman::update()
     }
 }
 
+std::string Pacman::getHighScore() const
+{
+    return (this->_hight);
+}
+
 size_t Pacman::getScore() const
 {
     return (this->_score);
