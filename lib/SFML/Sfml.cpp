@@ -181,7 +181,8 @@ void Sfml::getLists()
         this->_listLibs.append("-> " + this->_info.at(0).at(i) + "\n");
     this->_listLibs.append("\n\nACTUAL LIBRARY : SFML");
     this->_name = "-> " + this->_info.at(2).at(0);
-    this->_score = "-> 10000";
+    for (int i = 1; i < this->_info.at(2).size(); i++)
+        this->_score.append(("-> " + this->_info.at(2).at(i) + "\n"));
 }
 
 void Sfml::createWindow()

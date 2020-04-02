@@ -22,9 +22,10 @@ libCaca::~libCaca()
 void libCaca::display(std::vector<std::vector<std::string>> infos, int scene)
 {
     this->clear();
-    if (scene == 1)
+    if (scene == 1) {
         this->drawMen();
-    else if (scene == 2)
+    }
+    else if (scene == 2) 
         this->drawGame(infos);
     caca_refresh_display(this->_window);
 }
@@ -101,11 +102,16 @@ void libCaca::drawMen()
         this->text(160, pos, ("-> " + this->_info.at(0).at(i)));
         pos += 1.5;
     }
+    pos = 27;
     this->text(160, 16, "CURRENT LIBARRY : LIBCACA");
     this->text(196, 5, "LIBRARIES AVAILABLE");
     caca_draw_box(this->_canvas, 15, 23, 105, 16, ' ');
     this->text(60, 25, "YOUR SCORES");
-    this->text(20, 27, "-> 10000");
+    for (int i = 1; i < this->_info.at(2).size(); i++)
+    {
+        this->text(20, pos, this->_info.at(2).at(i));
+        pos += 1.5;
+    }
     caca_draw_box(this->_canvas, 150, 23, 105, 16, ' ');
     this->text(196, 25, "YOUR NAME");
     this->text(160, 27, ("-> " + this->_info.at(2).at(0)));

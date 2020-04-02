@@ -30,6 +30,8 @@ class Pacman : public AbstractGame
         Position _positionG4;
         int _hp;
         int _score;
+        std::string _hight;
+        std::vector<std::string> _hightScore;
 
         bool gameWon();
         void moveGhosts(int i, char &tmp, Position &pos);

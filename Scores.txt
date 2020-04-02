@@ -1,0 +1,2 @@
+NIBBLER -> 0
+PACMAN  -> 0

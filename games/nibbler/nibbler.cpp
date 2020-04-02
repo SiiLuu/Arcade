@@ -25,7 +25,7 @@ void nibbler::init()
     _position.y = 12;
     for (std::string line; getline(input, line);)
         this->_map.push_back(line);
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 4; i++) {
         this->_body.push_back("E");
         this->_posBody.push_back(_position);
     }
@@ -52,18 +52,14 @@ int nibbler::setFruit()
 void nibbler::setBodyPos()
 {
     size_t i = _body.size() - 1;
-    int x = _posBody.at(2).x;
-    int y = _posBody.at(2).y;
+    int x = _posBody.at(3).x;
+    int y = _posBody.at(3).y;
 
-    // std::cout << this->_posBody.at(2).y << std::endl;
-    // std::cout << this->_posBody.at(2).x << std::endl;
     for (; i > 0; i--) {
         this->_map.at(this->_posBody.at(i).y).at(this->_posBody.at(i).x) = 'E';
         _posBody.at(i).y = _posBody.at(i - 1).y;
         _posBody.at(i).x = _posBody.at(i - 1).x;
     }
-    // std::cout << y << std::endl;
-    // std::cout << x << std::endl;
     this->_map.at(y).at(x) = ' ';
 }
 
@@ -79,6 +75,7 @@ void nibbler::setNewBody()
     this->_posBody.push_back(_position);
     _position.x = x;
     _position.y = y;
+    this->_fruits += 1;
 }
 
 void nibbler::MoveForward()
@@ -92,12 +89,9 @@ void nibbler::MoveForward()
         setNewBody();
     } else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == ' ') {
         this->_position.y -= 1;
-        this->_map.at(this->_position.y).at(this->_position.x) = 'P';
         this->_map.at(this->_position.y + 1).at(this->_position.x) = 'E';
-        _posBody.at(0).y += 1;
-        _posBody.at(0).x = _position.x;
+        _posBody.at(0).y = (_position.y + 1);
         setBodyPos();
-        this->_map.at(this->_posBody.at(_body.size() - 1).y).at(this->_posBody.at(_body.size() - 1).x) = ' ';
     } else if ((this->_map.at(this->_position.y - 1).at(this->_position.x) == 'E') || (this->_map.at(this->_position.y - 1).at(this->_position.x) == '|')) {
         this->_hp -= 1;
         if (this->_hp == -1)
@@ -117,12 +111,9 @@ void nibbler::MoveBackward()
         setNewBody();
     } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == ' ') {
         this->_position.y += 1;
-        this->_map.at(this->_position.y).at(this->_position.x) = 'P';
         this->_map.at(this->_position.y - 1).at(this->_position.x) = 'E';
-        _posBody.at(0).y -= 1;
-        _posBody.at(0).x = _position.x;
+        _posBody.at(0).y = (_position.y - 1);
         setBodyPos();
-        this->_map.at(this->_posBody.at(_body.size() - 1).y).at(this->_posBody.at(_body.size() - 1).x) = ' ';
     } else if ((this->_map.at(this->_position.y + 1).at(this->_position.x) == 'E') || (this->_map.at(this->_position.y + 1).at(this->_position.x) == '|')) {
         this->_hp -= 1;
         if (this->_hp == -1)
@@ -134,7 +125,6 @@ void nibbler::MoveBackward()
 void nibbler::MoveLeft()
 {
     if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'o') {
-        this->_fruits += 1;
         this->_position.x -= 1;
         setFruit();
         this->_map.at(this->_position.y).at(this->_position.x) = 'P';
@@ -166,12 +156,9 @@ void nibbler::MoveRight()
     }
     if (this->_map.at(this->_position.y).at(this->_position.x + 1) == ' ') {
         this->_position.x += 1;
-        this->_map.at(this->_position.y).at(this->_position.x) = 'P';
         this->_map.at(this->_position.y).at(this->_position.x - 1) = 'E';
-        _posBody.at(0).y = _position.y;
-        _posBody.at(0).x -= 1;
+        _posBody.at(0).x = (_position.x - 1);
         setBodyPos();
-        this->_map.at(this->_posBody.at(_body.size() - 1).y).at(this->_posBody.at(_body.size() - 1).x) = ' ';
     } else if ((this->_map.at(this->_position.y).at(this->_position.x + 1) == 'E') || (this->_map.at(this->_position.y).at(this->_position.x + 1) == '|')) {
         this->_hp -= 1;
         if (this->_hp == -1)

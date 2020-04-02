@@ -120,8 +120,8 @@ void Sdl::setText()
     this->_txtScore = TTF_RenderText_Blended_Wrapped(this->_font, this->_score.c_str(), whiteColor, 2000);
     posScore.x = 130;
     posScore.y = 660;
-    posScore.h = 40;
-    posScore.w = 200;
+    posScore.h = 90;
+    posScore.w = 600;
     this->_ttxtScore = SDL_CreateTextureFromSurface(this->renderer, this->_txtScore);
     SDL_FreeSurface(this->_txtScore);
 }
@@ -134,8 +134,8 @@ void Sdl::getLists()
         this->_listLibs.append("-> " + this->_info.at(0).at(i) + "\n");
     this->_listLibs.append("\n\nACTUAL LIBRARY : SDL");
     this->_name = "-> " + this->_info.at(2).at(0);
-    this->_score = "-> 10000";
-}
+    for (int i = 1; i < this->_info.at(2).size(); i++)
+        this->_score.append(("-> " + this->_info.at(2).at(i) + "\n"));}
 
 void Sdl::createWindow()
 {

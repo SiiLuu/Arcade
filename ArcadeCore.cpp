@@ -131,9 +131,13 @@ void ArcadeCore::events()
 
 void ArcadeCore::gameLoop()
 {
+    std::ifstream input("Scores.txt");
     std::cout << "Enter a user name :" << std::endl;
     std::getline(std::cin, this->_name);
     this->nameScore.push_back(_name);
+    for (std::string line; getline(input, line);)
+        this->nameScore.push_back(line);
+    input.close();
     this->info.push_back(nameScore);
     this->_lib->loadGraphical(this->_av.at(1), this->info);
     this->_state = ArcadeCore::arcadeState::RUNNING;

@@ -35,10 +35,22 @@ Pacman::~Pacman() {}
 void Pacman::init()
 {
     std::ifstream input("games/pacman/pacmanMap.txt");
+    std::ifstream inp("Scores.txt");
+    size_t foundGame;
+    size_t foundScore;
 
-    for (std::string line; getline(input, line);) {
-        this->_map.push_back(line);
+    for (std::string lin; getline(inp, lin);) {
+        if ((foundGame = lin.find("PACMAN")) != std::string::npos) {
+            foundScore = lin.find("> ");
+            for (size_t i = foundScore + 2; i < lin.size(); i++)
+                this->_hight.push_back(lin.at(i));
+        }
+        this->_hightScore.push_back(lin + '\n');
     }
+    for (std::string line; getline(input, line);)
+        this->_map.push_back(line);
+    input.close();
+    inp.close();
 }
 
 void Pacman::respawnEnemyY()
@@ -341,15 +353,36 @@ void Pacman::moveEnemy()
 
 void Pacman::update()
 {
+    FILE *outfile;
+    size_t foundGame;
+
     this->_map.at(this->_position.y).at(this->_position.x) = 'P';
     ((this->_bonus > 0) ? this->_map.at(this->_positionG1.y).at(this->_positionG1.x) = 'A' : this->_map.at(this->_positionG1.y).at(this->_positionG1.x) = 'E');
     ((this->_bonus > 0) ? this->_map.at(this->_positionG2.y).at(this->_positionG2.x) = 'A' : this->_map.at(this->_positionG2.y).at(this->_positionG2.x) = 'E');
     ((this->_bonus > 0) ? this->_map.at(this->_positionG3.y).at(this->_positionG3.x) = 'A' : this->_map.at(this->_positionG3.y).at(this->_positionG3.x) = 'E');
     ((this->_bonus > 0) ? this->_map.at(this->_positionG4.y).at(this->_positionG4.x) = 'A' : this->_map.at(this->_positionG4.y).at(this->_positionG4.x) = 'E');
-    if (this->_hp < 0)
+    if (this->_hp < 0) {
+        if (this->_score > std::stoi(this->_hight)) {
+            outfile = fopen("Scores.txt", "w");
+            for (size_t k = 0; k < this->_hightScore.size(); k++)
+                if ((foundGame = this->_hightScore.at(k).find("PACMAN")) == std::string::npos)
+                    fputs(this->_hightScore.at(k).c_str(), outfile);
+            fputs(("PACMAN  -> " + std::to_string(this->_score)).c_str(), outfile);
+            fclose(outfile);
+        }
         this->_state = game::state::LOOSE;
-    if (this->gameWon())
+    }
+    if (this->gameWon()) {
+        if (this->_score > std::stoi(this->_hight)) {
+            outfile = fopen("Scores.txt", "w");
+            for (size_t k = 0; k < this->_hightScore.size(); k++)
+                if ((foundGame = this->_hightScore.at(k).find("PACMAN")) == std::string::npos)
+                    fputs(this->_hightScore.at(k).c_str(), outfile);
+            fputs(("PACMAN  -> " + std::to_string(this->_score)).c_str(), outfile);
+            fclose(outfile);
+        }
         this->_state = game::state::WIN;
+    }
 }
 
 size_t Pacman::getScore() const
