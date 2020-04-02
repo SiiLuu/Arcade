@@ -10,7 +10,6 @@
 Sfml::Sfml(std::vector<std::vector<std::string>> info)
 {
     this->_info = info;
-    this->_setTexture = true;
     this->createWindow();
 }
 
@@ -51,10 +50,8 @@ std::string Sfml::registerEvents()
     return ("");
 }
 
-void Sfml::drawMap(std::vector<std::vector<std::string>> infos)
+void Sfml::drawMap()
 {
-    std::map<int, sf::Sprite>::iterator it;
-
     for (size_t k = 0; k < this->_mapBorder.size(); k++)
         this->_window.draw(this->_mapBorder.at(k));
     for (size_t k = 0; k < this->_mapFood.size(); k++)
@@ -67,6 +64,8 @@ void Sfml::drawMap(std::vector<std::vector<std::string>> infos)
         this->_window.draw(this->_mapGGhost.at(k));
     for (size_t k = 0; k < this->_mapBonus.size(); k++)
         this->_window.draw(this->_mapBonus.at(k));
+    this->_window.draw(this->_txtScoreInGame);
+    this->_window.draw(this->_txtHighScoreInGame);
 }
 
 void Sfml::setMaptexture(std::vector<std::vector<std::string>> infos)
@@ -105,6 +104,8 @@ void Sfml::setMaptexture(std::vector<std::vector<std::string>> infos)
             }
         }
     }
+    this->_txtScoreInGame.setString("SCORE : " + infos.at(1).at(0));
+    this->_txtHighScoreInGame.setString("HIGH SCORE : " + infos.at(1).at(0));
 }
 
 void Sfml::display(std::vector<std::vector<std::string>> infos, int scene)
@@ -119,7 +120,7 @@ void Sfml::display(std::vector<std::vector<std::string>> infos, int scene)
     }
     else if (scene == 2) {
             this->setMaptexture(infos);
-            this->drawMap(infos);
+            this->drawMap();
     }
     this->_window.display();
 }
@@ -171,6 +172,14 @@ void Sfml::setText()
     this->_txtScore.setString(this->_score);
     this->_txtScore.setCharacterSize(25);
     this->_txtScore.setPosition(130, 660);
+
+    this->_txtScoreInGame.setFont(this->_font);
+    this->_txtScoreInGame.setCharacterSize(25);
+    this->_txtScoreInGame.setPosition(220, 100);
+
+    this->_txtHighScoreInGame.setFont(this->_font);
+    this->_txtHighScoreInGame.setCharacterSize(25);
+    this->_txtHighScoreInGame.setPosition(150, 200);
 }
 
 void Sfml::getLists()
