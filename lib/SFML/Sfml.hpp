@@ -37,13 +37,14 @@ class Sfml : public AbstractGraph
         sf::Texture _bonus;
         sf::Sprite _bonusSprite;
         sf::Clock _clock;
-        bool _setTexture;
 
         sf::Font _font;
         sf::Text _txtGames;
         sf::Text _txtLibs;
         sf::Text _txtName;
         sf::Text _txtScore;
+        sf::Text _txtScoreInGame;
+        sf::Text _txtHighScoreInGame;
         std::string _listGames;
         std::string _listLibs;
         std::string _score;

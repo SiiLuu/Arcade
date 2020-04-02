@@ -72,6 +72,8 @@ void Sdl::drawMap()
         SDL_RenderCopy(this->renderer, this->_food, NULL, &this->_mapFood.at(k));
     for (size_t k = 0; k < this->_mapBonus.size(); k++)
         SDL_RenderCopy(this->renderer, this->_bonus, NULL, &this->_mapBonus.at(k));
+    SDL_RenderCopy(this->renderer, this->_ttxtScoreInGame, NULL, &this->posScoreInGame);
+    SDL_RenderCopy(this->renderer, this->_ttxtHighScoreInGame, NULL, &this->posHighScore);
 }
 
 void Sdl::setMaptexture(std::vector<std::vector<std::string>> infos)
@@ -116,6 +118,10 @@ void Sdl::setMaptexture(std::vector<std::vector<std::string>> infos)
             }
         }
     }
+    SDL_FreeSurface(this->_txtScoreInGame);
+    this->_scoreInGame = "SCORE : " + infos.at(1).at(0);
+    this->_txtScoreInGame = TTF_RenderText_Blended_Wrapped(this->_font, this->_scoreInGame.c_str(), {255,255,255}, 2000);
+    this->_ttxtScoreInGame = SDL_CreateTextureFromSurface(this->renderer, this->_txtScoreInGame);
 }
 
 void Sdl::display(std::vector<std::vector<std::string>> infos, int scene)
@@ -140,7 +146,7 @@ void Sdl::setTexture()
     this->bg = IMG_Load("assets/arcade.jpg");
     this->tbg = SDL_CreateTextureFromSurface(this->renderer, this->bg);
     SDL_FreeSurface(this->bg);
-    this->_playerSprite = IMG_Load("assets/player3.jpg");
+    this->_playerSprite = IMG_Load("assets/player3.png");
     this->_player = SDL_CreateTextureFromSurface(this->renderer, this->_playerSprite);
     SDL_FreeSurface(this->_playerSprite);
     this->_ghostSprite = IMG_Load("assets/enemy2.png");
@@ -173,7 +179,6 @@ void Sdl::setText()
     posGames.w = 800;
     this->_ttxtGames = SDL_CreateTextureFromSurface(this->renderer, this->_txtGames);
     SDL_FreeSurface(this->_txtGames);
-
     this->_txtLibs = TTF_RenderText_Blended_Wrapped(this->_font, this->_listLibs.c_str(), whiteColor, 2000);
     posLibs.x = 930;
     posLibs.y = 115;
@@ -181,7 +186,6 @@ void Sdl::setText()
     posLibs.w = 800;
     this->_ttxtLibs = SDL_CreateTextureFromSurface(this->renderer, this->_txtLibs);
     SDL_FreeSurface(this->_txtLibs);
-
     this->_txtName = TTF_RenderText_Blended_Wrapped(this->_font, this->_name.c_str(), whiteColor, 2000);
     posName.x = 930;
     posName.y = 660;
@@ -189,7 +193,6 @@ void Sdl::setText()
     posName.w = 200;
     this->_ttxtName = SDL_CreateTextureFromSurface(this->renderer, this->_txtName);
     SDL_FreeSurface(this->_txtName);
-
     this->_txtScore = TTF_RenderText_Blended_Wrapped(this->_font, this->_score.c_str(), whiteColor, 2000);
     posScore.x = 130;
     posScore.y = 660;
@@ -197,6 +200,20 @@ void Sdl::setText()
     posScore.w = 200;
     this->_ttxtScore = SDL_CreateTextureFromSurface(this->renderer, this->_txtScore);
     SDL_FreeSurface(this->_txtScore);
+    this->_txtScoreInGame = TTF_RenderText_Blended_Wrapped(this->_font, this->_scoreInGame.c_str(), whiteColor, 2000);
+    posScoreInGame.x = 220;
+    posScoreInGame.y = 100;
+    posScoreInGame.h = 20;
+    posScoreInGame.w = 100;
+    this->_ttxtScoreInGame = SDL_CreateTextureFromSurface(this->renderer, this->_txtScoreInGame);
+    SDL_FreeSurface(this->_txtScoreInGame);
+    this->_txtHighScoreInGame = TTF_RenderText_Blended_Wrapped(this->_font, this->_highScore.c_str(), whiteColor, 2000);
+    posHighScore.x = 150;
+    posHighScore.y = 200;
+    posHighScore.h = 20;
+    posHighScore.w = 100;
+    this->_ttxtHighScoreInGame = SDL_CreateTextureFromSurface(this->renderer, this->_txtHighScoreInGame);
+    SDL_FreeSurface(this->_txtHighScoreInGame);
 }
 
 void Sdl::setRect()
@@ -225,6 +242,7 @@ void Sdl::getLists()
     this->_listLibs.append("\n\nACTUAL LIBRARY : SDL");
     this->_name = "-> " + this->_info.at(2).at(0);
     this->_score = "-> 10000";
+    this->_highScore = "1450";
 }
 
 void Sdl::createWindow()

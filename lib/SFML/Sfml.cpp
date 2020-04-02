@@ -10,7 +10,6 @@
 Sfml::Sfml(std::vector<std::vector<std::string>> info)
 {
     this->_info = info;
-    this->_setTexture = true;
     this->createWindow();
 }
 
@@ -65,6 +64,8 @@ void Sfml::drawMap()
         this->_window.draw(this->_mapGGhost.at(k));
     for (size_t k = 0; k < this->_mapBonus.size(); k++)
         this->_window.draw(this->_mapBonus.at(k));
+    this->_window.draw(this->_txtScoreInGame);
+    this->_window.draw(this->_txtHighScoreInGame);
 }
 
 void Sfml::setMaptexture(std::vector<std::vector<std::string>> infos)
@@ -103,6 +104,8 @@ void Sfml::setMaptexture(std::vector<std::vector<std::string>> infos)
             }
         }
     }
+    this->_txtScoreInGame.setString("SCORE : " + infos.at(1).at(0));
+    this->_txtHighScoreInGame.setString("HIGH SCORE : " + infos.at(1).at(0));
 }
 
 void Sfml::display(std::vector<std::vector<std::string>> infos, int scene)
@@ -169,6 +172,14 @@ void Sfml::setText()
     this->_txtScore.setString(this->_score);
     this->_txtScore.setCharacterSize(25);
     this->_txtScore.setPosition(130, 660);
+
+    this->_txtScoreInGame.setFont(this->_font);
+    this->_txtScoreInGame.setCharacterSize(25);
+    this->_txtScoreInGame.setPosition(220, 100);
+
+    this->_txtHighScoreInGame.setFont(this->_font);
+    this->_txtHighScoreInGame.setCharacterSize(25);
+    this->_txtHighScoreInGame.setPosition(150, 200);
 }
 
 void Sfml::getLists()
