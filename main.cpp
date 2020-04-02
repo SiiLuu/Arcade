@@ -13,5 +13,9 @@ int main(int ac, char **argv)
     std::vector<std::string> av(argv, argv + ac);
     errorGestion error(ac, av);
     ArcadeCore arcade(av);
+    for (int i = 0; argv[i] != NULL; i++) {
+        free(argv[i]);
+    }
+    free(argv);
     return (0);
 }
