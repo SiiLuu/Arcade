@@ -35,6 +35,7 @@ class nibbler : public AbstractGame
         std::vector<std::string> _body;
         std::vector<Position> _posBody;
         std::vector<Position> _posy;
+        std::vector<std::string> _saveHighScore;
 
     public:
         nibbler();
