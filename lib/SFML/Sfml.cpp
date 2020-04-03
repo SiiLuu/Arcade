@@ -115,8 +115,15 @@ void Sfml::setMaptexture(std::vector<std::vector<std::string>> infos)
 
 void Sfml::display(std::vector<std::vector<std::string>> infos, int scene)
 {
+    std::ifstream input("Scores.txt");
+
     this->_window.clear();
     if (scene == 1) {
+        this->_actualScore.clear();
+        for (std::string line; getline(input, line);)
+            this->_actualScore.append(line + "\n");
+        input.close();
+        this->_txtScore.setString(this->_actualScore);
         this->_window.draw(this->_backgroundSprite);
         this->_window.draw(this->_txtGames);
         this->_window.draw(this->_txtLibs);

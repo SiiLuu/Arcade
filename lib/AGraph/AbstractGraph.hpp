@@ -14,6 +14,7 @@
 #include <curses.h>
 #include <caca++.h>
 #include <vector>
+#include <fstream>
 
 #ifndef ABSTRACTGRAPH_HPP_
 #define ABSTRACTGRAPH_HPP_

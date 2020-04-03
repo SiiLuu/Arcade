@@ -26,10 +26,12 @@ class libCaca : public AbstractGraph
             caca_display_t *_window;
             caca_event_t _event;
             caca_color _currentColor;
+            std::vector<std::string> _actualScore;
             std::string _listGames;
             std::string _listLibs;
             std::string _score;
             std::string _name;
+            bool check;
             void getLists();
             void clear();
             void drawMen();

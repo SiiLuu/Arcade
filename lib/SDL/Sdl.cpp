@@ -162,8 +162,18 @@ void Sdl::setMaptexture(std::vector<std::vector<std::string>> infos)
 
 void Sdl::display(std::vector<std::vector<std::string>> infos, int scene)
 {
+    std::ifstream input("Scores.txt");
+
     SDL_RenderClear(renderer);
     if (scene == 1) {
+        this->_actualScore.clear();
+        for (std::string line; getline(input, line);)
+            this->_actualScore.append(line + "\n");
+        input.close();
+        this->_txtScore = TTF_RenderText_Blended_Wrapped(this->_font, this->_actualScore.c_str(), {255,255,255}, 2000);
+        this->_ttxtScore = SDL_CreateTextureFromSurface(this->renderer, this->_txtScore);
+        SDL_FreeSurface(this->_txtScore);
+        SDL_RenderCopy(this->renderer, this->_ttxtScore, NULL, &this->posScore);
         SDL_RenderCopy(this->renderer, this->tbg, NULL, NULL);
         SDL_RenderCopy(this->renderer, this->_ttxtGames, NULL, &this->posGames);
         SDL_RenderCopy(this->renderer, this->_ttxtLibs, NULL, &this->posLibs);

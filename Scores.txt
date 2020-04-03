@@ -1,2 +1,2 @@
 PACMAN  -> 0
-NIBBLER -> 300
+NIBBLER -> 0

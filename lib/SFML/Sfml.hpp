@@ -50,6 +50,7 @@ class Sfml : public AbstractGraph
         std::string _listLibs;
         std::string _score;
         std::string _name;
+        std::string _actualScore;
         std::vector<sf::Sprite> _mapBorder;
         std::vector<sf::Sprite> _mapFood;
         std::vector<sf::Sprite> _mapPlayer;

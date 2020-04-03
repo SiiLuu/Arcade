@@ -9,6 +9,7 @@
 
 libCaca::libCaca(std::vector<std::vector<std::string>> info)
 {
+    this->check = false;
     this->_info = info;
     this->createWindow();
 }
@@ -21,9 +22,21 @@ libCaca::~libCaca()
 
 void libCaca::display(std::vector<std::vector<std::string>> infos, int scene)
 {
+    std::ifstream input("Scores.txt");
+    int pos = 27;
+
     this->clear();
     if (scene == 1) {
         this->drawMen();
+        this->_actualScore.clear();
+        for (std::string line; getline(input, line);)
+            this->_actualScore.push_back(line);
+        if (this->check == true)
+            for (int i = 0; i < this->_actualScore.size(); i++) {
+                this->text(20, pos, this->_actualScore.at(i));
+                pos += 1.5;
+            }
+        input.close();
     }
     else if (scene == 2) {
         this->drawGame(infos);
@@ -112,11 +125,13 @@ void libCaca::drawMen()
     this->text(196, 5, "LIBRARIES AVAILABLE");
     caca_draw_box(this->_canvas, 15, 23, 105, 16, ' ');
     this->text(60, 25, "YOUR SCORES");
-    for (int i = 1; i < this->_info.at(2).size(); i++)
-    {
-        this->text(20, pos, this->_info.at(2).at(i));
-        pos += 1.5;
-    }
+    if (this->check == false)
+        for (int i = 1; i < this->_info.at(2).size(); i++)
+        {
+            this->text(20, pos, this->_info.at(2).at(i));
+            pos += 1.5;
+        }
+    this->check = true;
     caca_draw_box(this->_canvas, 150, 23, 105, 16, ' ');
     this->text(196, 25, "YOUR NAME");
     this->text(160, 27, ("-> " + this->_info.at(2).at(0)));

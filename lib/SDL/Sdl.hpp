@@ -77,6 +77,7 @@ class Sdl : public AbstractGraph
         std::string _highScore;
         std::string _HP;
         std::string _name;
+        std::string _actualScore;
         std::vector<SDL_Rect> _mapBorder;
         std::vector<SDL_Rect> _mapFood;
         std::vector<SDL_Rect> _mapPlayer;
