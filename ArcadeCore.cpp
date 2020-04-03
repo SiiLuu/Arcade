@@ -6,6 +6,8 @@
 */
 
 #include "ArcadeCore.hpp"
+#include <chrono>
+#include <ctime> 
 
 ArcadeCore::ArcadeCore(std::vector<std::string> av)
 {
@@ -88,6 +90,7 @@ void ArcadeCore::swapGame(std::string str)
 void ArcadeCore::events()
 {
     std::string event = this->_lib->_actual_graphical_lib->registerEvents();
+    
 
     if (!event.compare("CLOSE"))
         this->_state = ArcadeCore::arcadeState::CLOSED;
@@ -114,7 +117,7 @@ void ArcadeCore::events()
     if (this->_scene->sceneNumber == 2) {
         if (!event.empty())
             this->_lastMoveEvent = event;
-        if (this->_clock >= 10) {
+        if (this->_clock >= 1) {
             this->_clock = 0;
             this->_lib->_actual_game_lib->moveEnemy();
             if (!this->_lastMoveEvent.compare("Z"))
@@ -146,7 +149,13 @@ void ArcadeCore::gameLoop()
     {
         this->events();
         if (this->_scene->sceneNumber == 2) {
-            this->_clock += 1;
+            static auto start = std::chrono::system_clock::now();
+            auto end = std::chrono::system_clock::now();
+            std::chrono::duration<double> elapsed_seconds = start-end;
+            if (elapsed_seconds.count() <= -0.32500) {
+                this->_clock += 1;
+                start = std::chrono::system_clock::now();
+            }
             this->_gamesInfos.push_back(this->_lib->_actual_game_lib->getMap());
             this->_score.push_back(std::to_string(this->_lib->_actual_game_lib->getScore()).c_str());
             this->_highScore.push_back(this->_lib->_actual_game_lib->getHighScore().c_str());

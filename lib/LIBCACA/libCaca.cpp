@@ -25,14 +25,15 @@ void libCaca::display(std::vector<std::vector<std::string>> infos, int scene)
     if (scene == 1) {
         this->drawMen();
     }
-    else if (scene == 2) 
+    else if (scene == 2) {
         this->drawGame(infos);
+    }
     caca_refresh_display(this->_window);
 }
 
 std::string libCaca::registerEvents()
 {
-    if (caca_get_event(this->_window, CACA_EVENT_KEY_PRESS, &_event, 50))
+    if (caca_get_event(this->_window, CACA_EVENT_KEY_PRESS, &_event, 100))
     {
         switch (caca_get_event_key_ch(&this->_event))
         {

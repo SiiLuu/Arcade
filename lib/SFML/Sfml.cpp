@@ -21,7 +21,7 @@ std::string Sfml::registerEvents()
     {
         if (this->_event.type == sf::Event::Closed)
                 return ("CLOSE");
-        if (this->_clock.getElapsedTime().asMilliseconds() > 200) {
+        if (this->_clock.getElapsedTime().asMilliseconds() > 100) {
             this->_clock.restart();
             switch (this->_event.key.code) {
                 case sf::Keyboard::Left:

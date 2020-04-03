@@ -42,7 +42,7 @@ void Sdl::destroyTextures()
     SDL_DestroyTexture(this->_ttxtName);
     SDL_DestroyTexture(this->_ttxtScore);
     //SDL_DestroyTexture(this->_ttxtScoreInGame);
-    //SDL_DestroyTexture(this->_ttxtHighScoreInGame);
+    SDL_DestroyTexture(this->_ttxtHighScoreInGame);
 }
 
 std::string Sdl::registerEvents()
@@ -51,7 +51,7 @@ std::string Sdl::registerEvents()
         if (this->_events.type == SDL_QUIT)
             return ("CLOSE");
         this->_actualTime = SDL_GetTicks();
-        if (this->_actualTime - this->_lastTime > 150)
+        if (this->_actualTime - this->_lastTime > 125)
         {
             this->_lastTime = this->_actualTime;
             switch (this->_events.key.keysym.sym) {
