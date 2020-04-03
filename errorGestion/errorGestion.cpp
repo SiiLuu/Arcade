@@ -39,17 +39,18 @@ void errorGestion::readDir(int ac, std::vector<std::string> av)
 
 void errorGestion::argsGestion(int ac, std::vector<std::string> av)
 {
-    void *handle = dlopen(av.at(1).c_str(), RTLD_LAZY);
+    void *handle;
 
     try
     {
         if (ac != 2)
             throw Error(1, "You need almost add one lib with this binary.");
         if (this->check == false)
-            throw Error(1, "Wrong library.");
+            throw Error(2, "Wrong library.");
+        handle = dlopen(av.at(1).c_str(), RTLD_LAZY);
         if (!handle) {
             dlclose(handle);
-            throw Error(2, "Cannot open this shared libray");
+            throw Error(3, "Cannot open this shared libray");
         }
     }
     catch(std::exception const &error) {
