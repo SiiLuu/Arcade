@@ -76,12 +76,16 @@ void libCaca::drawGame(std::vector<std::vector<std::string>> info)
 {
     int pos = 7;
 
-    for (int i = 0; i < info.at(0).size(); i++)
-    {
+    for (int i = 0; i < info.at(0).size(); i++) {
         this->text(125, pos, info.at(0).at(i));
         pos += 1;
     }
-    this->text(150, 5, ("YOUR SCORES IS : " + info.at(1).at(0)));
+    this->text(75, 6, ("SCORES : " + info.at(1).at(0)));
+    if (info.at(1).at(0) < info.at(2).at(0))
+        this->text(75, 7, ("HIGHSCORE : " + info.at(2).at(0)));
+    else
+        this->text(75, 7, ("HIGHSCORE : " + info.at(1).at(0)));
+    this->text(75, 8, ("NUMBERS OF LIVES : " + info.at(3).at(0)));
 }
 
 void libCaca::drawMen()

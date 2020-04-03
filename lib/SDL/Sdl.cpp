@@ -41,8 +41,6 @@ void Sdl::destroyTextures()
     SDL_DestroyTexture(this->_ttxtLibs);
     SDL_DestroyTexture(this->_ttxtName);
     SDL_DestroyTexture(this->_ttxtScore);
-    //SDL_DestroyTexture(this->_ttxtScoreInGame);
-    SDL_DestroyTexture(this->_ttxtHighScoreInGame);
 }
 
 std::string Sdl::registerEvents()
@@ -51,7 +49,7 @@ std::string Sdl::registerEvents()
         if (this->_events.type == SDL_QUIT)
             return ("CLOSE");
         this->_actualTime = SDL_GetTicks();
-        if (this->_actualTime - this->_lastTime > 125)
+        if (this->_actualTime - this->_lastTime > 150)
         {
             this->_lastTime = this->_actualTime;
             switch (this->_events.key.keysym.sym) {
@@ -96,8 +94,11 @@ void Sdl::drawMap()
     for (size_t k = 0; k < this->_mapBonus.size(); k++)
         SDL_RenderCopy(this->renderer, this->_bonus, NULL, &this->_mapBonus.at(k));
     SDL_RenderCopy(this->renderer, this->_ttxtScoreInGame, NULL, &this->posScoreInGame);
-    //SDL_DestroyTexture(this->_ttxtScoreInGame);
+    SDL_DestroyTexture(this->_ttxtScoreInGame);
     SDL_RenderCopy(this->renderer, this->_ttxtHighScoreInGame, NULL, &this->posHighScore);
+    SDL_DestroyTexture(this->_ttxtHighScoreInGame);
+    SDL_RenderCopy(this->renderer, this->_ttxtHP, NULL, &this->posHP);
+    SDL_DestroyTexture(this->_ttxtHP);
 }
 
 void Sdl::setMaptexture(std::vector<std::vector<std::string>> infos)
@@ -146,6 +147,17 @@ void Sdl::setMaptexture(std::vector<std::vector<std::string>> infos)
     this->_txtScoreInGame = TTF_RenderText_Blended_Wrapped(this->_font, this->_scoreInGame.c_str(), {255,255,255}, 2000);
     this->_ttxtScoreInGame = SDL_CreateTextureFromSurface(this->renderer, this->_txtScoreInGame);
     SDL_FreeSurface(this->_txtScoreInGame);
+    if (infos.at(1).at(0) < infos.at(2).at(0))
+        this->_highScore = "HIGH SCORE : " + infos.at(2).at(0);
+    else
+        this->_highScore = "HIGH SCORE : " + infos.at(1).at(0);
+    this->_txtHighScoreInGame = TTF_RenderText_Blended_Wrapped(this->_font, this->_highScore.c_str(), {255,255,255}, 2000);
+    this->_ttxtHighScoreInGame = SDL_CreateTextureFromSurface(this->renderer, this->_txtHighScoreInGame);
+    SDL_FreeSurface(this->_txtHighScoreInGame);
+    this->_HP = "NUMBERS OF LIVES : " + infos.at(3).at(0);
+    this->_txtHP = TTF_RenderText_Blended_Wrapped(this->_font, this->_HP.c_str(), {255,255,255}, 2000);
+    this->_ttxtHP = SDL_CreateTextureFromSurface(this->renderer, this->_txtHP);
+    SDL_FreeSurface(this->_txtHP);
 }
 
 void Sdl::display(std::vector<std::vector<std::string>> infos, int scene)
@@ -232,12 +244,19 @@ void Sdl::setText()
     this->_ttxtScoreInGame = SDL_CreateTextureFromSurface(this->renderer, this->_txtScoreInGame);
     SDL_FreeSurface(this->_txtScoreInGame);
     this->_txtHighScoreInGame = TTF_RenderText_Blended_Wrapped(this->_font, this->_highScore.c_str(), whiteColor, 2000);
-    posHighScore.x = 150;
+    posHighScore.x = 190;
     posHighScore.y = 200;
     posHighScore.h = 20;
-    posHighScore.w = 100;
+    posHighScore.w = 150;
     this->_ttxtHighScoreInGame = SDL_CreateTextureFromSurface(this->renderer, this->_txtHighScoreInGame);
     SDL_FreeSurface(this->_txtHighScoreInGame);
+    this->_txtHP = TTF_RenderText_Blended_Wrapped(this->_font, this->_highScore.c_str(), whiteColor, 2000);
+    posHP.x = 150;
+    posHP.y = 300;
+    posHP.h = 20;
+    posHP.w = 250;
+    this->_ttxtHP = SDL_CreateTextureFromSurface(this->renderer, this->_txtHP);
+    SDL_FreeSurface(this->_txtHP);
 }
 
 void Sdl::setRect()

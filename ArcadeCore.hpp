@@ -57,6 +57,7 @@ class ArcadeCore {
         int defaultmove;
         std::vector<std::string> _score;
         std::vector<std::string> _highScore;
+        std::vector<std::string> _HP;
         std::string _name;
         std::string _lastMoveEvent;
         std::vector<std::string> libPath;

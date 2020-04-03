@@ -45,6 +45,7 @@ class Sfml : public AbstractGraph
         sf::Text _txtScore;
         sf::Text _txtScoreInGame;
         sf::Text _txtHighScoreInGame;
+        sf::Text _txtHP;
         std::string _listGames;
         std::string _listLibs;
         std::string _score;

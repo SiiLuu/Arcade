@@ -378,7 +378,7 @@ void Pacman::update()
             for (size_t k = 0; k < this->_highScore.size(); k++)
                 if ((foundGame = this->_highScore.at(k).find("PACMAN")) == std::string::npos)
                     fputs(this->_highScore.at(k).c_str(), outfile);
-            fputs(("PACMAN  -> " + std::to_string(this->_score)).c_str(), outfile);
+            fputs(("PACMAN  -> " + std::to_string(this->_score) + "\n").c_str(), outfile);
             fclose(outfile);
         }
         this->_state = game::state::WIN;
@@ -388,6 +388,11 @@ void Pacman::update()
 std::string Pacman::getHighScore() const
 {
     return (this->_high);
+}
+
+size_t Pacman::getHP() const
+{
+    return (this->_hp + 1);
 }
 
 size_t Pacman::getScore() const

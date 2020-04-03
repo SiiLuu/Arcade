@@ -24,6 +24,7 @@ class AbstractGame : public game::IModuleGame
         virtual void MoveRight() = 0;
         virtual void update() = 0;
         virtual size_t getScore() const = 0;
+        virtual size_t getHP() const = 0;
         virtual std::string getHighScore() const = 0;
         virtual game::state getState() const = 0;
         virtual void setState(game::state) = 0;

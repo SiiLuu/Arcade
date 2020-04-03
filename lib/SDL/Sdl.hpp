@@ -49,6 +49,7 @@ class Sdl : public AbstractGraph
         SDL_Rect posScore;
         SDL_Rect posScoreInGame;
         SDL_Rect posHighScore;
+        SDL_Rect posHP;
         SDL_Rect rectMapBorder;
         SDL_Rect rectFood;
         SDL_Rect rectPlayer;
@@ -65,6 +66,8 @@ class Sdl : public AbstractGraph
         SDL_Texture *_ttxtScore;
         SDL_Surface *_txtScoreInGame;
         SDL_Texture *_ttxtScoreInGame;
+        SDL_Surface *_txtHP;
+        SDL_Texture *_ttxtHP;
         SDL_Surface *_txtHighScoreInGame;
         SDL_Texture *_ttxtHighScoreInGame;
         std::string _listGames;
@@ -72,6 +75,7 @@ class Sdl : public AbstractGraph
         std::string _score;
         std::string _scoreInGame;
         std::string _highScore;
+        std::string _HP;
         std::string _name;
         std::vector<SDL_Rect> _mapBorder;
         std::vector<SDL_Rect> _mapFood;

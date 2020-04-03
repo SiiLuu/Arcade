@@ -21,7 +21,7 @@ std::string Sfml::registerEvents()
     {
         if (this->_event.type == sf::Event::Closed)
                 return ("CLOSE");
-        if (this->_clock.getElapsedTime().asMilliseconds() > 100) {
+        if (this->_clock.getElapsedTime().asMilliseconds() > 150) {
             this->_clock.restart();
             switch (this->_event.key.code) {
                 case sf::Keyboard::Left:
@@ -66,6 +66,7 @@ void Sfml::drawMap()
         this->_window.draw(this->_mapBonus.at(k));
     this->_window.draw(this->_txtScoreInGame);
     this->_window.draw(this->_txtHighScoreInGame);
+    this->_window.draw(this->_txtHP);
 }
 
 void Sfml::setMaptexture(std::vector<std::vector<std::string>> infos)
@@ -105,7 +106,11 @@ void Sfml::setMaptexture(std::vector<std::vector<std::string>> infos)
         }
     }
     this->_txtScoreInGame.setString("SCORE : " + infos.at(1).at(0));
-    this->_txtHighScoreInGame.setString("HIGH SCORE : " + infos.at(1).at(0));
+    this->_txtHP.setString("NUMBER OF LIVES : " + infos.at(3).at(0));
+    if (infos.at(1).at(0) < infos.at(2).at(0))
+        this->_txtHighScoreInGame.setString("HIGH SCORE : " + infos.at(2).at(0));
+    else
+        this->_txtHighScoreInGame.setString("HIGH SCORE : " + infos.at(1).at(0));
 }
 
 void Sfml::display(std::vector<std::vector<std::string>> infos, int scene)
@@ -175,11 +180,15 @@ void Sfml::setText()
 
     this->_txtScoreInGame.setFont(this->_font);
     this->_txtScoreInGame.setCharacterSize(25);
-    this->_txtScoreInGame.setPosition(220, 100);
+    this->_txtScoreInGame.setPosition(180, 100);
+
+    this->_txtHP.setFont(this->_font);
+    this->_txtHP.setCharacterSize(25);
+    this->_txtHP.setPosition(100, 300);
 
     this->_txtHighScoreInGame.setFont(this->_font);
     this->_txtHighScoreInGame.setCharacterSize(25);
-    this->_txtHighScoreInGame.setPosition(150, 200);
+    this->_txtHighScoreInGame.setPosition(130, 200);
 }
 
 void Sfml::getLists()
