@@ -26,14 +26,16 @@ class nibbler : public AbstractGame
         std::vector<std::string> _map;
         Position _position;
         Position _posfruit;
+        int _tailSize;
         int _hp;
         int _fruits;
-        int setFruit();
+        void setFruit();
         void setBodyPos();
         void setNewBody();
         std::vector<std::string> _body;
         std::vector<Position> _posBody;
         std::vector<Position> _posy;
+        std::vector<std::string> _saveHighScore;
 
     public:
         nibbler();

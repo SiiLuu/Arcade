@@ -21,81 +21,57 @@ void nibbler::init()
 
     this->_fruits = 0;
     this->_hp = 0;
-    _position.x = 10;
-    _position.y = 12;
+    this->_score = 0;
+    this->_tailSize = 4;
+    this->_position.x = 10;
+    this->_position.y = 12;
     for (std::string line; getline(input, line);)
         this->_map.push_back(line);
-    for (int i = 0; i < 4; i++) {
-        this->_body.push_back("E");
-        this->_posBody.push_back(_position);
-    }
 }
 
-int nibbler::setFruit()
+void nibbler::setFruit()
 {
-    srand(time(NULL));
-    this->_posfruit.x = rand()%21;
-    if (this->_posfruit.x == 0)
-        this->_posfruit.x += 1;
-    if (this->_posfruit.x == 21)
-        this->_posfruit.x -= 1;
-    srand(time(NULL));
-    this->_posfruit.y = rand()%21;
-    if (this->_posfruit.y == 0)
-        this->_posfruit.y += 1;
-    if (this->_posfruit.y == 21)
-        this->_posfruit.y -= 1;
+    this->_posfruit.x = rand() % 21;
+    this->_posfruit.y = rand() % 21;
+    if (this->_map.at(this->_posfruit.y).at(this->_posfruit.x) == '|')
+        this->setFruit();
+    if (this->_map.at(this->_posfruit.y).at(this->_posfruit.x) == 'E')
+        this->setFruit();
+    if (this->_map.at(this->_posfruit.y).at(this->_posfruit.x) == 'P')
+        this->setFruit();
+    this->_tailSize++;
+    this->_score += 100;
     this->_map.at(this->_posfruit.y).at(this->_posfruit.x) = 'o';
-    return 0;
 }
 
 void nibbler::setBodyPos()
 {
-    size_t i = _body.size() - 1;
-    int x = _posBody.at(3).x;
-    int y = _posBody.at(3).y;
+    int x = 0;
+    int y = 0;
 
-    for (; i > 0; i--) {
-        this->_map.at(this->_posBody.at(i).y).at(this->_posBody.at(i).x) = 'E';
-        _posBody.at(i).y = _posBody.at(i - 1).y;
-        _posBody.at(i).x = _posBody.at(i - 1).x;
+    if (this->_posBody.size() >= this->_tailSize) {
+        x = this->_posBody.at(this->_posBody.size() - this->_tailSize).x;
+        y = this->_posBody.at(this->_posBody.size() - this->_tailSize).y;
+        this->_map.at(y).at(x) = ' ';
     }
-    this->_map.at(y).at(x) = ' ';
-}
-
-void nibbler::setNewBody()
-{
-    int i = _body.size();
-    unsigned int x = _position.x;
-    unsigned int y = _position.y;
-
-    this->_body.push_back("E");
-    _position.x = _posBody.at(_body.size() - 1).x;
-    _position.y = _posBody.at(_body.size() - 1).y;
-    this->_posBody.push_back(_position);
-    _position.x = x;
-    _position.y = y;
-    this->_fruits += 1;
 }
 
 void nibbler::MoveForward()
 {
     if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'o') {
+        this->_posBody.push_back(this->_position);
         this->_position.y -= 1;
         setFruit();
         this->_map.at(this->_position.y).at(this->_position.x) = 'P';
         this->_map.at(this->_position.y + 1).at(this->_position.x) = 'E';
         setBodyPos();
-        setNewBody();
     } else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == ' ') {
+        this->_posBody.push_back(this->_position);
         this->_position.y -= 1;
         this->_map.at(this->_position.y + 1).at(this->_position.x) = 'E';
-        _posBody.at(0).y = (_position.y + 1);
         setBodyPos();
     } else if ((this->_map.at(this->_position.y - 1).at(this->_position.x) == 'E') || (this->_map.at(this->_position.y - 1).at(this->_position.x) == '|')) {
         this->_hp -= 1;
-        if (this->_hp == -1)
-            this->_state = game::state::LOOSE;
     }
     this->update();
 }
@@ -103,67 +79,61 @@ void nibbler::MoveForward()
 void nibbler::MoveBackward()
 {
     if (this->_map.at(this->_position.y + 1).at(this->_position.x) == 'o') {
+        this->_posBody.push_back(this->_position);
         this->_position.y += 1;
-        setFruit();
+        this->setFruit();
         this->_map.at(this->_position.y).at(this->_position.x) = 'P';
         this->_map.at(this->_position.y - 1).at(this->_position.x) = 'E';
-        setBodyPos();
-        setNewBody();
+        this->setBodyPos();
     } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == ' ') {
+        this->_posBody.push_back(this->_position);
         this->_position.y += 1;
         this->_map.at(this->_position.y - 1).at(this->_position.x) = 'E';
-        _posBody.at(0).y = (_position.y - 1);
-        setBodyPos();
-    } else if ((this->_map.at(this->_position.y + 1).at(this->_position.x) == 'E') || (this->_map.at(this->_position.y + 1).at(this->_position.x) == '|')) {
+        this->setBodyPos();
+    } else if ((this->_map.at(this->_position.y + 1).at(this->_position.x) == 'E') ||
+                (this->_map.at(this->_position.y + 1).at(this->_position.x) == '|'))
         this->_hp -= 1;
-        if (this->_hp == -1)
-            this->_state = game::state::LOOSE;
-    }
     this->update();
 }
 
 void nibbler::MoveLeft()
 {
     if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'o') {
+        this->_posBody.push_back(this->_position);
         this->_position.x -= 1;
-        setFruit();
+        this->setFruit();
         this->_map.at(this->_position.y).at(this->_position.x) = 'P';
         this->_map.at(this->_position.y).at(this->_position.x + 1) = 'E';
-        setBodyPos();
-        setNewBody();
+        this->setBodyPos();
     } else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == ' ') {
+        this->_posBody.push_back(this->_position);
         this->_position.x -= 1;
         this->_map.at(this->_position.y).at(this->_position.x + 1) = 'E';
-        _posBody.at(0).x = (_position.x + 1);
-        setBodyPos();
-    } else if ((this->_map.at(this->_position.y).at(this->_position.x - 1) == 'E') || (this->_map.at(this->_position.y).at(this->_position.x - 1) == '|')) {
+        this->setBodyPos();
+    } else if ((this->_map.at(this->_position.y).at(this->_position.x - 1) == 'E') ||
+                (this->_map.at(this->_position.y).at(this->_position.x - 1) == '|'))
         this->_hp -= 1;
-        if (this->_hp == -1)
-            this->_state = game::state::LOOSE;
-    }
     this->update();
 }
 
 void nibbler::MoveRight()
 {
     if (this->_map.at(this->_position.y).at(this->_position.x + 1) == 'o') {
+        this->_posBody.push_back(this->_position);
         this->_position.x += 1;
-        setFruit();
+        this->setFruit();
         this->_map.at(this->_position.y).at(this->_position.x) = 'P';
         this->_map.at(this->_position.y).at(this->_position.x - 1) = 'E';
-        setBodyPos();
-        setNewBody();
+        this->setBodyPos();
     }
     if (this->_map.at(this->_position.y).at(this->_position.x + 1) == ' ') {
+        this->_posBody.push_back(this->_position);
         this->_position.x += 1;
         this->_map.at(this->_position.y).at(this->_position.x - 1) = 'E';
-        _posBody.at(0).x = (_position.x - 1);
-        setBodyPos();
-    } else if ((this->_map.at(this->_position.y).at(this->_position.x + 1) == 'E') || (this->_map.at(this->_position.y).at(this->_position.x + 1) == '|')) {
+        this->setBodyPos();
+    } else if ((this->_map.at(this->_position.y).at(this->_position.x + 1) == 'E') ||
+                (this->_map.at(this->_position.y).at(this->_position.x + 1) == '|'))
         this->_hp -= 1;
-        if (this->_hp == -1)
-            this->_state = game::state::LOOSE;
-    }
     this->update();
 }
 
