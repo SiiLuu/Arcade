@@ -13,7 +13,11 @@ Scene::Scene()
     this->_sceneGame = new SceneMainGame();
 }
 
-Scene::~Scene() {}
+Scene::~Scene()
+{
+    this->_sceneMenu->~SceneMainMenu();
+    this->_sceneGame->~SceneMainGame();
+}
 
 void Scene::display(AbstractGraph *lib, std::vector<std::vector<std::string>> gameInfos)
 {

@@ -172,4 +172,9 @@ void ArcadeCore::gameLoop()
         this->_score.clear();
         this->_highScore.clear();
     }
+    std::cout << "tu passes la ?" << std::endl;
+    this->_lib->destroyGraphical();
+    this->_scene->~Scene();
+    free(this->_scene);
+    free(this->_lib);
 }
