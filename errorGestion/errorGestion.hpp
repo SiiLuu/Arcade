@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <dlfcn.h>
+#include <dirent.h>
 
 #ifndef ERRORGESTION_HPP_
 #define ERRORGESTION_HPP_
@@ -17,6 +18,9 @@ class errorGestion : public Error
 {
     private:
         void argsGestion(int ac, std::vector<std::string> av);
+        void readDir(int ac, std::vector<std::string> av);
+        std::vector<std::string> vector;
+        bool check;
 
     public:
         errorGestion(int ac, std::vector<std::string> av);

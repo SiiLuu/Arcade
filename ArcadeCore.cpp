@@ -6,8 +6,6 @@
 */
 
 #include "ArcadeCore.hpp"
-#include <chrono>
-#include <ctime> 
 
 ArcadeCore::ArcadeCore(std::vector<std::string> av)
 {
@@ -90,7 +88,6 @@ void ArcadeCore::swapGame(std::string str)
 void ArcadeCore::events()
 {
     std::string event = this->_lib->_actual_graphical_lib->registerEvents();
-    
 
     if (!event.compare("CLOSE"))
         this->_state = ArcadeCore::arcadeState::CLOSED;
@@ -172,9 +169,7 @@ void ArcadeCore::gameLoop()
         this->_score.clear();
         this->_highScore.clear();
     }
-    std::cout << "tu passes la ?" << std::endl;
+    delete this->_lib;
+    delete this->_scene;
     this->_lib->destroyGraphical();
-    this->_scene->~Scene();
-    free(this->_scene);
-    free(this->_lib);
 }

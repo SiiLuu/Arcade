@@ -13,6 +13,7 @@
 #include <dlfcn.h>
 #include <dirent.h>
 #include <chrono>
+#include <ctime> 
 
 #ifndef ARCADECORE_HPP_
 #define ARCADECORE_HPP_
