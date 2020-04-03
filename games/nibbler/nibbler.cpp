@@ -9,6 +9,7 @@
 
 nibbler::nibbler()
 {
+    this->_dir = nibbler::direction::STOP;
     this->_fruits = 0;
     this->_hp = 0;
     this->_score = 0;
@@ -61,6 +62,7 @@ void nibbler::setBodyPos()
 {
     int x = 0;
     int y = 0;
+    //std::vector<Position>::iterator it = this->_posBody.begin();
 
     if (this->_posBody.size() >= this->_tailSize) {
         x = this->_posBody.at(this->_posBody.size() - this->_tailSize).x;
@@ -71,83 +73,139 @@ void nibbler::setBodyPos()
 
 void nibbler::MoveForward()
 {
-    if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'o') {
-        this->_posBody.push_back(this->_position);
-        this->_position.y -= 1;
-        setFruit();
-        this->_map.at(this->_position.y).at(this->_position.x) = 'P';
-        this->_map.at(this->_position.y + 1).at(this->_position.x) = 'E';
-        setBodyPos();
-    } else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == ' ') {
-        this->_posBody.push_back(this->_position);
-        this->_position.y -= 1;
-        this->_map.at(this->_position.y + 1).at(this->_position.x) = 'E';
-        setBodyPos();
-    } else if ((this->_map.at(this->_position.y - 1).at(this->_position.x) == 'E') || (this->_map.at(this->_position.y - 1).at(this->_position.x) == '|')) {
-        this->_hp -= 1;
+    if (!this->_posBody.empty() && (this->_dir != nibbler::direction::UP &&
+                                    this->_dir != nibbler::direction::LEFT &&
+                                    this->_dir != nibbler::direction::RIGHT)) {
+        if (this->_position.y - 1 == this->_posBody.at(this->_posBody.size() - 1).y) {
+            this->_dir = nibbler::direction::DOWN;
+            this->MoveBackward();
+        }
     }
-    this->update();
+    else if (this->_dir == nibbler::direction::UP ||
+            this->_dir == nibbler::direction::STOP ||
+            this->_dir == nibbler::direction::LEFT ||
+            this->_dir == nibbler::direction::RIGHT) {
+        if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'o') {
+            this->_posBody.push_back(this->_position);
+            this->_position.y -= 1;
+            setFruit();
+            this->_map.at(this->_position.y).at(this->_position.x) = 'P';
+            this->_map.at(this->_position.y + 1).at(this->_position.x) = 'E';
+            setBodyPos();
+        } else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == ' ') {
+            this->_posBody.push_back(this->_position);
+            this->_position.y -= 1;
+            this->_map.at(this->_position.y + 1).at(this->_position.x) = 'E';
+            setBodyPos();
+        } else if ((this->_map.at(this->_position.y - 1).at(this->_position.x) == 'E') || (this->_map.at(this->_position.y - 1).at(this->_position.x) == '|'))
+            this->_hp -= 1;
+        this->_dir = nibbler::direction::UP;
+        this->update();
+    }
 }
 
 void nibbler::MoveBackward()
 {
-    if (this->_map.at(this->_position.y + 1).at(this->_position.x) == 'o') {
-        this->_posBody.push_back(this->_position);
-        this->_position.y += 1;
-        this->setFruit();
-        this->_map.at(this->_position.y).at(this->_position.x) = 'P';
-        this->_map.at(this->_position.y - 1).at(this->_position.x) = 'E';
-        this->setBodyPos();
-    } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == ' ') {
-        this->_posBody.push_back(this->_position);
-        this->_position.y += 1;
-        this->_map.at(this->_position.y - 1).at(this->_position.x) = 'E';
-        this->setBodyPos();
-    } else if ((this->_map.at(this->_position.y + 1).at(this->_position.x) == 'E') ||
-                (this->_map.at(this->_position.y + 1).at(this->_position.x) == '|'))
-        this->_hp -= 1;
-    this->update();
+    if (!this->_posBody.empty() && (this->_dir != nibbler::direction::DOWN  &&
+                                    this->_dir != nibbler::direction::LEFT &&
+                                    this->_dir != nibbler::direction::RIGHT)) {
+        if (this->_position.y + 1 == this->_posBody.at(this->_posBody.size() - 1).y) {
+            this->_dir = nibbler::direction::UP;
+            this->MoveForward();
+        }
+    }
+    else if (this->_dir == nibbler::direction::DOWN ||
+            this->_dir == nibbler::direction::STOP ||
+            this->_dir == nibbler::direction::LEFT ||
+            this->_dir == nibbler::direction::RIGHT) {
+        if (this->_map.at(this->_position.y + 1).at(this->_position.x) == 'o') {
+            this->_posBody.push_back(this->_position);
+            this->_position.y += 1;
+            this->setFruit();
+            this->_map.at(this->_position.y).at(this->_position.x) = 'P';
+            this->_map.at(this->_position.y - 1).at(this->_position.x) = 'E';
+            this->setBodyPos();
+        } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == ' ') {
+            this->_posBody.push_back(this->_position);
+            this->_position.y += 1;
+            this->_map.at(this->_position.y - 1).at(this->_position.x) = 'E';
+            this->setBodyPos();
+        } else if ((this->_map.at(this->_position.y + 1).at(this->_position.x) == 'E') ||
+                    (this->_map.at(this->_position.y + 1).at(this->_position.x) == '|'))
+            this->_hp -= 1;
+        this->_dir = nibbler::direction::DOWN;
+        this->update();
+    }
 }
 
 void nibbler::MoveLeft()
 {
-    if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'o') {
-        this->_posBody.push_back(this->_position);
-        this->_position.x -= 1;
-        this->setFruit();
-        this->_map.at(this->_position.y).at(this->_position.x) = 'P';
-        this->_map.at(this->_position.y).at(this->_position.x + 1) = 'E';
-        this->setBodyPos();
-    } else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == ' ') {
-        this->_posBody.push_back(this->_position);
-        this->_position.x -= 1;
-        this->_map.at(this->_position.y).at(this->_position.x + 1) = 'E';
-        this->setBodyPos();
-    } else if ((this->_map.at(this->_position.y).at(this->_position.x - 1) == 'E') ||
-                (this->_map.at(this->_position.y).at(this->_position.x - 1) == '|'))
-        this->_hp -= 1;
-    this->update();
+    if (!this->_posBody.empty() && (this->_dir != nibbler::direction::LEFT &&
+                                    this->_dir != nibbler::direction::UP &&
+                                    this->_dir != nibbler::direction::DOWN)) {
+        if (this->_position.x - 1 == this->_posBody.at(this->_posBody.size() - 1).x) {
+            this->_dir = nibbler::direction::RIGHT;
+            this->MoveRight();
+        }
+    }
+    else if (this->_dir == nibbler::direction::LEFT ||
+            this->_dir == nibbler::direction::STOP ||
+            this->_dir == nibbler::direction::DOWN ||
+            this->_dir == nibbler::direction::UP) {
+        if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'o') {
+            this->_posBody.push_back(this->_position);
+            this->_position.x -= 1;
+            this->setFruit();
+            this->_map.at(this->_position.y).at(this->_position.x) = 'P';
+            this->_map.at(this->_position.y).at(this->_position.x + 1) = 'E';
+            this->setBodyPos();
+        } else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == ' ') {
+            this->_posBody.push_back(this->_position);
+            this->_position.x -= 1;
+            this->_map.at(this->_position.y).at(this->_position.x + 1) = 'E';
+            this->setBodyPos();
+        } else if ((this->_map.at(this->_position.y).at(this->_position.x - 1) == 'E') ||
+                    (this->_map.at(this->_position.y).at(this->_position.x - 1) == '|'))
+            this->_hp -= 1;
+        this->_dir = nibbler::direction::LEFT;
+        this->update();
+    }
 }
 
 void nibbler::MoveRight()
 {
-    if (this->_map.at(this->_position.y).at(this->_position.x + 1) == 'o') {
-        this->_posBody.push_back(this->_position);
-        this->_position.x += 1;
-        this->setFruit();
-        this->_map.at(this->_position.y).at(this->_position.x) = 'P';
-        this->_map.at(this->_position.y).at(this->_position.x - 1) = 'E';
-        this->setBodyPos();
+    if (!this->_posBody.empty() && (this->_dir != nibbler::direction::RIGHT  &&
+                                    this->_dir != nibbler::direction::UP &&
+                                    this->_dir != nibbler::direction::DOWN)) {
+        if (this->_position.x + 1 == this->_posBody.at(this->_posBody.size() - 1).x) {
+            this->_dir = nibbler::direction::LEFT;
+            this->MoveLeft();
+        }
     }
-    if (this->_map.at(this->_position.y).at(this->_position.x + 1) == ' ') {
-        this->_posBody.push_back(this->_position);
-        this->_position.x += 1;
-        this->_map.at(this->_position.y).at(this->_position.x - 1) = 'E';
-        this->setBodyPos();
-    } else if ((this->_map.at(this->_position.y).at(this->_position.x + 1) == 'E') ||
-                (this->_map.at(this->_position.y).at(this->_position.x + 1) == '|'))
-        this->_hp -= 1;
-    this->update();
+    else if (this->_dir == nibbler::direction::RIGHT ||
+            this->_dir == nibbler::direction::STOP ||
+            this->_dir == nibbler::direction::DOWN ||
+            this->_dir == nibbler::direction::UP) {
+        if (this->_map.at(this->_position.y).at(this->_position.x + 1) == 'o') {
+            this->_posBody.push_back(this->_position);
+            this->_position.x += 1;
+            this->setFruit();
+            this->_map.at(this->_position.y).at(this->_position.x) = 'P';
+            this->_map.at(this->_position.y).at(this->_position.x - 1) = 'E';
+            this->setBodyPos();
+        }
+        else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == ' ') {
+            this->_posBody.push_back(this->_position);
+            this->_position.x += 1;
+            this->_map.at(this->_position.y).at(this->_position.x - 1) = 'E';
+            this->setBodyPos();
+        }
+        else if ((this->_map.at(this->_position.y).at(this->_position.x + 1) == 'E') ||
+                 (this->_map.at(this->_position.y).at(this->_position.x + 1) == '|'))
+            this->_hp -= 1;
+        this->_dir = nibbler::direction::RIGHT;
+        this->update();
+    }
 }
 
 void nibbler::moveEnemy() {}

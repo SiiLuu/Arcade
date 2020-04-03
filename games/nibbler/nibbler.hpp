@@ -18,6 +18,14 @@ class nibbler : public AbstractGame
             unsigned int x;
             unsigned int y;
     };
+    enum direction
+    {
+        STOP,
+        RIGHT,
+        UP,
+        LEFT,
+        DOWN,
+    };
 
     private:
         std::string _high;
@@ -27,6 +35,7 @@ class nibbler : public AbstractGame
         std::vector<std::string> _map;
         Position _position;
         Position _posfruit;
+        direction _dir;
         int _tailSize;
         int _hp;
         int _fruits;
