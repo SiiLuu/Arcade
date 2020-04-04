@@ -64,6 +64,8 @@ void Sfml::drawMap()
         this->_window.draw(this->_mapGGhost.at(k));
     for (size_t k = 0; k < this->_mapBonus.size(); k++)
         this->_window.draw(this->_mapBonus.at(k));
+    for (size_t k = 0; k < this->_mapWall.size(); k++)
+        this->_window.draw(this->_mapWall.at(k));
     this->_window.draw(this->_txtScoreInGame);
     this->_window.draw(this->_txtHighScoreInGame);
     this->_window.draw(this->_txtHP);
@@ -77,11 +79,16 @@ void Sfml::setMaptexture(std::vector<std::vector<std::string>> infos)
     this->_mapBonus.clear();
     this->_mapFood.clear();
     this->_mapPlayer.clear();
+    this->_mapWall.clear();
     for (size_t k = 0; k < infos.at(0).size(); k++) {
         for (size_t i = 0; i < infos.at(0).at(k).size(); i++) {
             if (infos.at(0).at(k).at(i) == '|') {
                 this->_mapBorderSprite.setPosition(450 + i * 30, k * 40);
                 this->_mapBorder.push_back(this->_mapBorderSprite);
+            }
+            else if (infos.at(0).at(k).at(i) == '-') {
+                this->_wallSprite.setPosition(455 + i * 30, k * 40);
+                this->_mapWall.push_back(this->_wallSprite);
             }
             else if (infos.at(0).at(k).at(i) == 'o') {
                 this->_foodSprite.setPosition(460 + i * 30, 10 + k * 40);
@@ -159,6 +166,9 @@ void Sfml::setTexture()
     this->_mapBorderTexture.loadFromFile("assets/carre.png");
     this->_mapBorderSprite.setTexture(this->_mapBorderTexture);
     this->_mapBorderSprite.setScale(0.075, 0.1);
+    this->_wall.loadFromFile("assets/mur.png");
+    this->_wallSprite.setTexture(this->_wall);
+    this->_wallSprite.setScale(0.1, 0.1);
 }
 
 void Sfml::setText()

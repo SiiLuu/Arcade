@@ -93,12 +93,33 @@ void Sdl::drawMap()
         SDL_RenderCopy(this->renderer, this->_food, NULL, &this->_mapFood.at(k));
     for (size_t k = 0; k < this->_mapBonus.size(); k++)
         SDL_RenderCopy(this->renderer, this->_bonus, NULL, &this->_mapBonus.at(k));
+    for (size_t k = 0; k < this->_mapWall.size(); k++)
+        SDL_RenderCopy(this->renderer, this->_wall, NULL, &this->_mapWall.at(k));
     SDL_RenderCopy(this->renderer, this->_ttxtScoreInGame, NULL, &this->posScoreInGame);
     SDL_DestroyTexture(this->_ttxtScoreInGame);
     SDL_RenderCopy(this->renderer, this->_ttxtHighScoreInGame, NULL, &this->posHighScore);
     SDL_DestroyTexture(this->_ttxtHighScoreInGame);
     SDL_RenderCopy(this->renderer, this->_ttxtHP, NULL, &this->posHP);
     SDL_DestroyTexture(this->_ttxtHP);
+}
+
+void Sdl::highScore(std::vector<std::vector<std::string>> infos)
+{
+    this->_scoreInGame = "SCORE : " + infos.at(1).at(0);
+    this->_txtScoreInGame = TTF_RenderText_Blended_Wrapped(this->_font, this->_scoreInGame.c_str(), {255,255,255}, 2000);
+    this->_ttxtScoreInGame = SDL_CreateTextureFromSurface(this->renderer, this->_txtScoreInGame);
+    SDL_FreeSurface(this->_txtScoreInGame);
+    if (infos.at(1).at(0) < infos.at(2).at(0))
+        this->_highScore = "HIGH SCORE : " + infos.at(2).at(0);
+    else
+        this->_highScore = "HIGH SCORE : " + infos.at(1).at(0);
+    this->_txtHighScoreInGame = TTF_RenderText_Blended_Wrapped(this->_font, this->_highScore.c_str(), {255,255,255}, 2000);
+    this->_ttxtHighScoreInGame = SDL_CreateTextureFromSurface(this->renderer, this->_txtHighScoreInGame);
+    SDL_FreeSurface(this->_txtHighScoreInGame);
+    this->_HP = "NUMBERS OF LIVES : " + infos.at(3).at(0);
+    this->_txtHP = TTF_RenderText_Blended_Wrapped(this->_font, this->_HP.c_str(), {255,255,255}, 2000);
+    this->_ttxtHP = SDL_CreateTextureFromSurface(this->renderer, this->_txtHP);
+    SDL_FreeSurface(this->_txtHP);
 }
 
 void Sdl::setMaptexture(std::vector<std::vector<std::string>> infos)
@@ -141,23 +162,14 @@ void Sdl::setMaptexture(std::vector<std::vector<std::string>> infos)
                 this->rectBonus.y = 10 + k * 40;
                 this->_mapBonus.push_back(this->rectBonus);
             }
+            else if (infos.at(0).at(k).at(i) == '-') {
+                this->rectWall.x = 450 + i * 30;
+                this->rectWall.y = k * 40;
+                this->_mapWall.push_back(this->rectWall);
+            }
         }
     }
-    this->_scoreInGame = "SCORE : " + infos.at(1).at(0);
-    this->_txtScoreInGame = TTF_RenderText_Blended_Wrapped(this->_font, this->_scoreInGame.c_str(), {255,255,255}, 2000);
-    this->_ttxtScoreInGame = SDL_CreateTextureFromSurface(this->renderer, this->_txtScoreInGame);
-    SDL_FreeSurface(this->_txtScoreInGame);
-    if (infos.at(1).at(0) < infos.at(2).at(0))
-        this->_highScore = "HIGH SCORE : " + infos.at(2).at(0);
-    else
-        this->_highScore = "HIGH SCORE : " + infos.at(1).at(0);
-    this->_txtHighScoreInGame = TTF_RenderText_Blended_Wrapped(this->_font, this->_highScore.c_str(), {255,255,255}, 2000);
-    this->_ttxtHighScoreInGame = SDL_CreateTextureFromSurface(this->renderer, this->_txtHighScoreInGame);
-    SDL_FreeSurface(this->_txtHighScoreInGame);
-    this->_HP = "NUMBERS OF LIVES : " + infos.at(3).at(0);
-    this->_txtHP = TTF_RenderText_Blended_Wrapped(this->_font, this->_HP.c_str(), {255,255,255}, 2000);
-    this->_ttxtHP = SDL_CreateTextureFromSurface(this->renderer, this->_txtHP);
-    SDL_FreeSurface(this->_txtHP);
+    this->highScore(infos);
 }
 
 void Sdl::display(std::vector<std::vector<std::string>> infos, int scene)
@@ -210,6 +222,9 @@ void Sdl::setTexture()
     this->_mapBorderSprite = IMG_Load("assets/carre.png");
     this->_mapBorderTexture = SDL_CreateTextureFromSurface(this->renderer, this->_mapBorderSprite);
     SDL_FreeSurface(this->_mapBorderSprite);
+    this->_wallSprite = IMG_Load("assets/mur.png");
+    this->_wall = SDL_CreateTextureFromSurface(this->renderer, this->_wallSprite);
+    SDL_FreeSurface(this->_wallSprite);
 }
 
 void Sdl::setText()
@@ -273,6 +288,8 @@ void Sdl::setRect()
 {
     this->rectMapBorder.h = 40;
     this->rectMapBorder.w = 30;
+    this->rectWall.h = 20;
+    this->rectWall.w = 30;
     this->rectBonus.h = 20;
     this->rectBonus.w = 20;
     this->rectFood.h = 20;

@@ -13,6 +13,7 @@ int main(int ac, char **argv)
 {
     std::vector<std::string> av(argv, argv + ac);
     errorGestion error(ac, av);
-    ArcadeCore arcade(av);
+    if (error._error == 0)
+        ArcadeCore arcade(av);
     return (0);
 }

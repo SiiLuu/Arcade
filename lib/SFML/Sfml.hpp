@@ -26,6 +26,8 @@ class Sfml : public AbstractGraph
         sf::Sprite _backgroundSprite;
         sf::Texture _mapBorderTexture;
         sf::Sprite _mapBorderSprite;
+        sf::Texture _wall;
+        sf::Sprite _wallSprite;
         sf::Texture _player;
         sf::Sprite _playerSprite;
         sf::Texture _ghost;
@@ -52,6 +54,7 @@ class Sfml : public AbstractGraph
         std::string _name;
         std::string _actualScore;
         std::vector<sf::Sprite> _mapBorder;
+        std::vector<sf::Sprite> _mapWall;
         std::vector<sf::Sprite> _mapFood;
         std::vector<sf::Sprite> _mapPlayer;
         std::vector<sf::Sprite> _mapGhost;
