@@ -86,6 +86,26 @@ void ArcadeCore::swapGame(std::string str)
     this->_gamesInfos.push_back(this->_lib->_actual_game_lib->getMap());
 }
 
+void ArcadeCore::movementEvents(std::string event)
+{
+    if (this->_scene->sceneNumber == 2) {
+        if (!event.empty())
+            this->_lastMoveEvent = event;
+        if (this->_clock >= 1) {
+            this->_clock = 0;
+            this->_lib->_actual_game_lib->moveEnemy();
+            if (!this->_lastMoveEvent.compare("Z"))
+                this->_lib->_actual_game_lib->MoveForward();
+            else if (!this->_lastMoveEvent.compare("Q"))
+                this->_lib->_actual_game_lib->MoveLeft();
+            else if (!this->_lastMoveEvent.compare("S"))
+                this->_lib->_actual_game_lib->MoveBackward();
+            else if (!this->_lastMoveEvent.compare("D"))
+                this->_lib->_actual_game_lib->MoveRight();
+        }
+    }
+}
+
 void ArcadeCore::events()
 {
     std::string event = this->_lib->_actual_graphical_lib->registerEvents();
@@ -112,29 +132,7 @@ void ArcadeCore::events()
         this->_scene->sceneNumber = 2;
         this->swapGame("KEYDOWN");
     }
-    if (this->_scene->sceneNumber == 2) {
-        if (!event.empty())
-            this->_lastMoveEvent = event;
-        if (this->_clock >= 1) {
-            this->_clock = 0;
-            static auto st = std::chrono::system_clock::now();
-            auto ed = std::chrono::system_clock::now();
-            std::chrono::duration<double> elapsed = st-ed;
-            if (this->_clockE == 0)
-                if (elapsed.count() <= -10.00000)
-                    this->_clockE = 1;
-            else
-                this->_lib->_actual_game_lib->moveEnemy();
-            if (!this->_lastMoveEvent.compare("Z"))
-                this->_lib->_actual_game_lib->MoveForward();
-            else if (!this->_lastMoveEvent.compare("Q"))
-                this->_lib->_actual_game_lib->MoveLeft();
-            else if (!this->_lastMoveEvent.compare("S"))
-                this->_lib->_actual_game_lib->MoveBackward();
-            else if (!this->_lastMoveEvent.compare("D"))
-                this->_lib->_actual_game_lib->MoveRight();
-        }
-    }
+    this->movementEvents(event);
 }
 
 void ArcadeCore::gameLoop()

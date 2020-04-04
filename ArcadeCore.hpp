@@ -54,6 +54,7 @@ class ArcadeCore {
         void swapLib(std::string str);
         void swapGame(std::string str);
         void events();
+        void movementEvents(std::string event);
         int findLib();
         int defaultmove;
         std::vector<std::string> _score;

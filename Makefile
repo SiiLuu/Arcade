@@ -7,7 +7,6 @@
 
 SRC 	=	main.cpp 								\
 			ArcadeCore.cpp							\
-			config/gameConfig.cpp					\
 			errorGestion/error.cpp					\
 			errorGestion/errorGestion.cpp			\
 			scene/Scene.cpp							\
@@ -38,7 +37,6 @@ clean:
 	rm -f *.o
 	rm -f scene/*.o
 	rm -f errorGestion/*.o
-	rm -f config/*.o
 	rm -f scene/sceneMainGame/*.o
 	rm -f scene/sceneMainMenu/*.o
 	rm -f libLoader/*.o
