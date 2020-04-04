@@ -18,7 +18,7 @@ OBJ 	=	$(SRC:.cpp=.o)
 
 NAME 	=	arcade
 
-CFLAGS 	+=	-W -Wall -Wextra -Werror -Wpedantic -ldl -g3
+CFLAGS 	+=	-W -Wall -Wextra -Werror -Wpedantic -ldl
 
 LIBS 	+=	 -lcaca -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lSDL2 -lSDL2_image -lSDL2_ttf
 
