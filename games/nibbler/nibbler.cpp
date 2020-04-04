@@ -62,13 +62,15 @@ void nibbler::setBodyPos()
 {
     int x = 0;
     int y = 0;
-    //std::vector<Position>::iterator it = this->_posBody.begin();
+    std::vector<Position>::iterator it = this->_posBody.begin();
 
     if (this->_posBody.size() >= this->_tailSize) {
         x = this->_posBody.at(this->_posBody.size() - this->_tailSize).x;
         y = this->_posBody.at(this->_posBody.size() - this->_tailSize).y;
         this->_map.at(y).at(x) = ' ';
     }
+    for (it; it < this->_posBody.end() - this->_tailSize; it++)
+        this->_posBody.erase(it);
 }
 
 void nibbler::MoveForward()
