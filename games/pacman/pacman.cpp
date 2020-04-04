@@ -243,93 +243,112 @@ bool Pacman::gameWon()
 	return (true);
 }
 
+void Pacman::moveGhostsUp(char &tmp, Position &pos)
+{
+    if (this->_map.at(pos.y - 1).at(pos.x) == 'o') {
+        this->_map.at(pos.y).at(pos.x) = tmp;
+        tmp = 'o';
+        pos.y -= 1;
+    } else if (this->_map.at(pos.y - 1).at(pos.x) == 'O') {
+        this->_map.at(pos.y).at(pos.x) = tmp;
+        tmp = 'O';
+        pos.y -= 1;
+    } else if (this->_map.at(pos.y - 1).at(pos.x) == ' ') {
+        this->_map.at(pos.y).at(pos.x) = tmp;
+        tmp = ' ';
+        pos.y -= 1;
+    } else if (this->_map.at(pos.y - 1).at(pos.x) == '-') {
+        this->_map.at(pos.y).at(pos.x) = tmp;
+        tmp = 'o';
+        pos.y -= 2;
+    } else if (this->_map.at(pos.y - 1).at(pos.x) == 'P' && this->_bonus < 0) {
+        pos.y -= 1;
+        tmp = ' ';
+        this->_hp -= 1;
+        this->_position.x = 10;
+        this->_position.y = 14;
+    }
+}
+
+void Pacman::moveGhostsDown(char &tmp, Position &pos)
+{
+    if (this->_map.at(pos.y + 1).at(pos.x) == 'o') {
+        this->_map.at(pos.y).at(pos.x) = tmp;
+        tmp = 'o';
+        pos.y += 1;
+    } else if (this->_map.at(pos.y + 1).at(pos.x) == 'O') {
+        this->_map.at(pos.y).at(pos.x) = tmp;
+        tmp = 'O';
+        pos.y += 1;
+    } else if (this->_map.at(pos.y + 1).at(pos.x) == ' ') {
+        this->_map.at(pos.y).at(pos.x) = tmp;
+        tmp = ' ';
+        pos.y += 1;
+    } else if (this->_map.at(pos.y + 1).at(pos.x) == 'P' && this->_bonus < 0) {
+        pos.y += 1;
+        tmp = ' ';
+        this->_hp -= 1;
+        this->_position.x = 10;
+        this->_position.y = 14;
+    }
+}
+
+void Pacman::moveGhostsRight(char &tmp, Position &pos)
+{
+    if (this->_map.at(pos.y).at(pos.x - 1) == 'o') {
+        this->_map.at(pos.y).at(pos.x) = tmp;
+        tmp = 'o';
+        pos.x -= 1;
+    } else if (this->_map.at(pos.y).at(pos.x - 1) == 'O') {
+        this->_map.at(pos.y).at(pos.x) = tmp;
+        tmp = 'O';
+        pos.x -= 1;
+    } else if (this->_map.at(pos.y).at(pos.x - 1) == ' ') {
+        this->_map.at(pos.y).at(pos.x) = tmp;
+        tmp = ' ';
+        pos.x -= 1;
+    } else if (this->_map.at(pos.y).at(pos.x - 1) == 'P' && this->_bonus < 0) {
+        pos.x -= 1;
+        tmp = ' ';
+        this->_hp -= 1;
+        this->_position.x = 10;
+        this->_position.y = 14;
+    }
+}
+
+void Pacman::moveGhostsLeft(char &tmp, Position &pos)
+{
+    if (this->_map.at(pos.y).at(pos.x + 1) == 'o') {
+        this->_map.at(pos.y).at(pos.x) = tmp;
+        tmp = 'o';
+        pos.x += 1;
+    } else if (this->_map.at(pos.y).at(pos.x + 1) == 'O') {
+        this->_map.at(pos.y).at(pos.x) = tmp;
+        tmp = 'O';
+        pos.x += 1;
+    } else if (this->_map.at(pos.y).at(pos.x + 1) == ' ') {
+        this->_map.at(pos.y).at(pos.x) = tmp;
+        tmp = ' ';
+        pos.x += 1;
+    } else if (this->_map.at(pos.y).at(pos.x + 1) == 'P' && this->_bonus < 0) {
+        pos.x += 1;
+        tmp = ' ';
+        this->_hp -= 1;
+        this->_position.x = 10;
+        this->_position.y = 14;
+    }
+}
+
 void Pacman::moveGhosts(int i, char &tmp, Position &pos)
 {
-    if (i == 1) {
-        if (this->_map.at(pos.y - 1).at(pos.x) == 'o') {
-            this->_map.at(pos.y).at(pos.x) = tmp;
-            tmp = 'o';
-            pos.y -= 1;
-        } else if (this->_map.at(pos.y - 1).at(pos.x) == 'O') {
-            this->_map.at(pos.y).at(pos.x) = tmp;
-            tmp = 'O';
-            pos.y -= 1;
-        } else if (this->_map.at(pos.y - 1).at(pos.x) == ' ') {
-            this->_map.at(pos.y).at(pos.x) = tmp;
-            tmp = ' ';
-            pos.y -= 1;
-        } else if (this->_map.at(pos.y - 1).at(pos.x) == '-') {
-            this->_map.at(pos.y).at(pos.x) = tmp;
-            tmp = 'o';
-            pos.y -= 2;
-        } else if (this->_map.at(pos.y - 1).at(pos.x) == 'P' && this->_bonus < 0) {
-            pos.y -= 1;
-            tmp = ' ';
-            this->_hp -= 1;
-            this->_position.x = 10;
-            this->_position.y = 14;
-        }
-    } else if (i == 2) {
-        if (this->_map.at(pos.y + 1).at(pos.x) == 'o') {
-            this->_map.at(pos.y).at(pos.x) = tmp;
-            tmp = 'o';
-            pos.y += 1;
-        } else if (this->_map.at(pos.y + 1).at(pos.x) == 'O') {
-            this->_map.at(pos.y).at(pos.x) = tmp;
-            tmp = 'O';
-            pos.y += 1;
-        } else if (this->_map.at(pos.y + 1).at(pos.x) == ' ') {
-            this->_map.at(pos.y).at(pos.x) = tmp;
-            tmp = ' ';
-            pos.y += 1;
-        } else if (this->_map.at(pos.y + 1).at(pos.x) == 'P' && this->_bonus < 0) {
-            pos.y += 1;
-            tmp = ' ';
-            this->_hp -= 1;
-            this->_position.x = 10;
-            this->_position.y = 14;
-        }
-    } else if (i == 3) {
-        if (this->_map.at(pos.y).at(pos.x - 1) == 'o') {
-            this->_map.at(pos.y).at(pos.x) = tmp;
-            tmp = 'o';
-            pos.x -= 1;
-        } else if (this->_map.at(pos.y).at(pos.x - 1) == 'O') {
-            this->_map.at(pos.y).at(pos.x) = tmp;
-            tmp = 'O';
-            pos.x -= 1;
-        } else if (this->_map.at(pos.y).at(pos.x - 1) == ' ') {
-            this->_map.at(pos.y).at(pos.x) = tmp;
-            tmp = ' ';
-            pos.x -= 1;
-        } else if (this->_map.at(pos.y).at(pos.x - 1) == 'P' && this->_bonus < 0) {
-            pos.x -= 1;
-            tmp = ' ';
-            this->_hp -= 1;
-            this->_position.x = 10;
-            this->_position.y = 14;
-        }
-    } else {
-        if (this->_map.at(pos.y).at(pos.x + 1) == 'o') {
-            this->_map.at(pos.y).at(pos.x) = tmp;
-            tmp = 'o';
-            pos.x += 1;
-        } else if (this->_map.at(pos.y).at(pos.x + 1) == 'O') {
-            this->_map.at(pos.y).at(pos.x) = tmp;
-            tmp = 'O';
-            pos.x += 1;
-        } else if (this->_map.at(pos.y).at(pos.x + 1) == ' ') {
-            this->_map.at(pos.y).at(pos.x) = tmp;
-            tmp = ' ';
-            pos.x += 1;
-        } else if (this->_map.at(pos.y).at(pos.x + 1) == 'P' && this->_bonus < 0) {
-            pos.x += 1;
-            tmp = ' ';
-            this->_hp -= 1;
-            this->_position.x = 10;
-            this->_position.y = 14;
-        }
-    }
+    if (i == 1)
+        moveGhostsUp(tmp, pos);
+    else if (i == 2)
+        moveGhostsDown(tmp, pos);
+    else if (i == 3)
+        moveGhostsRight(tmp, pos);
+    else
+        moveGhostsLeft(tmp, pos);
 }
 
 void Pacman::moveRand()

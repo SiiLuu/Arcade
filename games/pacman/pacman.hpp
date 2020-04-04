@@ -35,6 +35,10 @@ class Pacman : public AbstractGame
 
         bool gameWon();
         void moveGhosts(int i, char &tmp, Position &pos);
+        void moveGhostsUp(char &tmp, Position &pos);
+        void moveGhostsDown(char &tmp, Position &pos);
+        void moveGhostsRight(char &tmp, Position &pos);
+        void moveGhostsLeft(char &tmp, Position &pos);
         void moveRand();
         void respawnEnemyY();
         void respawnEnemyX();
