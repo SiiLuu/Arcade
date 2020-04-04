@@ -349,14 +349,14 @@ void Pacman::moveRand()
 
 void Pacman::moveEnemy()
 {
-    //static auto start = std::chrono::system_clock::now();
-    //auto end = std::chrono::system_clock::now();
-    //std::chrono::duration<double> elapsed_seconds = start-end;
-    //if (elapsed_seconds.count() <= -10.00000 || this->_clockE == true) {
+    static auto start = std::chrono::system_clock::now();
+    auto end = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed_seconds = start-end;
+    if (elapsed_seconds.count() <= -10.00000 || this->_clockE == true) {
         this->moveRand();
-    //    this->_clockE = true;
-    //    start = std::chrono::system_clock::now();
-    //}
+        this->_clockE = true;
+        start = std::chrono::system_clock::now();
+    }
 }
 
 void Pacman::update()

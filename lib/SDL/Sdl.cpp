@@ -9,14 +9,15 @@
 
 Sdl::Sdl(std::vector<std::vector<std::string>> info)
 {
+    this->_actualTime = 0;
+    this->_lastTime = 0;
     this->_info = info;
     this->createWindow();
 }
 
 Sdl::~Sdl()
 {
-    this->destroyTextures();
-    SDL_DestroyTexture(this->_mapBorderTexture);
+    //this->destroyTextures();
     SDL_DestroyRenderer(this->renderer);
     SDL_DestroyWindow(this->_window);
     TTF_CloseFont(this->_font);
@@ -96,11 +97,11 @@ void Sdl::drawMap()
     for (size_t k = 0; k < this->_mapWall.size(); k++)
         SDL_RenderCopy(this->renderer, this->_wall, NULL, &this->_mapWall.at(k));
     SDL_RenderCopy(this->renderer, this->_ttxtScoreInGame, NULL, &this->posScoreInGame);
-    SDL_DestroyTexture(this->_ttxtScoreInGame);
+    //SDL_DestroyTexture(this->_ttxtScoreInGame);
     SDL_RenderCopy(this->renderer, this->_ttxtHighScoreInGame, NULL, &this->posHighScore);
-    SDL_DestroyTexture(this->_ttxtHighScoreInGame);
+    //SDL_DestroyTexture(this->_ttxtHighScoreInGame);
     SDL_RenderCopy(this->renderer, this->_ttxtHP, NULL, &this->posHP);
-    SDL_DestroyTexture(this->_ttxtHP);
+    //SDL_DestroyTexture(this->_ttxtHP);
 }
 
 void Sdl::highScore(std::vector<std::vector<std::string>> infos)
