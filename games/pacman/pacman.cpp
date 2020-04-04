@@ -26,6 +26,7 @@ Pacman::Pacman()
     this->tmp2 = ' ';
     this->tmp3 = ' ';
     this->tmp4 = ' ';
+    this->_clockE = false;
     this->_state = game::state::RUNNING;
     this->init();
 }
@@ -113,7 +114,7 @@ void Pacman::MoveForward()
         this->respawnEnemyY();
     } else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'O') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
-        this->_bonus = 60;
+        this->_bonus = 30;
         this->_score += 100;
         this->_position.y -= 1;
     } else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == ' ') {
@@ -142,7 +143,7 @@ void Pacman::MoveBackward()
         this->respawnEnemyY();
     } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == 'O') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
-        this->_bonus = 60;
+        this->_bonus = 30;
         this->_score += 100;
         this->_position.y += 1;
     } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == ' ') {
@@ -174,7 +175,7 @@ void Pacman::MoveLeft()
         this->respawnEnemyX();
     } else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'O') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
-        this->_bonus = 60;
+        this->_bonus = 30;
         this->_score += 100;
         this->_position.x -= 1;
     } else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == ' ') {
@@ -207,7 +208,7 @@ void Pacman::MoveRight()
         this->respawnEnemyX();
     } else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == 'O') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
-        this->_bonus = 60;
+        this->_bonus = 30;
         this->_score += 100;
         this->_position.x += 1;
     }
@@ -367,7 +368,14 @@ void Pacman::moveRand()
 
 void Pacman::moveEnemy()
 {
-    this->moveRand();
+    static auto start = std::chrono::system_clock::now();
+    auto end = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed_seconds = start-end;
+    if (elapsed_seconds.count() <= -10.00000 || this->_clockE == true) {
+        this->moveRand();
+        this->_clockE = true;
+        start = std::chrono::system_clock::now();
+    }
 }
 
 void Pacman::update()

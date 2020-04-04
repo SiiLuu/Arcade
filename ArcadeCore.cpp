@@ -23,7 +23,6 @@ ArcadeCore::ArcadeCore(std::vector<std::string> av)
     this->gameLoop();
     this->defaultmove = 0;
     this->_clock = 0;
-    this->_clockE = 0;
     this->_lastMoveEvent = "D";
 }
 

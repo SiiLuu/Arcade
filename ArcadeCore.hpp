@@ -44,7 +44,6 @@ class ArcadeCore {
         int _actualLibrary;
         int _actualGame;
         int _clock;
-        int _clockE;
 
         void readDir(const std::string path, std::vector<std::string> &vector);
         void setLibrary();

@@ -6,6 +6,7 @@
 */
 
 #include "../AGame/AbstractGame.hpp"
+#include <chrono>
 
 #ifndef PACMAN_HPP_
 #define PACMAN_HPP_
@@ -32,6 +33,7 @@ class Pacman : public AbstractGame
         int _score;
         std::string _high;
         std::vector<std::string> _highScore;
+        bool _clockE;
 
         bool gameWon();
         void moveGhosts(int i, char &tmp, Position &pos);
