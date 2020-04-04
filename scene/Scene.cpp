@@ -9,15 +9,11 @@
 
 Scene::Scene()
 {
-    this->_sceneMenu = new SceneMainMenu();
-    this->_sceneGame = new SceneMainGame();
+    std::unique_ptr<SceneMainMenu> _sceneMenu(new SceneMainMenu());
+    std::unique_ptr<SceneMainGame> _sceneGame(new SceneMainGame());
 }
 
-Scene::~Scene()
-{
-    this->_sceneMenu->~SceneMainMenu();
-    this->_sceneGame->~SceneMainGame();
-}
+Scene::~Scene() {}
 
 void Scene::display(AbstractGraph *lib, std::vector<std::vector<std::string>> gameInfos)
 {

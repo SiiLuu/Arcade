@@ -20,8 +20,8 @@ class Scene {
 
     protected:
     private:
-        SceneMainMenu *_sceneMenu;
-        SceneMainGame *_sceneGame;
+        std::unique_ptr<SceneMainMenu> _sceneMenu;
+        std::unique_ptr<SceneMainGame> _sceneGame;
         AbstractGraph *graphicalLib;
 };
 

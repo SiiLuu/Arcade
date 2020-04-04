@@ -7,13 +7,9 @@
 
 #include "sceneMainGame.hpp"
 
-SceneMainGame::SceneMainGame(/* args */)
-{
-}
+SceneMainGame::SceneMainGame() {}
 
-SceneMainGame::~SceneMainGame()
-{
-}
+SceneMainGame::~SceneMainGame() {}
 
 void SceneMainGame::display(AbstractGraph *lib, std::vector<std::vector<std::string>> gameInfos, int scene)
 {
