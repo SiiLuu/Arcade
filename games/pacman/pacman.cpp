@@ -54,48 +54,21 @@ void Pacman::init()
     inp.close();
 }
 
-void Pacman::respawnEnemyY()
+void Pacman::respawnEnemy()
 {
-    if (this->_positionG1.y == this->_position.y) {
+    if (this->_positionG1.x == this->_position.x && this->_positionG1.y == this->_position.y) {
         this->_positionG1.x = 9;
         this->_positionG1.y = 11;
         this->tmp1 = ' ';
-    }
-    if (this->_positionG2.y == this->_position.y) {
+    } else if (this->_positionG2.x == this->_position.x && this->_positionG2.y == this->_position.y) {
         this->_positionG2.x = 11;
         this->_positionG2.y = 11;
         this->tmp2 = ' ';
-    }
-    if (this->_positionG3.y == this->_position.y) {
+    } else if (this->_positionG3.x == this->_position.x && this->_positionG3.y == this->_position.y) {
         this->_positionG3.x = 9;
         this->_positionG3.y = 10;
         this->tmp3 = ' ';
-    }
-    if (this->_positionG4.y == this->_position.y) {
-        this->_positionG4.x = 11;
-        this->_positionG4.y = 10;
-        this->tmp4 = ' ';
-    }
-}
-
-void Pacman::respawnEnemyX()
-{
-    if (this->_positionG1.x == this->_position.x) {
-        this->_positionG1.x = 9;
-        this->_positionG1.y = 11;
-        this->tmp1 = ' ';
-    }
-    if (this->_positionG2.x == this->_position.x) {
-        this->_positionG2.x = 11;
-        this->_positionG2.y = 11;
-        this->tmp2 = ' ';
-    }
-    if (this->_positionG3.x == this->_position.x) {
-        this->_positionG3.x = 9;
-        this->_positionG3.y = 10;
-        this->tmp3 = ' ';
-    }
-    if (this->_positionG4.x == this->_position.x) {
+    } else if (this->_positionG4.x == this->_position.x && this->_positionG4.y == this->_position.y) {
         this->_positionG4.x = 11;
         this->_positionG4.y = 10;
         this->tmp4 = ' ';
@@ -111,7 +84,7 @@ void Pacman::MoveForward()
     } else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'A') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.y -= 1;
-        this->respawnEnemyY();
+        this->respawnEnemy();
     } else if (this->_map.at(this->_position.y - 1).at(this->_position.x) == 'O') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_bonus = 30;
@@ -140,7 +113,7 @@ void Pacman::MoveBackward()
     } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == 'A') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.y += 1;
-        this->respawnEnemyY();
+        this->respawnEnemy();
     } else if (this->_map.at(this->_position.y + 1).at(this->_position.x) == 'O') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_bonus = 30;
@@ -172,7 +145,7 @@ void Pacman::MoveLeft()
     } else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'A') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.x -= 1;
-        this->respawnEnemyX();
+        this->respawnEnemy();
     } else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'O') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_bonus = 30;
@@ -204,7 +177,7 @@ void Pacman::MoveRight()
     } else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == 'A') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.x += 1;
-        this->respawnEnemyX();
+        this->respawnEnemy();
     } else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == 'O') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_bonus = 30;
@@ -293,8 +266,10 @@ void Pacman::moveGhostsDown(char &tmp, Position &pos)
 
 void Pacman::moveGhostsRight(char &tmp, Position &pos)
 {
-    if (pos.y == 9 && pos.x == 20)
-        return;
+    if (pos.y == 9 && pos.x == 0) {
+        this->_map.at(9).at(0) = ' ';
+        pos.x = 20;
+    }
     else if (this->_map.at(pos.y).at(pos.x - 1) == 'o') {
         this->_map.at(pos.y).at(pos.x) = tmp;
         tmp = 'o';
@@ -321,8 +296,10 @@ void Pacman::moveGhostsRight(char &tmp, Position &pos)
 
 void Pacman::moveGhostsLeft(char &tmp, Position &pos)
 {
-    if (pos.y == 9 && pos.x == 1)
-        return;
+    if (pos.y == 9 && pos.x == 20) {
+        this->_map.at(9).at(20) = ' ';
+        pos.x = 0;
+    }
     else if (this->_map.at(pos.y).at(pos.x + 1) == 'o') {
         this->_map.at(pos.y).at(pos.x) = tmp;
         tmp = 'o';
@@ -363,7 +340,6 @@ void Pacman::moveRand()
 	int j = rand()%(4);
 	int k = rand()%(4);
 	int l = rand()%(4);
-    std::cout << "test" << std::endl;
     this->moveGhosts(i, this->tmp1, this->_positionG1);
     this->moveGhosts(j, this->tmp2, this->_positionG2);
     this->moveGhosts(k, this->tmp3, this->_positionG3);
@@ -373,14 +349,14 @@ void Pacman::moveRand()
 
 void Pacman::moveEnemy()
 {
-    static auto start = std::chrono::system_clock::now();
-    auto end = std::chrono::system_clock::now();
-    std::chrono::duration<double> elapsed_seconds = start-end;
-    if (elapsed_seconds.count() <= -10.00000 || this->_clockE == true) {
+    //static auto start = std::chrono::system_clock::now();
+    //auto end = std::chrono::system_clock::now();
+    //std::chrono::duration<double> elapsed_seconds = start-end;
+    //if (elapsed_seconds.count() <= -10.00000 || this->_clockE == true) {
         this->moveRand();
-        this->_clockE = true;
-        start = std::chrono::system_clock::now();
-    }
+    //    this->_clockE = true;
+    //    start = std::chrono::system_clock::now();
+    //}
 }
 
 void Pacman::update()

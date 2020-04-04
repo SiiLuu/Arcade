@@ -42,8 +42,7 @@ class Pacman : public AbstractGame
         void moveGhostsRight(char &tmp, Position &pos);
         void moveGhostsLeft(char &tmp, Position &pos);
         void moveRand();
-        void respawnEnemyY();
-        void respawnEnemyX();
+        void respawnEnemy();
 
     public:
         Pacman();
