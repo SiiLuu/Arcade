@@ -23,6 +23,7 @@ class errorGestion : public Error
         bool check;
 
     public:
+        int _error;
         errorGestion(int ac, std::vector<std::string> av);
         ~errorGestion();
 };

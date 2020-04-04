@@ -181,8 +181,7 @@ void Pacman::MoveLeft()
     } else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == ' ') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.x -= 1;
-    }
-    else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'E') {
+    } else if (this->_map.at(this->_position.y).at(this->_position.x - 1) == 'E') {
         this->_hp -= 1;
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.x = 10;
@@ -211,9 +210,7 @@ void Pacman::MoveRight()
         this->_bonus = 30;
         this->_score += 100;
         this->_position.x += 1;
-    }
-    else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == ' ')
-    {
+    } else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == ' ') {
         this->_map.at(this->_position.y).at(this->_position.x) = ' ';
         this->_position.x += 1;
     } else if (this->_map.at(this->_position.y).at(this->_position.x + 1) == 'E') {
@@ -296,19 +293,24 @@ void Pacman::moveGhostsDown(char &tmp, Position &pos)
 
 void Pacman::moveGhostsRight(char &tmp, Position &pos)
 {
-    if (this->_map.at(pos.y).at(pos.x - 1) == 'o') {
+    if (pos.y == 9 && pos.x == 20)
+        return;
+    else if (this->_map.at(pos.y).at(pos.x - 1) == 'o') {
         this->_map.at(pos.y).at(pos.x) = tmp;
         tmp = 'o';
         pos.x -= 1;
-    } else if (this->_map.at(pos.y).at(pos.x - 1) == 'O') {
+    }
+    else if (this->_map.at(pos.y).at(pos.x - 1) == 'O') {
         this->_map.at(pos.y).at(pos.x) = tmp;
         tmp = 'O';
         pos.x -= 1;
-    } else if (this->_map.at(pos.y).at(pos.x - 1) == ' ') {
+    }
+    else if (this->_map.at(pos.y).at(pos.x - 1) == ' ') {
         this->_map.at(pos.y).at(pos.x) = tmp;
         tmp = ' ';
         pos.x -= 1;
-    } else if (this->_map.at(pos.y).at(pos.x - 1) == 'P' && this->_bonus < 0) {
+    }
+    else if (this->_map.at(pos.y).at(pos.x - 1) == 'P' && this->_bonus < 0) {
         pos.x -= 1;
         tmp = ' ';
         this->_hp -= 1;
@@ -319,7 +321,9 @@ void Pacman::moveGhostsRight(char &tmp, Position &pos)
 
 void Pacman::moveGhostsLeft(char &tmp, Position &pos)
 {
-    if (this->_map.at(pos.y).at(pos.x + 1) == 'o') {
+    if (pos.y == 9 && pos.x == 1)
+        return;
+    else if (this->_map.at(pos.y).at(pos.x + 1) == 'o') {
         this->_map.at(pos.y).at(pos.x) = tmp;
         tmp = 'o';
         pos.x += 1;
@@ -345,7 +349,7 @@ void Pacman::moveGhosts(int i, char &tmp, Position &pos)
     if (i == 1)
         moveGhostsUp(tmp, pos);
     else if (i == 2)
-        moveGhostsDown(tmp, pos);
+        moveGhostsDown(tmp,pos);
     else if (i == 3)
         moveGhostsRight(tmp, pos);
     else
@@ -359,6 +363,7 @@ void Pacman::moveRand()
 	int j = rand()%(4);
 	int k = rand()%(4);
 	int l = rand()%(4);
+    std::cout << "test" << std::endl;
     this->moveGhosts(i, this->tmp1, this->_positionG1);
     this->moveGhosts(j, this->tmp2, this->_positionG2);
     this->moveGhosts(k, this->tmp3, this->_positionG3);

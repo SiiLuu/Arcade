@@ -38,6 +38,8 @@ class Sdl : public AbstractGraph
         SDL_Surface *_foodSprite;
         SDL_Texture *_bonus;
         SDL_Surface *_bonusSprite;
+        SDL_Texture *_wall;
+        SDL_Surface *_wallSprite;
         SDL_Event _events;
         size_t _actualTime;
         size_t _lastTime;
@@ -51,6 +53,7 @@ class Sdl : public AbstractGraph
         SDL_Rect posHighScore;
         SDL_Rect posHP;
         SDL_Rect rectMapBorder;
+        SDL_Rect rectWall;
         SDL_Rect rectFood;
         SDL_Rect rectPlayer;
         SDL_Rect rectGhost;
@@ -79,6 +82,7 @@ class Sdl : public AbstractGraph
         std::string _name;
         std::string _actualScore;
         std::vector<SDL_Rect> _mapBorder;
+        std::vector<SDL_Rect> _mapWall;
         std::vector<SDL_Rect> _mapFood;
         std::vector<SDL_Rect> _mapPlayer;
         std::vector<SDL_Rect> _mapGhost;
@@ -89,6 +93,7 @@ class Sdl : public AbstractGraph
         void drawMap();
         void setText();
         void getLists();
+        void highScore(std::vector<std::vector<std::string>> infos);
         void setRect();
         void destroyTextures();
 };
