@@ -67,7 +67,7 @@ void errorGestion::argsGestion(int ac, std::vector<std::string> av)
         if (ac != 2)
             throw Error(1, "You need almost add one lib with this binary.");
         if (!av.at(1).compare("-h")) {
-            this->_error = 1;
+            this->_error = 2;
             this->help();
         }
         if (this->check == false  && this->_error == 0) {

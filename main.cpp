@@ -15,5 +15,7 @@ int main(int ac, char **argv)
     errorGestion error(ac, av);
     if (error._error == 0)
         ArcadeCore arcade(av);
+    else if (error._error == 1)
+        return (84);
     return (0);
 }
