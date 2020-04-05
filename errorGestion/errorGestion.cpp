@@ -40,6 +40,25 @@ void errorGestion::readDir(int ac, std::vector<std::string> av)
     }
 }
 
+void errorGestion::help()
+{
+    std::cout << "USAGE:" << std::endl;
+    std::cout << "\t\t./arcade [\"Your graphical shared library\"]" << std::endl;
+    std::cout << "DESCRIPTION:" << std::endl;
+    std::cout << "\t\tPlay different games on different graphical library" << std::endl;
+    std::cout << "\t\ttry to be better at every single one of your games." << std::endl;
+    std::cout << "HOW TO PLAY:" << std::endl;
+    std::cout << "\t\tKEY_LEFT : Go to the previous graphical library" << std::endl;
+    std::cout << "\t\tKEY_RIGHT : Go to the next graphical library" << std::endl;
+    std::cout << "\t\tKEY_UP : Go to the previous game" << std::endl;
+    std::cout << "\t\tKEY_DOWN : Go to the next game" << std::endl;
+    std::cout << "\t\tZ : Go forward (only in game)" << std::endl;
+    std::cout << "\t\tQ : Go backward (only in game)" << std::endl;
+    std::cout << "\t\tS : Go to the left (only in game)" << std::endl;
+    std::cout << "\t\tD : Go to the right (only in game)" << std::endl;
+    std::cout << "\t\tESCAPE : Go back to the menu or quit the game" << std::endl;
+}
+
 void errorGestion::argsGestion(int ac, std::vector<std::string> av)
 {
     void *handle;
@@ -48,11 +67,14 @@ void errorGestion::argsGestion(int ac, std::vector<std::string> av)
         if (ac != 2)
             throw Error(1, "You need almost add one lib with this binary.");
         if (!av.at(1).compare("-h")) {
-            std::cout << "help" << std::endl;
+            this->_error = 1;
+            this->help();
         }
-        if (this->check == false)
+        if (this->check == false  && this->_error == 0) {
+            this->_error = 1;
             throw Error(2, "Wrong library.");
-        if (!(handle = dlopen(av.at(1).c_str(), RTLD_LAZY))) {
+        }
+        if (!(handle = dlopen(av.at(1).c_str(), RTLD_LAZY)) && this->_error == 0) {
             dlclose(handle);
             throw Error(3, "Cannot open this shared libray");
         }
