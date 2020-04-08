@@ -94,8 +94,9 @@ class Sdl : public AbstractGraph
         void setText();
         void getLists();
         void highScore(std::vector<std::vector<std::string>> infos);
-        void setRect();
+        void setRectSprites();
         void destroyTextures();
+        void clearVector();
 };
 
 #endif /* !SDL_HPP_ */

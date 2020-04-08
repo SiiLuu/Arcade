@@ -71,7 +71,7 @@ void Sfml::drawMap()
     this->_window.draw(this->_txtHP);
 }
 
-void Sfml::setMaptexture(std::vector<std::vector<std::string>> infos)
+void Sfml::clearVector()
 {
     this->_mapBorder.clear();
     this->_mapGhost.clear();
@@ -80,33 +80,32 @@ void Sfml::setMaptexture(std::vector<std::vector<std::string>> infos)
     this->_mapFood.clear();
     this->_mapPlayer.clear();
     this->_mapWall.clear();
+}
+
+void Sfml::setMaptexture(std::vector<std::vector<std::string>> infos)
+{
+    this->clearVector();
     for (size_t k = 0; k < infos.at(0).size(); k++) {
         for (size_t i = 0; i < infos.at(0).at(k).size(); i++) {
             if (infos.at(0).at(k).at(i) == '|') {
                 this->_mapBorderSprite.setPosition(450 + i * 30, k * 40);
                 this->_mapBorder.push_back(this->_mapBorderSprite);
-            }
-            else if (infos.at(0).at(k).at(i) == '-') {
+            } else if (infos.at(0).at(k).at(i) == '-') {
                 this->_wallSprite.setPosition(455 + i * 30, k * 40);
                 this->_mapWall.push_back(this->_wallSprite);
-            }
-            else if (infos.at(0).at(k).at(i) == 'o') {
+            } else if (infos.at(0).at(k).at(i) == 'o') {
                 this->_foodSprite.setPosition(460 + i * 30, 10 + k * 40);
                 this->_mapFood.push_back(this->_foodSprite);
-            }
-            else if (infos.at(0).at(k).at(i) == 'E') {
+            } else if (infos.at(0).at(k).at(i) == 'E') {
                 this->_ghostSprite.setPosition(450 + i * 30, k * 40);
                 this->_mapGhost.push_back(this->_ghostSprite);
-            }
-            else if (infos.at(0).at(k).at(i) == 'P') {
+            } else if (infos.at(0).at(k).at(i) == 'P') {
                 this->_playerSprite.setPosition(450 + i * 30, 10 + k * 40);
                 this->_mapPlayer.push_back(this->_playerSprite);
-            }
-            else if (infos.at(0).at(k).at(i) == 'A') {
+            } else if (infos.at(0).at(k).at(i) == 'A') {
                 this->_gGhostSprite.setPosition(450 + i * 30, k * 40);
                 this->_mapGGhost.push_back(this->_gGhostSprite);
-            }
-            else if (infos.at(0).at(k).at(i) == 'O') {
+            } else if (infos.at(0).at(k).at(i) == 'O') {
                 this->_bonusSprite.setPosition(450 + i * 30, k * 40);
                 this->_mapBonus.push_back(this->_bonusSprite);
             }

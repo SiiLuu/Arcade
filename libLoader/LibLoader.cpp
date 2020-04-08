@@ -29,7 +29,7 @@ void LibLoader::loadGraphical(std::string av, std::vector<std::vector<std::strin
     this->_actual_graphical_lib = load_lib(infos);
 }
 
-void LibLoader::destroyGraphical()
+void LibLoader::destroyGraphical() const
 {
     this->destroy__graphical_lib(this->_actual_graphical_lib);
     dlclose(this->_handle_lib);
@@ -54,7 +54,7 @@ void LibLoader::loadGames(std::string av)
     this->_actual_game_lib = load_lib();
 }
 
-void LibLoader::destroyGames()
+void LibLoader::destroyGames() const
 {
     this->destroy_game_lib(this->_actual_game_lib);
     dlclose(this->_handle_game);

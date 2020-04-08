@@ -97,11 +97,8 @@ void Sdl::drawMap()
     for (size_t k = 0; k < this->_mapWall.size(); k++)
         SDL_RenderCopy(this->renderer, this->_wall, NULL, &this->_mapWall.at(k));
     SDL_RenderCopy(this->renderer, this->_ttxtScoreInGame, NULL, &this->posScoreInGame);
-    //SDL_DestroyTexture(this->_ttxtScoreInGame);
     SDL_RenderCopy(this->renderer, this->_ttxtHighScoreInGame, NULL, &this->posHighScore);
-    //SDL_DestroyTexture(this->_ttxtHighScoreInGame);
     SDL_RenderCopy(this->renderer, this->_ttxtHP, NULL, &this->posHP);
-    //SDL_DestroyTexture(this->_ttxtHP);
 }
 
 void Sdl::highScore(std::vector<std::vector<std::string>> infos)
@@ -123,7 +120,7 @@ void Sdl::highScore(std::vector<std::vector<std::string>> infos)
     SDL_FreeSurface(this->_txtHP);
 }
 
-void Sdl::setMaptexture(std::vector<std::vector<std::string>> infos)
+void Sdl::clearVector()
 {
     this->_mapBorder.clear();
     this->_mapGhost.clear();
@@ -131,39 +128,38 @@ void Sdl::setMaptexture(std::vector<std::vector<std::string>> infos)
     this->_mapBonus.clear();
     this->_mapFood.clear();
     this->_mapPlayer.clear();
+}
+
+void Sdl::setMaptexture(std::vector<std::vector<std::string>> infos)
+{
+    this->clearVector();
     for (size_t k = 0; k < infos.at(0).size(); k++) {
         for (size_t i = 0; i < infos.at(0).at(k).size(); i++) {
             if (infos.at(0).at(k).at(i) == '|') {
                 this->rectMapBorder.x = 450 + i * 30;
                 this->rectMapBorder.y = k * 40;
                 this->_mapBorder.push_back(this->rectMapBorder);
-            }
-            else if (infos.at(0).at(k).at(i) == 'o') {
+            } else if (infos.at(0).at(k).at(i) == 'o') {
                 this->rectFood.x = 455 + i * 30;
                 this->rectFood.y = 10 + k * 40;
                 this->_mapFood.push_back(this->rectFood);
-            }
-            else if (infos.at(0).at(k).at(i) == 'E') {
+            } else if (infos.at(0).at(k).at(i) == 'E') {
                 this->rectGhost.x = 450 + i * 30;
                 this->rectGhost.y = 10 + k * 40;
                 this->_mapGhost.push_back(this->rectGhost);
-            }
-            else if (infos.at(0).at(k).at(i) == 'P') {
+            } else if (infos.at(0).at(k).at(i) == 'P') {
                 this->rectPlayer.x = 450 + i * 30;
                 this->rectPlayer.y = 10 + k * 40;
                 this->_mapPlayer.push_back(this->rectPlayer);
-            }
-            else if (infos.at(0).at(k).at(i) == 'A') {
+            } else if (infos.at(0).at(k).at(i) == 'A') {
                 this->rectGGhost.x = 450 + i * 30;
                 this->rectGGhost.y = 10 + k * 40;
                 this->_mapGGhost.push_back(this->rectGGhost);
-            }
-            else if (infos.at(0).at(k).at(i) == 'O') {
+            } else if (infos.at(0).at(k).at(i) == 'O') {
                 this->rectBonus.x = 455 + i * 30;
                 this->rectBonus.y = 10 + k * 40;
                 this->_mapBonus.push_back(this->rectBonus);
-            }
-            else if (infos.at(0).at(k).at(i) == '-') {
+            } else if (infos.at(0).at(k).at(i) == '-') {
                 this->rectWall.x = 450 + i * 30;
                 this->rectWall.y = k * 40;
                 this->_mapWall.push_back(this->rectWall);
@@ -285,7 +281,7 @@ void Sdl::setText()
     SDL_FreeSurface(this->_txtHP);
 }
 
-void Sdl::setRect()
+void Sdl::setRectSprites()
 {
     this->rectMapBorder.h = 40;
     this->rectMapBorder.w = 30;
@@ -331,7 +327,7 @@ void Sdl::createWindow()
     this->renderer = SDL_CreateRenderer(this->_window, -1, SDL_RENDERER_ACCELERATED);
     this->setTexture();
     this->setText();
-    this->setRect();
+    this->setRectSprites();
 }
 
 extern "C" AbstractGraph *create(std::vector<std::vector<std::string>> info)

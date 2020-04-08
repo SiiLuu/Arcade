@@ -34,7 +34,12 @@ class Pacman : public AbstractGame
         std::string _high;
         std::vector<std::string> _highScore;
         bool _clockE;
+        char tmp1;
+        char tmp2;
+        char tmp3;
+        char tmp4;
 
+        //Functions
         bool gameWon();
         void moveGhosts(int i, char &tmp, Position &pos);
         void moveGhostsUp(char &tmp, Position &pos);
@@ -61,10 +66,6 @@ class Pacman : public AbstractGame
         game::state getState() const;
         void setState(game::state state);
         std::vector<std::string> getMap() const;
-        char tmp1;
-        char tmp2;
-        char tmp3;
-        char tmp4;
 };
 
 #endif /* !PACMAN_HPP_ */

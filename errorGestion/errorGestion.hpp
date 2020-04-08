@@ -19,7 +19,7 @@ class errorGestion : public Error
     private:
         void argsGestion(int ac, std::vector<std::string> av);
         void readDir(int ac, std::vector<std::string> av);
-        void help();
+        void help() const;
         std::vector<std::string> vector;
         bool check;
 

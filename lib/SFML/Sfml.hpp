@@ -4,6 +4,7 @@
 ** File description:
 ** sfml class
 */
+
 #include "../AGraph/AbstractGraph.hpp"
 
 #ifndef SFML_HPP_
@@ -15,13 +16,14 @@ class Sfml : public AbstractGraph
         ~Sfml();
 
         void createWindow();
-        void display(std::vector<std::vector<std::string>>, int);
+        void display(std::vector<std::vector<std::string>> gamesInfos, int sceneNumber);
         std::string registerEvents();
 
     private:
         std::vector<std::vector<std::string>> _info;
         sf::RenderWindow _window;
         sf::Event _event;
+        //Game Sprites and Textures
         sf::Texture _background;
         sf::Sprite _backgroundSprite;
         sf::Texture _mapBorderTexture;
@@ -65,6 +67,7 @@ class Sfml : public AbstractGraph
         void setText();
         void getLists();
         void drawMap();
+        void clearVector();
 };
 
 #endif /* !SFML_HPP_ */

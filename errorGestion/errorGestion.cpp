@@ -40,7 +40,7 @@ void errorGestion::readDir(int ac, std::vector<std::string> av)
     }
 }
 
-void errorGestion::help()
+void errorGestion::help() const
 {
     std::cout << "USAGE:" << std::endl;
     std::cout << "\t\t./arcade [\"Your graphical shared library\"]" << std::endl;
@@ -64,8 +64,10 @@ void errorGestion::argsGestion(int ac, std::vector<std::string> av)
     void *handle;
 
     try {
-        if (ac != 2)
+        if (ac != 2) {
             throw Error(1, "You need almost add one lib with this binary.");
+            this->_error = 1;
+        }
         if (!av.at(1).compare("-h")) {
             this->_error = 2;
             this->help();
