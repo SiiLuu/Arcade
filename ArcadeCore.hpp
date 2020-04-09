@@ -46,9 +46,6 @@ class ArcadeCore {
         int _clock;
 
         void readDir(const std::string path, std::vector<std::string> &vector);
-        void setLibrary();
-        void setPlayerName();
-        void setGame();
         void setScore();
         void swapLib(std::string str);
         void swapGame(std::string str);

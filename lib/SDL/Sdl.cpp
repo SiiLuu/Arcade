@@ -128,6 +128,7 @@ void Sdl::clearVector()
     this->_mapBonus.clear();
     this->_mapFood.clear();
     this->_mapPlayer.clear();
+    this->_mapWall.clear();
 }
 
 void Sdl::setMaptexture(std::vector<std::vector<std::string>> infos)
